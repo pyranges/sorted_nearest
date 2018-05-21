@@ -71,3 +71,20 @@ def test_simple_duplicates_right():
     assert idx_r == [0, 0, 3, 3, 4, 4]
     assert idx_l == [0, 1, 2, 3, 4, 5]
     assert dist == [0, 0, 1, 0, 0, 0]
+
+
+def test_simple_duplicates_both():
+
+    l_s = np.array([0, 0, 1, 3, 3, 4, 7, 8])
+    l_e = np.array([1, 1, 2, 4, 4, 5, 9, 11])
+
+    r_s = np.array([1, 1, 5, 5, 8])
+    r_e = np.array([2, 2, 6, 6, 10])
+
+    idx_l, idx_r, dist = nearest(l_s, l_e, r_s, r_e)
+
+    idx_l, idx_r, dist = list(idx_l), list(idx_r), list(dist)
+
+    assert idx_r == [0, 0, 0, 3, 3, 3, 4, 4]
+    assert idx_l == [0, 1, 2, 3, 4, 5, 6, 7]
+    assert dist == [0, 0, 0, 1, 1, 0, 0, 0]
