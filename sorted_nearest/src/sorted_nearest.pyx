@@ -11,51 +11,50 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
     cdef int _continue = 1
     cdef int new_diff
     cdef int old_diff = cn.INT_MAX
-    cdef unsigned int j = 0
-    cdef unsigned int i = 0
+    cdef int j = 0
+    cdef int i = 0
     cdef int ZERO = 0
+    cdef int length_l = len(l_s)
+    cdef int length_r_minus_one = len(r_s) - 1
 
-    cdef cn.UT_array *idx_left
-    cn.utarray_new(idx_left, &(cn.ut_int_icd))
+    output_arr_ridx = np.zeros(length_l, dtype=np.long)
+    output_arr_dist = np.zeros(length_l, dtype=np.long)
+    cdef long [::1] output_ridx
+    cdef long [::1] output_dist
 
-    cdef cn.UT_array *idx_right
-    cn.utarray_new(idx_right, &(cn.ut_int_icd))
-
-    cdef cn.UT_array *dist
-    cn.utarray_new(dist, &(cn.ut_int_icd))
+    output_ridx = output_arr_ridx
+    output_dist = output_arr_dist
 
     while _continue:
-        print("while j == 0")
+        # print("while j == 0")
         if l_e[i] < r_s[0]:
-            print("  l_e[i] < r_s[0]")
+            # print("  l_e[i] < r_s[0]")
             old_diff = r_s[0] - l_e[i]
             _continue = 0
         elif l_s[i] > r_e[0]:
-            print("  l_s[i] > r_e[0]")
+            # print("  l_s[i] > r_e[0]")
             old_diff = l_s[i] - r_e[0]
             _continue = 0
         else: # overlapping
-            print("  overlapping")
-            cn.utarray_push_back(idx_left, &(i))
-            cn.utarray_push_back(idx_right, &(j)) # should always be zero in this loop
-            cn.utarray_push_back(dist, &(ZERO))
+            # print("  overlapping")
+            output_ridx[i] = j
+            output_dist[i] = 0
             i += 1
 
-    while i < len(l_s) and j < (len(r_s) - 1):
+    while i < length_l and j < length_r_minus_one:
 
-        print("i is", i, "and j + 1 is", j + 1)
-        print("left start, end: ", l_s[i], l_e[i])
-        print("right start, end: ", r_s[j + 1], r_e[j + 1])
+        # print("i is", i, "and j + 1 is", j + 1)
+        # print("left start, end: ", l_s[i], l_e[i])
+        # print("right start, end: ", r_s[j + 1], r_e[j + 1])
 
         if l_e[i] < r_s[j + 1]:
-            print("l_e[i] < r_s[j + 1]")
+            # print("l_e[i] < r_s[j + 1]")
             new_diff = r_s[j + 1] - l_e[i]
-            print("  New diff:", new_diff, "old diff:", old_diff)
+            # print("  New diff:", new_diff, "old diff:", old_diff)
             if new_diff > old_diff:
-                print("  Pushing", i, j, old_diff)
-                cn.utarray_push_back(idx_left, &(i))
-                cn.utarray_push_back(idx_right, &(j))
-                cn.utarray_push_back(dist, &(old_diff))
+                # print("  Pushing", i, j, old_diff)
+                output_ridx[i] = j
+                output_dist[i] = old_diff
                 old_diff = cn.INT_MAX
                 j -= 1
                 i += 1
@@ -64,14 +63,13 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
                 old_diff = new_diff
 
         elif l_s[i] > r_e[j + 1]:
-            print("l_s[i] > r_e[j + 1]")
+            # print("l_s[i] > r_e[j + 1]")
             new_diff = l_s[i] - r_e[j + 1]
-            print("  New diff:", new_diff, "old diff:", old_diff)
+            # print("  New diff:", new_diff, "old diff:", old_diff)
             if new_diff > old_diff:
-                print("  Pushing", i, j, old_diff)
-                cn.utarray_push_back(idx_left, &(i))
-                cn.utarray_push_back(idx_right, &(j))
-                cn.utarray_push_back(dist, &(old_diff))
+                # print("  Pushing", i, j, old_diff)
+                output_ridx[i] = j
+                output_dist[i] = old_diff
                 old_diff = cn.INT_MAX
                 j -= 1
                 i += 1
@@ -79,12 +77,11 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
                 j += 1
                 old_diff = new_diff
         else: # overlapping
-            print("else")
-            print("  Pushing", i, j, 0)
-            cn.utarray_push_back(idx_left, &(i))
+            # print("else")
+            # print("  Pushing", i, j, 0)
             j += 1
-            cn.utarray_push_back(idx_right, &(j))
-            cn.utarray_push_back(dist, &(ZERO))
+            output_ridx[i] = j
+            output_dist[i] = 0
             old_diff = cn.INT_MAX
             j -= 1
             i += 1
@@ -93,138 +90,41 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
     cdef int second_last = len(r_s) - 2
     cdef int last = len(r_s) - 1
     cdef int sl_dist, l_dist
-    while i < len(l_s):
-        print("we are here")
+    while i < length_l:
+        # print("we are here")
         if l_e[i] < r_s[second_last]:
-            print("l_e[i] < r_s[second_last]")
-            print(l_e[i], r_s[second_last])
+            # print("l_e[i] < r_s[second_last]")
+            # print(l_e[i], r_s[second_last])
             sl_dist = r_s[second_last] - l_e[i]
         elif l_s[i] > r_e[second_last]:
-            print("l_s[i] > r_e[second_last]")
-            print(l_s[i], r_e[second_last])
+            # print("l_s[i] > r_e[second_last]")
+            # print(l_s[i], r_e[second_last])
             sl_dist = l_s[i] - r_e[second_last]
         else:
             sl_dist = 0
 
         if l_e[i] < r_s[last]:
-            print("l_e[i] < r_s[last]")
-            print(l_e[i], r_s[last])
+            # print("l_e[i] < r_s[last]")
+            # print(l_e[i], r_s[last])
             l_dist = r_s[last] - l_e[i]
         elif l_s[i] > r_e[last]:
-            print("l_s[i] > r_e[last]")
-            print(l_s[i], r_e[last])
+            # print("l_s[i] > r_e[last]")
+            # print(l_s[i], r_e[last])
             l_dist = l_s[i] - r_e[last]
         else:
-            print("else ldist=0")
+            # print("else ldist=0")
             l_dist = 0
 
-        print("sl_dist", sl_dist, "l_dist", l_dist)
+        # print("sl_dist", sl_dist, "l_dist", l_dist)
         if sl_dist < l_dist:
-            print(" Pushing", second_last, sl_dist)
-            cn.utarray_push_back(idx_left, &(i))
-            cn.utarray_push_back(idx_right, &(second_last))
-            cn.utarray_push_back(dist, &(sl_dist))
+            # print(" Pushing", second_last, sl_dist)
+            output_ridx[i] = second_last
+            output_dist[i] = sl_dist
         else:
-            print(" Pushing", last, l_dist)
-            cn.utarray_push_back(idx_left, &(i))
-            cn.utarray_push_back(idx_right, &(last))
-            cn.utarray_push_back(dist, &(l_dist))
+            # print(" Pushing", last, l_dist)
+            output_ridx[i] = last
+            output_dist[i] = l_dist
 
         i += 1
 
-    cdef int *arr_left_idx
-    cdef int *arr_right_idx
-    cdef int *arr_dist
-
-    length = cn.utarray_len(idx_left)
-
-    arr_left_idx = cn.utarray_eltptr(idx_left, 0)
-    arr_right_idx = cn.utarray_eltptr(idx_right, 0)
-    arr_dist = cn.utarray_eltptr(dist, 0)
-
-    output_arr_lidx = np.zeros(length, dtype=np.long)
-    output_arr_ridx = np.zeros(length, dtype=np.long)
-    output_arr_dist = np.zeros(length, dtype=np.long)
-    cdef long [::1] output_lidx
-    cdef long [::1] output_ridx
-    cdef long [::1] output_dist
-
-    output_lidx = output_arr_lidx
-    output_ridx = output_arr_ridx
-    output_dist = output_arr_dist
-
-    i = 0
-    for i in range(length):
-        output_arr_lidx[i] = arr_left_idx[i]
-        output_arr_ridx[i] = arr_right_idx[i]
-        output_arr_dist[i] = arr_dist[i]
-
-    cn.utarray_free(idx_left)
-    cn.utarray_free(idx_right)
-    cn.utarray_free(dist)
-
-    return output_arr_lidx, output_arr_ridx, output_arr_dist
-
-
-    # while i < len(l_s):
-
-    #     old_diff =
-
-    #     if l_e[i] < r_s[j + 1]:
-    #         new_diff = r_s[j + 1] - l_e[i]
-    #         if new_diff > old_diff:
-    #             cn.utarray_push_back(idx_left, &(i))
-    #             cn.utarray_push_back(idx_right, &(j))
-    #             cn.utarray_push_back(dist, &(old_diff))
-    #             old_diff = cn.INT_MAX
-    #             j -= 1
-    #             i += 1
-    #         else:
-    #             j += 1
-    #             old_diff = new_diff
-
-    #     elif l_s[i] > r_e[j + 1]:
-    #         new_diff = l_s[i] - r_e[j + 1]
-    #         if new_diff > old_diff:
-    #             cn.utarray_push_back(idx_left, &(i))
-    #             cn.utarray_push_back(idx_right, &(j))
-    #             cn.utarray_push_back(dist, &(old_diff))
-    #             old_diff = cn.INT_MAX
-    #             j -= 1
-    #             i += 1
-    #         else:
-    #             j += 1
-    #             old_diff = new_diff
-    #     else: # overlapping
-    #         cn.utarray_push_back(idx_left, &(i))
-    #         cn.utarray_push_back(idx_right, &(j))
-    #         cn.utarray_push_back(dist, &(ZERO))
-    #         old_diff = cn.INT_MAX
-    #         j -= 1
-    #         i += 1
-
-    # # if there are i-s left, means that they are either closest to j - 1 or j
-    # # does not need to be very efficient
-    # # while i < len(l_s):
-
-    # #     # know that i is closer to j-1 than j due to sort
-    # #     if l_e[i] < r_s[j - 1]:
-    # #         new_diff = r_s[j - 1] - l_e[i]
-    # #         cn.utarray_push_back(idx_left, &(i))
-    # #         cn.utarray_push_back(idx_right, &(j - 1))
-    # #         cn.utarray_push_back(dist, &(new_diff))
-    # #         i += 1
-    # #     elif l_s[i] > r_e[j - 1]:
-    # #         if l_s[i] > r_e[j]:
-    # #             new_diff = l_s[i] - r_e[j]
-    # #             cn.utarray_push_back(idx_left, &(i))
-    # #             cn.utarray_push_back(idx_right, &(j))
-    # #             cn.utarray_push_back(dist, &(new_diff))
-    # #         elif r_s[j] > l_e[i]:
-
-    # #         i += 1
-
-
-
-    # #     # starts behind the backmost so j is the closest
-    # #     elif l_s[i] > r_e[j]:
+    return output_arr_ridx, output_arr_dist
