@@ -90,7 +90,47 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
             i += 1
 
 
+    cdef int second_last = len(r_s) - 2
+    cdef int last = len(r_s) - 1
+    cdef int sl_dist, l_dist
+    while i < len(l_s):
+        print("we are here")
+        if l_e[i] < r_s[second_last]:
+            print("l_e[i] < r_s[second_last]")
+            print(l_e[i], r_s[second_last])
+            sl_dist = r_s[second_last] - l_e[i]
+        elif l_s[i] > r_e[second_last]:
+            print("l_s[i] > r_e[second_last]")
+            print(l_s[i], r_e[second_last])
+            sl_dist = l_s[i] - r_e[second_last]
+        else:
+            sl_dist = 0
 
+        if l_e[i] < r_s[last]:
+            print("l_e[i] < r_s[last]")
+            print(l_e[i], r_s[last])
+            l_dist = r_s[last] - l_e[i]
+        elif l_s[i] > r_e[last]:
+            print("l_s[i] > r_e[last]")
+            print(l_s[i], r_e[last])
+            l_dist = l_s[i] - r_e[last]
+        else:
+            print("else ldist=0")
+            l_dist = 0
+
+        print("sl_dist", sl_dist, "l_dist", l_dist)
+        if sl_dist < l_dist:
+            print(" Pushing", second_last, sl_dist)
+            cn.utarray_push_back(idx_left, &(i))
+            cn.utarray_push_back(idx_right, &(second_last))
+            cn.utarray_push_back(dist, &(sl_dist))
+        else:
+            print(" Pushing", last, l_dist)
+            cn.utarray_push_back(idx_left, &(i))
+            cn.utarray_push_back(idx_right, &(last))
+            cn.utarray_push_back(dist, &(l_dist))
+
+        i += 1
 
     cdef int *arr_left_idx
     cdef int *arr_right_idx
