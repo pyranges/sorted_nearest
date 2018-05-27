@@ -25,6 +25,7 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
     output_ridx = output_arr_ridx
     output_dist = output_arr_dist
 
+    # since the main loop checks j + 1, need this step for checking index zero
     while _continue:
         # print("while j == 0")
         if l_e[i] < r_s[0]:
@@ -37,15 +38,11 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
             _continue = 0
         else: # overlapping
             # print("  overlapping")
-            output_ridx[i] = j
+            output_ridx[i] = 0
             output_dist[i] = 0
             i += 1
 
     while i < length_l and j < length_r_minus_one:
-
-        # print("i is", i, "and j + 1 is", j + 1)
-        # print("left start, end: ", l_s[i], l_e[i])
-        # print("right start, end: ", r_s[j + 1], r_e[j + 1])
 
         if l_e[i] < r_s[j + 1]:
             # print("l_e[i] < r_s[j + 1]")
@@ -87,6 +84,8 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
             i += 1
 
 
+    # might be a tie against last and second last since we could not check j == len(r)
+    # in prev loop
     cdef int second_last = len(r_s) - 2
     cdef int last = len(r_s) - 1
     cdef int sl_dist, l_dist
@@ -126,5 +125,81 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
             output_dist[i] = l_dist
 
         i += 1
+
+    return output_arr_ridx, output_arr_dist
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef nearest_previous(long [::1] l_s, long [::1] r_e):
+
+    "Does not find overlapping"
+
+    cdef int diff
+    cdef int j = 0
+    cdef int i = 0
+    cdef int ZERO = 0
+    cdef int length_l = len(l_s)
+    cdef int length_r = len(r_e)
+
+    output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
+    output_arr_dist = np.ones(length_l, dtype=np.long) * -1
+    cdef long [::1] output_ridx
+    cdef long [::1] output_dist
+
+    output_ridx = output_arr_ridx
+    output_dist = output_arr_dist
+
+    # loop out of the leftones that have no entries in right previous
+    while i < length_l and l_s[i] <= r_e[0]:
+        i += 1
+
+    while i < length_l and j < length_r:
+
+        if l_s[i] > r_e[j]:
+            output_dist[i] = l_s[i] - r_e[j]
+            j += 1
+        else: # overlapping
+            j -= 1
+            output_ridx[i] = j
+            i += 1
+
+    return output_arr_ridx, output_arr_dist
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef nearest_next(long [::1] l_e, long [::1] r_s):
+
+    "Does not find overlapping"
+
+    cdef int diff
+    cdef int j = 0
+    cdef int i = 0
+    cdef int ZERO = 0
+    cdef int length_l = len(l_e)
+    cdef int length_r = len(r_s)
+
+    output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
+    output_arr_dist = np.ones(length_l, dtype=np.long) * -1
+    cdef long [::1] output_ridx
+    cdef long [::1] output_dist
+
+    output_ridx = output_arr_ridx
+    output_dist = output_arr_dist
+
+    # loop out of the rightmost that are not next to any in left
+    while j < length_r and r_s[j] <= l_e[0]:
+        j += 1
+
+    while i < length_l and j < length_r:
+
+        if l_e[i] > r_e[j]:
+            output_dist[i] = l_s[i] - r_e[j]
+            j += 1
+        else: # overlapping
+            j -= 1
+            output_ridx[i] = j
+            i += 1
 
     return output_arr_ridx, output_arr_dist
