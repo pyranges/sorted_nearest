@@ -8,16 +8,14 @@ import sys
 from sorted_nearest import __version__
 
 
-CLASSIFIERS = """
-Development Status :: 5 - Production/Stable
+CLASSIFIERS = """Development Status :: 5 - Production/Stable
 Operating System :: MacOS :: MacOS X
 Operating System :: POSIX
 Operating System :: POSIX :: Linux
 Operating System :: Unix
 Programming Language :: Python
 Topic :: Scientific/Engineering
-Topic :: Scientific/Engineering :: Bio-Informatics
-"""
+Topic :: Scientific/Engineering :: Bio-Informatics"""
 
 # split into lines and filter empty ones
 CLASSIFIERS = CLASSIFIERS.splitlines()
