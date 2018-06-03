@@ -15,7 +15,8 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
     cdef int i = 0
     cdef int ZERO = 0
     cdef int length_l = len(l_s)
-    cdef int length_r_minus_one = len(r_s) - 1
+    cdef int length_r = len(r_s)
+    cdef int length_r_minus_one = length_r - 1
 
     output_arr_ridx = np.zeros(length_l, dtype=np.long)
     output_arr_dist = np.zeros(length_l, dtype=np.long)
@@ -26,7 +27,7 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
     output_dist = output_arr_dist
 
     # since the main loop checks j + 1, need this step for checking index zero
-    while _continue:
+    while _continue and i < length_l:
         # print("while j == 0")
         if l_e[i] < r_s[0]:
             # print("  l_e[i] < r_s[0]")
@@ -86,46 +87,65 @@ cpdef nearest(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
 
     # might be a tie against last and second last since we could not check j == len(r)
     # in prev loop
+
     cdef int second_last = len(r_s) - 2
     cdef int last = len(r_s) - 1
     cdef int sl_dist, l_dist
-    while i < length_l:
-        # print("we are here")
-        if l_e[i] < r_s[second_last]:
-            # print("l_e[i] < r_s[second_last]")
-            # print(l_e[i], r_s[second_last])
-            sl_dist = r_s[second_last] - l_e[i]
-        elif l_s[i] > r_e[second_last]:
-            # print("l_s[i] > r_e[second_last]")
-            # print(l_s[i], r_e[second_last])
-            sl_dist = l_s[i] - r_e[second_last]
-        else:
-            sl_dist = 0
+    if length_r >= 2:
 
-        if l_e[i] < r_s[last]:
-            # print("l_e[i] < r_s[last]")
-            # print(l_e[i], r_s[last])
-            l_dist = r_s[last] - l_e[i]
-        elif l_s[i] > r_e[last]:
-            # print("l_s[i] > r_e[last]")
-            # print(l_s[i], r_e[last])
-            l_dist = l_s[i] - r_e[last]
-        else:
-            # print("else ldist=0")
-            l_dist = 0
+        while i < length_l:
+            # print("we are here")
+            if l_e[i] < r_s[second_last]:
+                # print("l_e[i] < r_s[second_last]")
+                # print(l_e[i], r_s[second_last])
+                sl_dist = r_s[second_last] - l_e[i]
+            elif l_s[i] > r_e[second_last]:
+                # print("l_s[i] > r_e[second_last]")
+                # print(l_s[i], r_e[second_last])
+                sl_dist = l_s[i] - r_e[second_last]
+            else:
+                sl_dist = 0
 
-        # print("sl_dist", sl_dist, "l_dist", l_dist)
-        if sl_dist < l_dist:
-            # print(" Pushing", second_last, sl_dist)
-            output_ridx[i] = second_last
-            output_dist[i] = sl_dist
-        else:
-            # print(" Pushing", last, l_dist)
-            output_ridx[i] = last
+            if l_e[i] < r_s[last]:
+                # print("l_e[i] < r_s[last]")
+                # print(l_e[i], r_s[last])
+                l_dist = r_s[last] - l_e[i]
+            elif l_s[i] > r_e[last]:
+                # print("l_s[i] > r_e[last]")
+                # print(l_s[i], r_e[last])
+                l_dist = l_s[i] - r_e[last]
+            else:
+                # print("else ldist=0")
+                l_dist = 0
+
+            # print("sl_dist", sl_dist, "l_dist", l_dist)
+            if sl_dist < l_dist:
+                # print(" Pushing", second_last, sl_dist)
+                output_ridx[i] = second_last
+                output_dist[i] = sl_dist
+            else:
+                # print(" Pushing", last, l_dist)
+                output_ridx[i] = last
+                output_dist[i] = l_dist
+
+            i += 1
+    else:
+        while i < length_l:
+            if l_e[i] < r_s[0]:
+                # print("l_e[i] < r_s[last]")
+                # print(l_e[i], r_s[last])
+                l_dist = r_s[0] - l_e[i]
+            elif l_s[i] > r_e[0]:
+                # print("l_s[i] > r_e[0]")
+                # print(l_s[i], r_e[0])
+                l_dist = l_s[i] - r_e[0]
+            else:
+                # print("else ldist=0")
+                l_dist = 0
+
+            output_ridx[i] = 0
             output_dist[i] = l_dist
-
-        i += 1
-
+            i += 1
     return output_arr_ridx, output_arr_dist
 
 
@@ -152,8 +172,6 @@ cpdef nearest_nonoverlapping(long [::1] l_s, long [::1] l_e, long [::1] r_s, lon
 
     prev_dist_arr[prev_dist_arr == -1] = cn.INT_MAX
     next_dist_arr[next_dist_arr == -1] = cn.INT_MAX
-
-    print(next_dist)
 
     output_arr_ridx = np.ones(length, dtype=np.long) * -1
     output_arr_dist = np.ones(length, dtype=np.long) * -1
@@ -183,7 +201,6 @@ cpdef nearest_nonoverlapping(long [::1] l_s, long [::1] l_e, long [::1] r_s, lon
 @cython.wraparound(False)
 cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_e):
 
-    cdef int diff
     cdef int j = 0
     cdef int i = 0
     cdef int ZERO = 0
@@ -317,7 +334,7 @@ cpdef nearest_previous(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1
     output_dist = output_arr_dist
 
     # since the main loop checks j + 1, need this step for checking index zero
-    while _continue:
+    while _continue and i < length_l:
         # print("while j == 0")
         if l_e[i] < r_s[0]:
             # print("  l_e[i] < r_s[0]")
@@ -421,8 +438,5 @@ cpdef nearest_previous(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1
                 output_dist[i] = 0
 
             i += 1
-
-
-
 
     return output_arr_ridx, output_arr_dist

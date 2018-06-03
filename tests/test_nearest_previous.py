@@ -92,3 +92,19 @@ def test_simple_several_missing_previous():
 
     assert idx_r == [-1, -1, -1, 0, 0]
     assert dist == [-1, -1, -1, 781, 781]
+
+
+def test_previous():
+
+    l_s = np.array([3, 5, 8])
+    l_e = np.array([6, 7, 9])
+
+    r_s = np.array([1, 6])
+    r_e = np.array([2, 7])
+
+    idx_r, dist = nearest_previous(l_s, l_e, r_s, r_e)
+
+    idx_r, dist = list(idx_r), list(dist)
+
+    assert idx_r == [1, 1, 1]
+    assert dist == [0, 0, 1]
