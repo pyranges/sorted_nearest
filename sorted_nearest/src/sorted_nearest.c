@@ -1746,8 +1746,12 @@ static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
+static const char __pyx_k_l_e_i_r_s_j[] = "l_e[i] < r_s[j]";
+static const char __pyx_k_output_dist[] = "output_dist";
+static const char __pyx_k_output_ridx[] = "output_ridx";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
+static const char __pyx_k_l_e_i_r_s_j_2[] = "l_e[i] > r_s[j]";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
@@ -1769,7 +1773,9 @@ static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
-static const char __pyx_k_nearest_previous_nonoverlapping[] = "nearest previous nonoverlapping ";
+#if PY_MAJOR_VERSION < 3
+static const char __pyx_k_b_after_after_after_after_after[] = "b'after after after after after after after after after after '";
+#endif
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static const char __pyx_k_Cannot_assign_to_read_only_memor[] = "Cannot assign to read-only memoryview";
@@ -1780,6 +1786,9 @@ static const char __pyx_k_Indirect_dimensions_not_supporte[] = "Indirect dimensi
 static const char __pyx_k_Invalid_mode_expected_c_or_fortr[] = "Invalid mode, expected 'c' or 'fortran', got %s";
 static const char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on buffer access (axis %d)";
 static const char __pyx_k_Unable_to_convert_item_to_object[] = "Unable to convert item to object";
+#if PY_MAJOR_VERSION >= 3
+static const char __pyx_k_after_after_after_after_after_af[] = "after after after after after after after after after after ";
+#endif
 static const char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents in dimension %d (got %d and %d)";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate shape and strides.";
@@ -1808,6 +1817,7 @@ static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_View_MemoryView;
 static PyObject *__pyx_n_s_allocate_buffer;
+static PyObject *__pyx_kp_s_b_after_after_after_after_after;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_u_c;
@@ -1834,6 +1844,8 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
 static PyObject *__pyx_n_s_l_e;
+static PyObject *__pyx_kp_s_l_e_i_r_s_j;
+static PyObject *__pyx_kp_s_l_e_i_r_s_j_2;
 static PyObject *__pyx_n_s_l_s;
 static PyObject *__pyx_n_s_long;
 static PyObject *__pyx_n_s_main;
@@ -1842,13 +1854,14 @@ static PyObject *__pyx_n_s_mode;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
-static PyObject *__pyx_kp_s_nearest_previous_nonoverlapping;
 static PyObject *__pyx_n_s_new;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
 static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_ones;
+static PyObject *__pyx_n_s_output_dist;
+static PyObject *__pyx_n_s_output_ridx;
 static PyObject *__pyx_n_s_pack;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_print;
@@ -1937,7 +1950,6 @@ static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject 
 static PyObject *__pyx_tp_new__memoryviewslice(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
-static PyObject *__pyx_int_10;
 static PyObject *__pyx_int_184977713;
 static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_tuple_;
@@ -4197,11 +4209,11 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_2nearest_nonove
 }
 
 /* "sorted_nearest/src/sorted_nearest.pyx":166
- * @cython.boundscheck(False)
+ * @cython.boundscheck(True)
  * @cython.wraparound(False)
  * cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
  * 
- *     print("nearest previous nonoverlapping " * 10)
+ *     # print("nearest previous nonoverlapping " * 10)
  */
 
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_5nearest_previous_nonoverlapping(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -4214,14 +4226,15 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   CYTHON_UNUSED int __pyx_v_ZERO;
   int __pyx_v_length_l;
   int __pyx_v_length_r;
+  CYTHON_UNUSED int __pyx_v_length_l_minus_one;
   PyObject *__pyx_v_output_arr_ridx = NULL;
   PyObject *__pyx_v_output_arr_dist = NULL;
   __Pyx_memviewslice __pyx_v_output_ridx = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_output_dist = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  size_t __pyx_t_2;
+  size_t __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
@@ -4230,29 +4243,30 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   int __pyx_t_8;
   int __pyx_t_9;
   Py_ssize_t __pyx_t_10;
-  Py_ssize_t __pyx_t_11;
+  int __pyx_t_11;
   Py_ssize_t __pyx_t_12;
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
   Py_ssize_t __pyx_t_15;
   Py_ssize_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
+  Py_ssize_t __pyx_t_18;
+  Py_ssize_t __pyx_t_19;
+  Py_ssize_t __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
+  Py_ssize_t __pyx_t_22;
+  Py_ssize_t __pyx_t_23;
+  Py_ssize_t __pyx_t_24;
+  Py_ssize_t __pyx_t_25;
+  Py_ssize_t __pyx_t_26;
+  Py_ssize_t __pyx_t_27;
+  Py_ssize_t __pyx_t_28;
+  Py_ssize_t __pyx_t_29;
+  Py_ssize_t __pyx_t_30;
   __Pyx_RefNannySetupContext("nearest_previous_nonoverlapping", 0);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":168
- * cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1] r_e):
- * 
- *     print("nearest previous nonoverlapping " * 10)             # <<<<<<<<<<<<<<
- * 
- *     cdef int j = 0
- */
-  __pyx_t_1 = PyNumber_Multiply(__pyx_kp_s_nearest_previous_nonoverlapping, __pyx_int_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 168, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
   /* "sorted_nearest/src/sorted_nearest.pyx":170
- *     print("nearest previous nonoverlapping " * 10)
+ *     # print("nearest previous nonoverlapping " * 10)
  * 
  *     cdef int j = 0             # <<<<<<<<<<<<<<
  *     cdef int i = 0
@@ -4274,7 +4288,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  *     cdef int i = 0
  *     cdef int min_dist = cn.INT_MAX             # <<<<<<<<<<<<<<
  *     cdef int new_diff = cn.INT_MAX
- *     cdef int min_j = -2
+ *     cdef int min_j = -1
  */
   __pyx_v_min_dist = INT_MAX;
 
@@ -4282,7 +4296,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  *     cdef int i = 0
  *     cdef int min_dist = cn.INT_MAX
  *     cdef int new_diff = cn.INT_MAX             # <<<<<<<<<<<<<<
- *     cdef int min_j = -2
+ *     cdef int min_j = -1
  *     cdef int ZERO = 0
  */
   __pyx_v_new_diff = INT_MAX;
@@ -4290,15 +4304,15 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   /* "sorted_nearest/src/sorted_nearest.pyx":174
  *     cdef int min_dist = cn.INT_MAX
  *     cdef int new_diff = cn.INT_MAX
- *     cdef int min_j = -2             # <<<<<<<<<<<<<<
+ *     cdef int min_j = -1             # <<<<<<<<<<<<<<
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_s)
  */
-  __pyx_v_min_j = -2;
+  __pyx_v_min_j = -1;
 
   /* "sorted_nearest/src/sorted_nearest.pyx":175
  *     cdef int new_diff = cn.INT_MAX
- *     cdef int min_j = -2
+ *     cdef int min_j = -1
  *     cdef int ZERO = 0             # <<<<<<<<<<<<<<
  *     cdef int length_l = len(l_s)
  *     cdef int length_r = len(r_e)
@@ -4306,133 +4320,143 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_v_ZERO = 0;
 
   /* "sorted_nearest/src/sorted_nearest.pyx":176
- *     cdef int min_j = -2
+ *     cdef int min_j = -1
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_s)             # <<<<<<<<<<<<<<
  *     cdef int length_r = len(r_e)
- * 
+ *     cdef int length_l_minus_one = len(l_s) - 1
  */
-  __pyx_t_2 = __Pyx_MemoryView_Len(__pyx_v_l_s); 
-  __pyx_v_length_l = __pyx_t_2;
+  __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_l_s); 
+  __pyx_v_length_l = __pyx_t_1;
 
   /* "sorted_nearest/src/sorted_nearest.pyx":177
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_s)
  *     cdef int length_r = len(r_e)             # <<<<<<<<<<<<<<
+ *     cdef int length_l_minus_one = len(l_s) - 1
+ * 
+ */
+  __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_e); 
+  __pyx_v_length_r = __pyx_t_1;
+
+  /* "sorted_nearest/src/sorted_nearest.pyx":178
+ *     cdef int length_l = len(l_s)
+ *     cdef int length_r = len(r_e)
+ *     cdef int length_l_minus_one = len(l_s) - 1             # <<<<<<<<<<<<<<
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
  */
-  __pyx_t_2 = __Pyx_MemoryView_Len(__pyx_v_r_e); 
-  __pyx_v_length_r = __pyx_t_2;
+  __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_l_s); 
+  __pyx_v_length_l_minus_one = (__pyx_t_1 - 1);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":179
- *     cdef int length_r = len(r_e)
+  /* "sorted_nearest/src/sorted_nearest.pyx":180
+ *     cdef int length_l_minus_one = len(l_s) - 1
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
  *     cdef long [::1] output_ridx
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_v_output_arr_ridx = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_v_output_arr_ridx = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":180
+  /* "sorted_nearest/src/sorted_nearest.pyx":181
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     cdef long [::1] output_ridx
  *     cdef long [::1] output_dist
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_v_output_arr_dist = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_v_output_arr_dist = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":184
+  /* "sorted_nearest/src/sorted_nearest.pyx":185
  *     cdef long [::1] output_dist
  * 
  *     output_ridx = output_arr_ridx             # <<<<<<<<<<<<<<
  *     output_dist = output_arr_dist
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 185, __pyx_L1_error)
   __pyx_v_output_ridx = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":185
+  /* "sorted_nearest/src/sorted_nearest.pyx":186
  * 
  *     output_ridx = output_arr_ridx
  *     output_dist = output_arr_dist             # <<<<<<<<<<<<<<
  * 
  *     while i < length_l and j < length_r:
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 186, __pyx_L1_error)
   __pyx_v_output_dist = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":187
+  /* "sorted_nearest/src/sorted_nearest.pyx":188
  *     output_dist = output_arr_dist
  * 
  *     while i < length_l and j < length_r:             # <<<<<<<<<<<<<<
  * 
- *         if l_s[i] >= r_e[j]:
+ *         # print("----")
  */
   while (1) {
     __pyx_t_9 = ((__pyx_v_i < __pyx_v_length_l) != 0);
@@ -4446,186 +4470,621 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_8) break;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":189
- *     while i < length_l and j < length_r:
- * 
- *         if l_s[i] >= r_e[j]:             # <<<<<<<<<<<<<<
+    /* "sorted_nearest/src/sorted_nearest.pyx":194
+ *         # print("output_ridx", output_arr_ridx)
+ *         # print("output_dist", output_arr_dist)
+ *         if l_s[i] > r_e[j]:             # <<<<<<<<<<<<<<
+ *             # print("l_s[i] > r_e[j]", l_s[i], r_e[j])
  *             new_diff = l_s[i] - r_e[j]
- *             if new_diff < min_dist:
  */
     __pyx_t_10 = __pyx_v_i;
-    __pyx_t_11 = __pyx_v_j;
-    __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_10)) ))) >= (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_11)) )))) != 0);
+    __pyx_t_11 = -1;
+    if (__pyx_t_10 < 0) {
+      __pyx_t_11 = 0;
+    } else if (unlikely(__pyx_t_10 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+    if (unlikely(__pyx_t_11 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_11);
+      __PYX_ERR(0, 194, __pyx_L1_error)
+    }
+    __pyx_t_12 = __pyx_v_j;
+    __pyx_t_11 = -1;
+    if (__pyx_t_12 < 0) {
+      __pyx_t_11 = 0;
+    } else if (unlikely(__pyx_t_12 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+    if (unlikely(__pyx_t_11 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_11);
+      __PYX_ERR(0, 194, __pyx_L1_error)
+    }
+    __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_10)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_12)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":190
- * 
- *         if l_s[i] >= r_e[j]:
+      /* "sorted_nearest/src/sorted_nearest.pyx":196
+ *         if l_s[i] > r_e[j]:
+ *             # print("l_s[i] > r_e[j]", l_s[i], r_e[j])
  *             new_diff = l_s[i] - r_e[j]             # <<<<<<<<<<<<<<
+ *             # print("new_diff", l_s[i] - r_e[j])
  *             if new_diff < min_dist:
- *                 min_dist = new_diff
  */
-      __pyx_t_12 = __pyx_v_i;
-      __pyx_t_13 = __pyx_v_j;
-      __pyx_v_new_diff = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_12)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_13)) ))));
+      __pyx_t_13 = __pyx_v_i;
+      __pyx_t_11 = -1;
+      if (__pyx_t_13 < 0) {
+        __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_13 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+      if (unlikely(__pyx_t_11 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_11);
+        __PYX_ERR(0, 196, __pyx_L1_error)
+      }
+      __pyx_t_14 = __pyx_v_j;
+      __pyx_t_11 = -1;
+      if (__pyx_t_14 < 0) {
+        __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_14 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+      if (unlikely(__pyx_t_11 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_11);
+        __PYX_ERR(0, 196, __pyx_L1_error)
+      }
+      __pyx_v_new_diff = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_13)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_14)) ))));
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":191
- *         if l_s[i] >= r_e[j]:
+      /* "sorted_nearest/src/sorted_nearest.pyx":198
  *             new_diff = l_s[i] - r_e[j]
+ *             # print("new_diff", l_s[i] - r_e[j])
  *             if new_diff < min_dist:             # <<<<<<<<<<<<<<
- *                 min_dist = new_diff
  *                 min_j = j
+ *                 # output_ridx[i] = j
  */
       __pyx_t_8 = ((__pyx_v_new_diff < __pyx_v_min_dist) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":192
- *             new_diff = l_s[i] - r_e[j]
+        /* "sorted_nearest/src/sorted_nearest.pyx":199
+ *             # print("new_diff", l_s[i] - r_e[j])
  *             if new_diff < min_dist:
- *                 min_dist = new_diff             # <<<<<<<<<<<<<<
- *                 min_j = j
- *         elif r_s[j] >= l_s[i]:
- */
-        __pyx_v_min_dist = __pyx_v_new_diff;
-
-        /* "sorted_nearest/src/sorted_nearest.pyx":193
- *             if new_diff < min_dist:
- *                 min_dist = new_diff
  *                 min_j = j             # <<<<<<<<<<<<<<
- *         elif r_s[j] >= l_s[i]:
- *             output_ridx[i] = min_j
+ *                 # output_ridx[i] = j
+ *                 # output_dist[i] = new_diff
  */
         __pyx_v_min_j = __pyx_v_j;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":191
- *         if l_s[i] >= r_e[j]:
+        /* "sorted_nearest/src/sorted_nearest.pyx":202
+ *                 # output_ridx[i] = j
+ *                 # output_dist[i] = new_diff
+ *                 min_dist = new_diff             # <<<<<<<<<<<<<<
+ *             # print("min_dist", min_dist)
+ *             # print("min_j", min_j)
+ */
+        __pyx_v_min_dist = __pyx_v_new_diff;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":198
  *             new_diff = l_s[i] - r_e[j]
+ *             # print("new_diff", l_s[i] - r_e[j])
  *             if new_diff < min_dist:             # <<<<<<<<<<<<<<
- *                 min_dist = new_diff
  *                 min_j = j
+ *                 # output_ridx[i] = j
  */
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":189
- *     while i < length_l and j < length_r:
- * 
- *         if l_s[i] >= r_e[j]:             # <<<<<<<<<<<<<<
+      /* "sorted_nearest/src/sorted_nearest.pyx":194
+ *         # print("output_ridx", output_arr_ridx)
+ *         # print("output_dist", output_arr_dist)
+ *         if l_s[i] > r_e[j]:             # <<<<<<<<<<<<<<
+ *             # print("l_s[i] > r_e[j]", l_s[i], r_e[j])
  *             new_diff = l_s[i] - r_e[j]
- *             if new_diff < min_dist:
  */
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":194
- *                 min_dist = new_diff
- *                 min_j = j
+    /* "sorted_nearest/src/sorted_nearest.pyx":205
+ *             # print("min_dist", min_dist)
+ *             # print("min_j", min_j)
  *         elif r_s[j] >= l_s[i]:             # <<<<<<<<<<<<<<
- *             output_ridx[i] = min_j
- *             output_dist[i] = min_dist
+ *             # print("elif r_s[j] >= l_s[i]", r_s[j], l_s[i])
+ *             # print("min_dist", min_dist)
  */
-    __pyx_t_14 = __pyx_v_j;
-    __pyx_t_15 = __pyx_v_i;
-    __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_14)) ))) >= (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_15)) )))) != 0);
+    __pyx_t_15 = __pyx_v_j;
+    __pyx_t_11 = -1;
+    if (__pyx_t_15 < 0) {
+      __pyx_t_11 = 0;
+    } else if (unlikely(__pyx_t_15 >= __pyx_v_r_s.shape[0])) __pyx_t_11 = 0;
+    if (unlikely(__pyx_t_11 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_11);
+      __PYX_ERR(0, 205, __pyx_L1_error)
+    }
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_t_11 = -1;
+    if (__pyx_t_16 < 0) {
+      __pyx_t_11 = 0;
+    } else if (unlikely(__pyx_t_16 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+    if (unlikely(__pyx_t_11 != -1)) {
+      __Pyx_RaiseBufferIndexError(__pyx_t_11);
+      __PYX_ERR(0, 205, __pyx_L1_error)
+    }
+    __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_15)) ))) >= (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_16)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":195
- *                 min_j = j
- *         elif r_s[j] >= l_s[i]:
- *             output_ridx[i] = min_j             # <<<<<<<<<<<<<<
- *             output_dist[i] = min_dist
- *             min_dist = cn.INT_MAX
+      /* "sorted_nearest/src/sorted_nearest.pyx":209
+ *             # print("min_dist", min_dist)
+ *             # print("min_j", min_j)
+ *             if min_j >= 0:             # <<<<<<<<<<<<<<
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist
  */
-      __pyx_t_16 = __pyx_v_i;
-      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_16)) )) = __pyx_v_min_j;
+      __pyx_t_8 = ((__pyx_v_min_j >= 0) != 0);
+      if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":196
- *         elif r_s[j] >= l_s[i]:
- *             output_ridx[i] = min_j
- *             output_dist[i] = min_dist             # <<<<<<<<<<<<<<
- *             min_dist = cn.INT_MAX
- *             j = min_j - 1
+        /* "sorted_nearest/src/sorted_nearest.pyx":210
+ *             # print("min_j", min_j)
+ *             if min_j >= 0:
+ *                 output_ridx[i] = min_j             # <<<<<<<<<<<<<<
+ *                 output_dist[i] = min_dist
+ *                 min_dist = cn.INT_MAX
  */
-      __pyx_t_17 = __pyx_v_i;
-      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_17)) )) = __pyx_v_min_dist;
+        __pyx_t_17 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_17 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_17 >= __pyx_v_output_ridx.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 210, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_17)) )) = __pyx_v_min_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":197
- *             output_ridx[i] = min_j
- *             output_dist[i] = min_dist
- *             min_dist = cn.INT_MAX             # <<<<<<<<<<<<<<
- *             j = min_j - 1
- *             i += 1
+        /* "sorted_nearest/src/sorted_nearest.pyx":211
+ *             if min_j >= 0:
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist             # <<<<<<<<<<<<<<
+ *                 min_dist = cn.INT_MAX
+ *             if min_j > 0:
  */
-      __pyx_v_min_dist = INT_MAX;
+        __pyx_t_18 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_18 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_18 >= __pyx_v_output_dist.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 211, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_18)) )) = __pyx_v_min_dist;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":198
- *             output_dist[i] = min_dist
- *             min_dist = cn.INT_MAX
- *             j = min_j - 1             # <<<<<<<<<<<<<<
+        /* "sorted_nearest/src/sorted_nearest.pyx":212
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist
+ *                 min_dist = cn.INT_MAX             # <<<<<<<<<<<<<<
+ *             if min_j > 0:
+ *                 j = min_j - 1
+ */
+        __pyx_v_min_dist = INT_MAX;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":209
+ *             # print("min_dist", min_dist)
+ *             # print("min_j", min_j)
+ *             if min_j >= 0:             # <<<<<<<<<<<<<<
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist
+ */
+      }
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":213
+ *                 output_dist[i] = min_dist
+ *                 min_dist = cn.INT_MAX
+ *             if min_j > 0:             # <<<<<<<<<<<<<<
+ *                 j = min_j - 1
+ *             else:
+ */
+      __pyx_t_8 = ((__pyx_v_min_j > 0) != 0);
+      if (__pyx_t_8) {
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":214
+ *                 min_dist = cn.INT_MAX
+ *             if min_j > 0:
+ *                 j = min_j - 1             # <<<<<<<<<<<<<<
+ *             else:
+ *                 j = -1
+ */
+        __pyx_v_j = (__pyx_v_min_j - 1);
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":213
+ *                 output_dist[i] = min_dist
+ *                 min_dist = cn.INT_MAX
+ *             if min_j > 0:             # <<<<<<<<<<<<<<
+ *                 j = min_j - 1
+ *             else:
+ */
+        goto __pyx_L10;
+      }
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":216
+ *                 j = min_j - 1
+ *             else:
+ *                 j = -1             # <<<<<<<<<<<<<<
  *             i += 1
  * 
  */
-      __pyx_v_j = (__pyx_v_min_j - 1);
+      /*else*/ {
+        __pyx_v_j = -1;
+      }
+      __pyx_L10:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":199
- *             min_dist = cn.INT_MAX
- *             j = min_j - 1
+      /* "sorted_nearest/src/sorted_nearest.pyx":217
+ *             else:
+ *                 j = -1
  *             i += 1             # <<<<<<<<<<<<<<
  * 
  *         j += 1
  */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":194
- *                 min_dist = new_diff
- *                 min_j = j
+      /* "sorted_nearest/src/sorted_nearest.pyx":205
+ *             # print("min_dist", min_dist)
+ *             # print("min_j", min_j)
  *         elif r_s[j] >= l_s[i]:             # <<<<<<<<<<<<<<
- *             output_ridx[i] = min_j
- *             output_dist[i] = min_dist
+ *             # print("elif r_s[j] >= l_s[i]", r_s[j], l_s[i])
+ *             # print("min_dist", min_dist)
  */
     }
     __pyx_L7:;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":201
+    /* "sorted_nearest/src/sorted_nearest.pyx":219
  *             i += 1
  * 
  *         j += 1             # <<<<<<<<<<<<<<
+ *         if j == length_r:
+ *             # print("j == length_r")
+ */
+    __pyx_v_j = (__pyx_v_j + 1);
+
+    /* "sorted_nearest/src/sorted_nearest.pyx":220
+ * 
+ *         j += 1
+ *         if j == length_r:             # <<<<<<<<<<<<<<
+ *             # print("j == length_r")
+ *             # print("i == length_l_minus_one", i == length_l_minus_one)
+ */
+    __pyx_t_8 = ((__pyx_v_j == __pyx_v_length_r) != 0);
+    if (__pyx_t_8) {
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":224
+ *             # print("i == length_l_minus_one", i == length_l_minus_one)
+ *             # print("l_s[i] > r_e[j - 1]", l_s[i], r_e[j - 1])
+ *             if min_j >= 0:             # <<<<<<<<<<<<<<
+ *                 new_diff = l_s[i] - r_e[j - 1]
+ *                 if min_dist > new_diff and new_diff > 0:
+ */
+      __pyx_t_8 = ((__pyx_v_min_j >= 0) != 0);
+      if (__pyx_t_8) {
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":225
+ *             # print("l_s[i] > r_e[j - 1]", l_s[i], r_e[j - 1])
+ *             if min_j >= 0:
+ *                 new_diff = l_s[i] - r_e[j - 1]             # <<<<<<<<<<<<<<
+ *                 if min_dist > new_diff and new_diff > 0:
+ *                     min_dist = l_s[i] - r_e[j - 1]
+ */
+        __pyx_t_19 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_19 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_19 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 225, __pyx_L1_error)
+        }
+        __pyx_t_20 = (__pyx_v_j - 1);
+        __pyx_t_11 = -1;
+        if (__pyx_t_20 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_20 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 225, __pyx_L1_error)
+        }
+        __pyx_v_new_diff = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_19)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_20)) ))));
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":226
+ *             if min_j >= 0:
+ *                 new_diff = l_s[i] - r_e[j - 1]
+ *                 if min_dist > new_diff and new_diff > 0:             # <<<<<<<<<<<<<<
+ *                     min_dist = l_s[i] - r_e[j - 1]
+ * 
+ */
+        __pyx_t_9 = ((__pyx_v_min_dist > __pyx_v_new_diff) != 0);
+        if (__pyx_t_9) {
+        } else {
+          __pyx_t_8 = __pyx_t_9;
+          goto __pyx_L14_bool_binop_done;
+        }
+        __pyx_t_9 = ((__pyx_v_new_diff > 0) != 0);
+        __pyx_t_8 = __pyx_t_9;
+        __pyx_L14_bool_binop_done:;
+        if (__pyx_t_8) {
+
+          /* "sorted_nearest/src/sorted_nearest.pyx":227
+ *                 new_diff = l_s[i] - r_e[j - 1]
+ *                 if min_dist > new_diff and new_diff > 0:
+ *                     min_dist = l_s[i] - r_e[j - 1]             # <<<<<<<<<<<<<<
+ * 
+ *                 # print("i == length_l")
+ */
+          __pyx_t_21 = __pyx_v_i;
+          __pyx_t_11 = -1;
+          if (__pyx_t_21 < 0) {
+            __pyx_t_11 = 0;
+          } else if (unlikely(__pyx_t_21 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+          if (unlikely(__pyx_t_11 != -1)) {
+            __Pyx_RaiseBufferIndexError(__pyx_t_11);
+            __PYX_ERR(0, 227, __pyx_L1_error)
+          }
+          __pyx_t_22 = (__pyx_v_j - 1);
+          __pyx_t_11 = -1;
+          if (__pyx_t_22 < 0) {
+            __pyx_t_11 = 0;
+          } else if (unlikely(__pyx_t_22 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+          if (unlikely(__pyx_t_11 != -1)) {
+            __Pyx_RaiseBufferIndexError(__pyx_t_11);
+            __PYX_ERR(0, 227, __pyx_L1_error)
+          }
+          __pyx_v_min_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_21)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_22)) ))));
+
+          /* "sorted_nearest/src/sorted_nearest.pyx":226
+ *             if min_j >= 0:
+ *                 new_diff = l_s[i] - r_e[j - 1]
+ *                 if min_dist > new_diff and new_diff > 0:             # <<<<<<<<<<<<<<
+ *                     min_dist = l_s[i] - r_e[j - 1]
+ * 
+ */
+        }
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":230
+ * 
+ *                 # print("i == length_l")
+ *                 output_ridx[i] = min_j             # <<<<<<<<<<<<<<
+ *                 output_dist[i] = min_dist
+ *                 j = min_j
+ */
+        __pyx_t_23 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_23 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_23 >= __pyx_v_output_ridx.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 230, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_23)) )) = __pyx_v_min_j;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":231
+ *                 # print("i == length_l")
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist             # <<<<<<<<<<<<<<
+ *                 j = min_j
+ *             elif l_s[i] > r_e[j - 1]:
+ */
+        __pyx_t_24 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_24 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_24 >= __pyx_v_output_dist.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 231, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_24)) )) = __pyx_v_min_dist;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":232
+ *                 output_ridx[i] = min_j
+ *                 output_dist[i] = min_dist
+ *                 j = min_j             # <<<<<<<<<<<<<<
+ *             elif l_s[i] > r_e[j - 1]:
+ *                 # print("l_s[i] > r_e[j - 1]")
+ */
+        __pyx_v_j = __pyx_v_min_j;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":224
+ *             # print("i == length_l_minus_one", i == length_l_minus_one)
+ *             # print("l_s[i] > r_e[j - 1]", l_s[i], r_e[j - 1])
+ *             if min_j >= 0:             # <<<<<<<<<<<<<<
+ *                 new_diff = l_s[i] - r_e[j - 1]
+ *                 if min_dist > new_diff and new_diff > 0:
+ */
+        goto __pyx_L12;
+      }
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":233
+ *                 output_dist[i] = min_dist
+ *                 j = min_j
+ *             elif l_s[i] > r_e[j - 1]:             # <<<<<<<<<<<<<<
+ *                 # print("l_s[i] > r_e[j - 1]")
+ *                 min_dist = l_s[i] - r_e[j - 1]
+ */
+      __pyx_t_25 = __pyx_v_i;
+      __pyx_t_11 = -1;
+      if (__pyx_t_25 < 0) {
+        __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_25 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+      if (unlikely(__pyx_t_11 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_11);
+        __PYX_ERR(0, 233, __pyx_L1_error)
+      }
+      __pyx_t_26 = (__pyx_v_j - 1);
+      __pyx_t_11 = -1;
+      if (__pyx_t_26 < 0) {
+        __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_26 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+      if (unlikely(__pyx_t_11 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_11);
+        __PYX_ERR(0, 233, __pyx_L1_error)
+      }
+      __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_25)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_26)) )))) != 0);
+      if (__pyx_t_8) {
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":235
+ *             elif l_s[i] > r_e[j - 1]:
+ *                 # print("l_s[i] > r_e[j - 1]")
+ *                 min_dist = l_s[i] - r_e[j - 1]             # <<<<<<<<<<<<<<
+ *                 output_ridx[i] = j - 1
+ *                 output_dist[i] = min_dist
+ */
+        __pyx_t_27 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_27 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_27 >= __pyx_v_l_s.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 235, __pyx_L1_error)
+        }
+        __pyx_t_28 = (__pyx_v_j - 1);
+        __pyx_t_11 = -1;
+        if (__pyx_t_28 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_28 >= __pyx_v_r_e.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 235, __pyx_L1_error)
+        }
+        __pyx_v_min_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_27)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_28)) ))));
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":236
+ *                 # print("l_s[i] > r_e[j - 1]")
+ *                 min_dist = l_s[i] - r_e[j - 1]
+ *                 output_ridx[i] = j - 1             # <<<<<<<<<<<<<<
+ *                 output_dist[i] = min_dist
+ * 
+ */
+        __pyx_t_29 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_29 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_29 >= __pyx_v_output_ridx.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 236, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_29)) )) = (__pyx_v_j - 1);
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":237
+ *                 min_dist = l_s[i] - r_e[j - 1]
+ *                 output_ridx[i] = j - 1
+ *                 output_dist[i] = min_dist             # <<<<<<<<<<<<<<
+ * 
+ *             # elif i < length_l_minus_one:
+ */
+        __pyx_t_30 = __pyx_v_i;
+        __pyx_t_11 = -1;
+        if (__pyx_t_30 < 0) {
+          __pyx_t_11 = 0;
+        } else if (unlikely(__pyx_t_30 >= __pyx_v_output_dist.shape[0])) __pyx_t_11 = 0;
+        if (unlikely(__pyx_t_11 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_11);
+          __PYX_ERR(0, 237, __pyx_L1_error)
+        }
+        *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_30)) )) = __pyx_v_min_dist;
+
+        /* "sorted_nearest/src/sorted_nearest.pyx":233
+ *                 output_dist[i] = min_dist
+ *                 j = min_j
+ *             elif l_s[i] > r_e[j - 1]:             # <<<<<<<<<<<<<<
+ *                 # print("l_s[i] > r_e[j - 1]")
+ *                 min_dist = l_s[i] - r_e[j - 1]
+ */
+      }
+      __pyx_L12:;
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":253
+ *             #     output_dist[i] = min_dist
+ * 
+ *             i += 1             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_v_j = (__pyx_v_j + 1);
+      __pyx_v_i = (__pyx_v_i + 1);
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":220
+ * 
+ *         j += 1
+ *         if j == length_r:             # <<<<<<<<<<<<<<
+ *             # print("j == length_r")
+ *             # print("i == length_l_minus_one", i == length_l_minus_one)
+ */
+    }
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":204
+  /* "sorted_nearest/src/sorted_nearest.pyx":257
  * 
+ * 
+ *     print("after " * 10)             # <<<<<<<<<<<<<<
+ *     print("output_ridx", output_arr_ridx)
+ *     print("output_dist", output_arr_dist)
+ */
+  if (__Pyx_PrintOne(0, __pyx_kp_s_b_after_after_after_after_after) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
+
+  /* "sorted_nearest/src/sorted_nearest.pyx":258
+ * 
+ *     print("after " * 10)
+ *     print("output_ridx", output_arr_ridx)             # <<<<<<<<<<<<<<
+ *     print("output_dist", output_arr_dist)
+ * 
+ */
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_output_ridx);
+  __Pyx_GIVEREF(__pyx_n_s_output_ridx);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_output_ridx);
+  __Pyx_INCREF(__pyx_v_output_arr_ridx);
+  __Pyx_GIVEREF(__pyx_v_output_arr_ridx);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_output_arr_ridx);
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 258, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "sorted_nearest/src/sorted_nearest.pyx":259
+ *     print("after " * 10)
+ *     print("output_ridx", output_arr_ridx)
+ *     print("output_dist", output_arr_dist)             # <<<<<<<<<<<<<<
+ * 
+ *     return output_arr_ridx, output_arr_dist
+ */
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_output_dist);
+  __Pyx_GIVEREF(__pyx_n_s_output_dist);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_output_dist);
+  __Pyx_INCREF(__pyx_v_output_arr_dist);
+  __Pyx_GIVEREF(__pyx_v_output_arr_dist);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_output_arr_dist);
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 259, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "sorted_nearest/src/sorted_nearest.pyx":261
+ *     print("output_dist", output_arr_dist)
  * 
  *     return output_arr_ridx, output_arr_dist             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_output_arr_ridx);
   __Pyx_GIVEREF(__pyx_v_output_arr_ridx);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_output_arr_ridx);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_output_arr_ridx);
   __Pyx_INCREF(__pyx_v_output_arr_dist);
   __Pyx_GIVEREF(__pyx_v_output_arr_dist);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_output_arr_dist);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_output_arr_dist);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "sorted_nearest/src/sorted_nearest.pyx":166
- * @cython.boundscheck(False)
+ * @cython.boundscheck(True)
  * @cython.wraparound(False)
  * cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
  * 
- *     print("nearest previous nonoverlapping " * 10)
+ *     # print("nearest previous nonoverlapping " * 10)
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
@@ -4744,7 +5203,7 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_4nearest_previo
   return __pyx_r;
 }
 
-/* "sorted_nearest/src/sorted_nearest.pyx":244
+/* "sorted_nearest/src/sorted_nearest.pyx":301
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_next_nonoverlapping(long [::1] l_e, long [::1] r_s):             # <<<<<<<<<<<<<<
@@ -4780,9 +5239,15 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
   Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  Py_ssize_t __pyx_t_17;
+  Py_ssize_t __pyx_t_18;
+  Py_ssize_t __pyx_t_19;
+  Py_ssize_t __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
   __Pyx_RefNannySetupContext("nearest_next_nonoverlapping", 0);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":247
+  /* "sorted_nearest/src/sorted_nearest.pyx":304
  * 
  *     cdef int diff
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -4791,7 +5256,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
  */
   __pyx_v_j = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":248
+  /* "sorted_nearest/src/sorted_nearest.pyx":305
  *     cdef int diff
  *     cdef int j = 0
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -4800,7 +5265,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
  */
   __pyx_v_i = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":249
+  /* "sorted_nearest/src/sorted_nearest.pyx":306
  *     cdef int j = 0
  *     cdef int i = 0
  *     cdef int ZERO = 0             # <<<<<<<<<<<<<<
@@ -4809,7 +5274,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
  */
   __pyx_v_ZERO = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":250
+  /* "sorted_nearest/src/sorted_nearest.pyx":307
  *     cdef int i = 0
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_e)             # <<<<<<<<<<<<<<
@@ -4819,7 +5284,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_l_e); 
   __pyx_v_length_l = __pyx_t_1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":251
+  /* "sorted_nearest/src/sorted_nearest.pyx":308
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_e)
  *     cdef int length_r = len(r_s)             # <<<<<<<<<<<<<<
@@ -4829,109 +5294,109 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_s); 
   __pyx_v_length_r = __pyx_t_1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":253
+  /* "sorted_nearest/src/sorted_nearest.pyx":310
  *     cdef int length_r = len(r_s)
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
  *     cdef long [::1] output_ridx
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 253, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_output_arr_ridx = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":254
+  /* "sorted_nearest/src/sorted_nearest.pyx":311
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     cdef long [::1] output_ridx
  *     cdef long [::1] output_dist
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_output_arr_dist = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":258
+  /* "sorted_nearest/src/sorted_nearest.pyx":315
  *     cdef long [::1] output_dist
  * 
  *     output_ridx = output_arr_ridx             # <<<<<<<<<<<<<<
  *     output_dist = output_arr_dist
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 315, __pyx_L1_error)
   __pyx_v_output_ridx = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":259
+  /* "sorted_nearest/src/sorted_nearest.pyx":316
  * 
  *     output_ridx = output_arr_ridx
  *     output_dist = output_arr_dist             # <<<<<<<<<<<<<<
  * 
  *     # # loop out of the rightmost that are not next to any in left
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 316, __pyx_L1_error)
   __pyx_v_output_dist = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":265
+  /* "sorted_nearest/src/sorted_nearest.pyx":322
  *     #     j += 1
  * 
  *     while i < length_l and j < length_r:             # <<<<<<<<<<<<<<
@@ -4950,73 +5415,158 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_8) break;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":267
+    /* "sorted_nearest/src/sorted_nearest.pyx":324
  *     while i < length_l and j < length_r:
  * 
  *         if l_e[i] < r_s[j]:             # <<<<<<<<<<<<<<
+ *             print("l_e[i] < r_s[j]", l_e[i], r_s[j])
  *             output_dist[i] = r_s[j] - l_e[i]
- *             output_ridx[i] = j
  */
     __pyx_t_10 = __pyx_v_i;
     __pyx_t_11 = __pyx_v_j;
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_10)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_11)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":268
+      /* "sorted_nearest/src/sorted_nearest.pyx":325
  * 
  *         if l_e[i] < r_s[j]:
+ *             print("l_e[i] < r_s[j]", l_e[i], r_s[j])             # <<<<<<<<<<<<<<
+ *             output_dist[i] = r_s[j] - l_e[i]
+ *             output_ridx[i] = j
+ */
+      __pyx_t_12 = __pyx_v_i;
+      __pyx_t_2 = __Pyx_PyInt_From_long((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 325, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_13 = __pyx_v_j;
+      __pyx_t_5 = __Pyx_PyInt_From_long((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_13)) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 325, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_INCREF(__pyx_kp_s_l_e_i_r_s_j);
+      __Pyx_GIVEREF(__pyx_kp_s_l_e_i_r_s_j);
+      PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_kp_s_l_e_i_r_s_j);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2);
+      __Pyx_GIVEREF(__pyx_t_5);
+      PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_5);
+      __pyx_t_2 = 0;
+      __pyx_t_5 = 0;
+      if (__Pyx_PrintOne(0, __pyx_t_4) < 0) __PYX_ERR(0, 325, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":326
+ *         if l_e[i] < r_s[j]:
+ *             print("l_e[i] < r_s[j]", l_e[i], r_s[j])
  *             output_dist[i] = r_s[j] - l_e[i]             # <<<<<<<<<<<<<<
  *             output_ridx[i] = j
  *             i += 1
  */
-      __pyx_t_12 = __pyx_v_j;
-      __pyx_t_13 = __pyx_v_i;
-      __pyx_t_14 = __pyx_v_i;
-      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_14)) )) = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_12)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_13)) ))));
+      __pyx_t_14 = __pyx_v_j;
+      __pyx_t_15 = __pyx_v_i;
+      __pyx_t_16 = __pyx_v_i;
+      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_16)) )) = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_14)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_15)) ))));
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":269
- *         if l_e[i] < r_s[j]:
+      /* "sorted_nearest/src/sorted_nearest.pyx":327
+ *             print("l_e[i] < r_s[j]", l_e[i], r_s[j])
  *             output_dist[i] = r_s[j] - l_e[i]
  *             output_ridx[i] = j             # <<<<<<<<<<<<<<
  *             i += 1
- *         else:
+ *         elif l_e[i] > r_s[j]:
  */
-      __pyx_t_15 = __pyx_v_i;
-      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_15)) )) = __pyx_v_j;
+      __pyx_t_17 = __pyx_v_i;
+      *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_17)) )) = __pyx_v_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":270
+      /* "sorted_nearest/src/sorted_nearest.pyx":328
  *             output_dist[i] = r_s[j] - l_e[i]
  *             output_ridx[i] = j
  *             i += 1             # <<<<<<<<<<<<<<
- *         else:
- *             j += 1
+ *         elif l_e[i] > r_s[j]:
+ *             print("l_e[i] > r_s[j]", l_e[i], r_s[j])
  */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":267
+      /* "sorted_nearest/src/sorted_nearest.pyx":324
  *     while i < length_l and j < length_r:
  * 
  *         if l_e[i] < r_s[j]:             # <<<<<<<<<<<<<<
+ *             print("l_e[i] < r_s[j]", l_e[i], r_s[j])
  *             output_dist[i] = r_s[j] - l_e[i]
- *             output_ridx[i] = j
  */
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":272
+    /* "sorted_nearest/src/sorted_nearest.pyx":329
+ *             output_ridx[i] = j
  *             i += 1
+ *         elif l_e[i] > r_s[j]:             # <<<<<<<<<<<<<<
+ *             print("l_e[i] > r_s[j]", l_e[i], r_s[j])
+ *             j += 1
+ */
+    __pyx_t_18 = __pyx_v_i;
+    __pyx_t_19 = __pyx_v_j;
+    __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_18)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_19)) )))) != 0);
+    if (__pyx_t_8) {
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":330
+ *             i += 1
+ *         elif l_e[i] > r_s[j]:
+ *             print("l_e[i] > r_s[j]", l_e[i], r_s[j])             # <<<<<<<<<<<<<<
+ *             j += 1
  *         else:
+ */
+      __pyx_t_20 = __pyx_v_i;
+      __pyx_t_4 = __Pyx_PyInt_From_long((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_20)) )))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 330, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_21 = __pyx_v_j;
+      __pyx_t_5 = __Pyx_PyInt_From_long((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_21)) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 330, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 330, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_kp_s_l_e_i_r_s_j_2);
+      __Pyx_GIVEREF(__pyx_kp_s_l_e_i_r_s_j_2);
+      PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_kp_s_l_e_i_r_s_j_2);
+      __Pyx_GIVEREF(__pyx_t_4);
+      PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_5);
+      PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_5);
+      __pyx_t_4 = 0;
+      __pyx_t_5 = 0;
+      if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 330, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":331
+ *         elif l_e[i] > r_s[j]:
+ *             print("l_e[i] > r_s[j]", l_e[i], r_s[j])
  *             j += 1             # <<<<<<<<<<<<<<
+ *         else:
+ *             i += 1
+ */
+      __pyx_v_j = (__pyx_v_j + 1);
+
+      /* "sorted_nearest/src/sorted_nearest.pyx":329
+ *             output_ridx[i] = j
+ *             i += 1
+ *         elif l_e[i] > r_s[j]:             # <<<<<<<<<<<<<<
+ *             print("l_e[i] > r_s[j]", l_e[i], r_s[j])
+ *             j += 1
+ */
+      goto __pyx_L7;
+    }
+
+    /* "sorted_nearest/src/sorted_nearest.pyx":333
+ *             j += 1
+ *         else:
+ *             i += 1             # <<<<<<<<<<<<<<
  * 
  * 
  */
     /*else*/ {
-      __pyx_v_j = (__pyx_v_j + 1);
+      __pyx_v_i = (__pyx_v_i + 1);
     }
     __pyx_L7:;
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":275
+  /* "sorted_nearest/src/sorted_nearest.pyx":336
  * 
  * 
  *     return output_arr_ridx, output_arr_dist             # <<<<<<<<<<<<<<
@@ -5024,7 +5574,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_output_arr_ridx);
   __Pyx_GIVEREF(__pyx_v_output_arr_ridx);
@@ -5036,7 +5586,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_non
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":244
+  /* "sorted_nearest/src/sorted_nearest.pyx":301
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_next_nonoverlapping(long [::1] l_e, long [::1] r_s):             # <<<<<<<<<<<<<<
@@ -5095,11 +5645,11 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_7nearest_next_n
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_next_nonoverlapping", 1, 2, 2, 1); __PYX_ERR(0, 244, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_next_nonoverlapping", 1, 2, 2, 1); __PYX_ERR(0, 301, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_next_nonoverlapping") < 0)) __PYX_ERR(0, 244, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_next_nonoverlapping") < 0)) __PYX_ERR(0, 301, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5107,12 +5657,12 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_7nearest_next_n
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 244, __pyx_L3_error)
-    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 244, __pyx_L3_error)
+    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 301, __pyx_L3_error)
+    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 301, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("nearest_next_nonoverlapping", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 244, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("nearest_next_nonoverlapping", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 301, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.nearest_next_nonoverlapping", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5131,9 +5681,9 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_6nearest_next_n
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("nearest_next_nonoverlapping", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 244, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 244, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_nonoverlapping(__pyx_v_l_e, __pyx_v_r_s, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 301, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 301, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next_nonoverlapping(__pyx_v_l_e, __pyx_v_r_s, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5152,7 +5702,7 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_6nearest_next_n
   return __pyx_r;
 }
 
-/* "sorted_nearest/src/sorted_nearest.pyx":280
+/* "sorted_nearest/src/sorted_nearest.pyx":341
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_next(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
@@ -5194,7 +5744,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
   Py_ssize_t __pyx_t_19;
   __Pyx_RefNannySetupContext("nearest_next", 0);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":283
+  /* "sorted_nearest/src/sorted_nearest.pyx":344
  * 
  *     cdef int diff
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -5203,7 +5753,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  */
   __pyx_v_j = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":284
+  /* "sorted_nearest/src/sorted_nearest.pyx":345
  *     cdef int diff
  *     cdef int j = 0
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -5212,7 +5762,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  */
   __pyx_v_i = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":285
+  /* "sorted_nearest/src/sorted_nearest.pyx":346
  *     cdef int j = 0
  *     cdef int i = 0
  *     cdef int ZERO = 0             # <<<<<<<<<<<<<<
@@ -5221,7 +5771,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  */
   __pyx_v_ZERO = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":286
+  /* "sorted_nearest/src/sorted_nearest.pyx":347
  *     cdef int i = 0
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_e)             # <<<<<<<<<<<<<<
@@ -5231,7 +5781,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_l_e); 
   __pyx_v_length_l = __pyx_t_1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":287
+  /* "sorted_nearest/src/sorted_nearest.pyx":348
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_e)
  *     cdef int length_r = len(r_s)             # <<<<<<<<<<<<<<
@@ -5241,109 +5791,109 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_s); 
   __pyx_v_length_r = __pyx_t_1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":289
+  /* "sorted_nearest/src/sorted_nearest.pyx":350
  *     cdef int length_r = len(r_s)
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
  *     cdef long [::1] output_ridx
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 350, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_output_arr_ridx = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":290
+  /* "sorted_nearest/src/sorted_nearest.pyx":351
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     cdef long [::1] output_ridx
  *     cdef long [::1] output_dist
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_output_arr_dist = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":294
+  /* "sorted_nearest/src/sorted_nearest.pyx":355
  *     cdef long [::1] output_dist
  * 
  *     output_ridx = output_arr_ridx             # <<<<<<<<<<<<<<
  *     output_dist = output_arr_dist
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 355, __pyx_L1_error)
   __pyx_v_output_ridx = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":295
+  /* "sorted_nearest/src/sorted_nearest.pyx":356
  * 
  *     output_ridx = output_arr_ridx
  *     output_dist = output_arr_dist             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 356, __pyx_L1_error)
   __pyx_v_output_dist = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":298
+  /* "sorted_nearest/src/sorted_nearest.pyx":359
  * 
  * 
  *     while i < length_l and j < length_r:             # <<<<<<<<<<<<<<
@@ -5362,7 +5912,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_8) break;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":300
+    /* "sorted_nearest/src/sorted_nearest.pyx":361
  *     while i < length_l and j < length_r:
  * 
  *         if l_e[i] < r_s[j]:             # <<<<<<<<<<<<<<
@@ -5374,7 +5924,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_10)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_11)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":301
+      /* "sorted_nearest/src/sorted_nearest.pyx":362
  * 
  *         if l_e[i] < r_s[j]:
  *             output_dist[i] = r_s[j] - l_e[i]             # <<<<<<<<<<<<<<
@@ -5386,7 +5936,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       __pyx_t_14 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_14)) )) = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_12)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_13)) ))));
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":302
+      /* "sorted_nearest/src/sorted_nearest.pyx":363
  *         if l_e[i] < r_s[j]:
  *             output_dist[i] = r_s[j] - l_e[i]
  *             output_ridx[i] = j             # <<<<<<<<<<<<<<
@@ -5396,7 +5946,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       __pyx_t_15 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_15)) )) = __pyx_v_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":303
+      /* "sorted_nearest/src/sorted_nearest.pyx":364
  *             output_dist[i] = r_s[j] - l_e[i]
  *             output_ridx[i] = j
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5405,7 +5955,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":300
+      /* "sorted_nearest/src/sorted_nearest.pyx":361
  *     while i < length_l and j < length_r:
  * 
  *         if l_e[i] < r_s[j]:             # <<<<<<<<<<<<<<
@@ -5415,7 +5965,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":304
+    /* "sorted_nearest/src/sorted_nearest.pyx":365
  *             output_ridx[i] = j
  *             i += 1
  *         elif r_e[j] < l_s[i]: # non-overlapping and non-next             # <<<<<<<<<<<<<<
@@ -5427,7 +5977,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_16)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_17)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":305
+      /* "sorted_nearest/src/sorted_nearest.pyx":366
  *             i += 1
  *         elif r_e[j] < l_s[i]: # non-overlapping and non-next
  *             j += 1             # <<<<<<<<<<<<<<
@@ -5436,7 +5986,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  */
       __pyx_v_j = (__pyx_v_j + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":304
+      /* "sorted_nearest/src/sorted_nearest.pyx":365
  *             output_ridx[i] = j
  *             i += 1
  *         elif r_e[j] < l_s[i]: # non-overlapping and non-next             # <<<<<<<<<<<<<<
@@ -5446,7 +5996,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":307
+    /* "sorted_nearest/src/sorted_nearest.pyx":368
  *             j += 1
  *         else: # overlap
  *             output_dist[i] = 0             # <<<<<<<<<<<<<<
@@ -5457,7 +6007,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       __pyx_t_18 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_18)) )) = 0;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":308
+      /* "sorted_nearest/src/sorted_nearest.pyx":369
  *         else: # overlap
  *             output_dist[i] = 0
  *             output_ridx[i] = j             # <<<<<<<<<<<<<<
@@ -5467,7 +6017,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
       __pyx_t_19 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_19)) )) = __pyx_v_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":309
+      /* "sorted_nearest/src/sorted_nearest.pyx":370
  *             output_dist[i] = 0
  *             output_ridx[i] = j
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5479,7 +6029,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
     __pyx_L7:;
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":311
+  /* "sorted_nearest/src/sorted_nearest.pyx":372
  *             i += 1
  * 
  *     return output_arr_ridx, output_arr_dist             # <<<<<<<<<<<<<<
@@ -5487,7 +6037,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 372, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_output_arr_ridx);
   __Pyx_GIVEREF(__pyx_v_output_arr_ridx);
@@ -5499,7 +6049,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__P
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":280
+  /* "sorted_nearest/src/sorted_nearest.pyx":341
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_next(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
@@ -5564,23 +6114,23 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_9nearest_next(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_l_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 1); __PYX_ERR(0, 280, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 1); __PYX_ERR(0, 341, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 2); __PYX_ERR(0, 280, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 2); __PYX_ERR(0, 341, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 3); __PYX_ERR(0, 280, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, 3); __PYX_ERR(0, 341, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_next") < 0)) __PYX_ERR(0, 280, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_next") < 0)) __PYX_ERR(0, 341, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -5590,14 +6140,14 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_9nearest_next(P
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_l_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_s.memview)) __PYX_ERR(0, 280, __pyx_L3_error)
-    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 280, __pyx_L3_error)
-    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 280, __pyx_L3_error)
-    __pyx_v_r_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_e.memview)) __PYX_ERR(0, 280, __pyx_L3_error)
+    __pyx_v_l_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_s.memview)) __PYX_ERR(0, 341, __pyx_L3_error)
+    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 341, __pyx_L3_error)
+    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 341, __pyx_L3_error)
+    __pyx_v_r_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_e.memview)) __PYX_ERR(0, 341, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 280, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("nearest_next", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 341, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.nearest_next", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5616,11 +6166,11 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_8nearest_next(C
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("nearest_next", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_l_s.memview)) { __Pyx_RaiseUnboundLocalError("l_s"); __PYX_ERR(0, 280, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 280, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 280, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_r_e.memview)) { __Pyx_RaiseUnboundLocalError("r_e"); __PYX_ERR(0, 280, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__pyx_v_l_s, __pyx_v_l_e, __pyx_v_r_s, __pyx_v_r_e, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
+  if (unlikely(!__pyx_v_l_s.memview)) { __Pyx_RaiseUnboundLocalError("l_s"); __PYX_ERR(0, 341, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 341, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 341, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_r_e.memview)) { __Pyx_RaiseUnboundLocalError("r_e"); __PYX_ERR(0, 341, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_next(__pyx_v_l_s, __pyx_v_l_e, __pyx_v_r_s, __pyx_v_r_e, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5641,7 +6191,7 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_8nearest_next(C
   return __pyx_r;
 }
 
-/* "sorted_nearest/src/sorted_nearest.pyx":316
+/* "sorted_nearest/src/sorted_nearest.pyx":377
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_previous(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
@@ -5730,7 +6280,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   Py_ssize_t __pyx_t_59;
   __Pyx_RefNannySetupContext("nearest_previous", 0);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":318
+  /* "sorted_nearest/src/sorted_nearest.pyx":379
  * cpdef nearest_previous(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):
  * 
  *     cdef int _continue = 1             # <<<<<<<<<<<<<<
@@ -5739,7 +6289,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
   __pyx_v__continue = 1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":320
+  /* "sorted_nearest/src/sorted_nearest.pyx":381
  *     cdef int _continue = 1
  *     cdef int new_diff
  *     cdef int old_diff = cn.INT_MAX             # <<<<<<<<<<<<<<
@@ -5748,7 +6298,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
   __pyx_v_old_diff = INT_MAX;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":321
+  /* "sorted_nearest/src/sorted_nearest.pyx":382
  *     cdef int new_diff
  *     cdef int old_diff = cn.INT_MAX
  *     cdef int j = 0             # <<<<<<<<<<<<<<
@@ -5757,7 +6307,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
   __pyx_v_j = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":322
+  /* "sorted_nearest/src/sorted_nearest.pyx":383
  *     cdef int old_diff = cn.INT_MAX
  *     cdef int j = 0
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -5766,7 +6316,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
   __pyx_v_i = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":323
+  /* "sorted_nearest/src/sorted_nearest.pyx":384
  *     cdef int j = 0
  *     cdef int i = 0
  *     cdef int ZERO = 0             # <<<<<<<<<<<<<<
@@ -5775,7 +6325,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
   __pyx_v_ZERO = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":324
+  /* "sorted_nearest/src/sorted_nearest.pyx":385
  *     cdef int i = 0
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_s)             # <<<<<<<<<<<<<<
@@ -5785,7 +6335,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_l_s); 
   __pyx_v_length_l = __pyx_t_1;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":325
+  /* "sorted_nearest/src/sorted_nearest.pyx":386
  *     cdef int ZERO = 0
  *     cdef int length_l = len(l_s)
  *     cdef int length_r_minus_one = len(r_s) - 1             # <<<<<<<<<<<<<<
@@ -5795,109 +6345,109 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_s); 
   __pyx_v_length_r_minus_one = (__pyx_t_1 - 1);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":327
+  /* "sorted_nearest/src/sorted_nearest.pyx":388
  *     cdef int length_r_minus_one = len(r_s) - 1
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
  *     cdef long [::1] output_ridx
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_long); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 327, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 327, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_6, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 388, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_output_arr_ridx = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":328
+  /* "sorted_nearest/src/sorted_nearest.pyx":389
  * 
  *     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
  *     output_arr_dist = np.ones(length_l, dtype=np.long) * -1             # <<<<<<<<<<<<<<
  *     cdef long [::1] output_ridx
  *     cdef long [::1] output_dist
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ones); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_length_l); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_long); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_int_neg_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_output_arr_dist = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":332
+  /* "sorted_nearest/src/sorted_nearest.pyx":393
  *     cdef long [::1] output_dist
  * 
  *     output_ridx = output_arr_ridx             # <<<<<<<<<<<<<<
  *     output_dist = output_arr_dist
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 332, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_ridx, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 393, __pyx_L1_error)
   __pyx_v_output_ridx = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":333
+  /* "sorted_nearest/src/sorted_nearest.pyx":394
  * 
  *     output_ridx = output_arr_ridx
  *     output_dist = output_arr_dist             # <<<<<<<<<<<<<<
  * 
  *     # since the main loop checks j + 1, need this step for checking index zero
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_output_arr_dist, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 394, __pyx_L1_error)
   __pyx_v_output_dist = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":336
+  /* "sorted_nearest/src/sorted_nearest.pyx":397
  * 
  *     # since the main loop checks j + 1, need this step for checking index zero
  *     while _continue and i < length_l:             # <<<<<<<<<<<<<<
@@ -5916,7 +6466,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_8) break;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":338
+    /* "sorted_nearest/src/sorted_nearest.pyx":399
  *     while _continue and i < length_l:
  *         # print("while j == 0")
  *         if l_e[i] < r_s[0]:             # <<<<<<<<<<<<<<
@@ -5928,7 +6478,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_10)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_11)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":340
+      /* "sorted_nearest/src/sorted_nearest.pyx":401
  *         if l_e[i] < r_s[0]:
  *             # print("  l_e[i] < r_s[0]")
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5937,7 +6487,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":338
+      /* "sorted_nearest/src/sorted_nearest.pyx":399
  *     while _continue and i < length_l:
  *         # print("while j == 0")
  *         if l_e[i] < r_s[0]:             # <<<<<<<<<<<<<<
@@ -5947,7 +6497,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":341
+    /* "sorted_nearest/src/sorted_nearest.pyx":402
  *             # print("  l_e[i] < r_s[0]")
  *             i += 1
  *         elif l_s[i] > r_e[0]:             # <<<<<<<<<<<<<<
@@ -5959,7 +6509,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_12)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_13)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":343
+      /* "sorted_nearest/src/sorted_nearest.pyx":404
  *         elif l_s[i] > r_e[0]:
  *             # print("  l_s[i] > r_e[0]")
  *             old_diff = l_s[i] - r_e[0]             # <<<<<<<<<<<<<<
@@ -5970,7 +6520,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_15 = 0;
       __pyx_v_old_diff = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_14)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_15)) ))));
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":344
+      /* "sorted_nearest/src/sorted_nearest.pyx":405
  *             # print("  l_s[i] > r_e[0]")
  *             old_diff = l_s[i] - r_e[0]
  *             _continue = 0             # <<<<<<<<<<<<<<
@@ -5979,7 +6529,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v__continue = 0;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":341
+      /* "sorted_nearest/src/sorted_nearest.pyx":402
  *             # print("  l_e[i] < r_s[0]")
  *             i += 1
  *         elif l_s[i] > r_e[0]:             # <<<<<<<<<<<<<<
@@ -5989,7 +6539,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       goto __pyx_L7;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":347
+    /* "sorted_nearest/src/sorted_nearest.pyx":408
  *         else: # overlapping
  *             # print("  overlapping")
  *             output_ridx[i] = 0             # <<<<<<<<<<<<<<
@@ -6000,7 +6550,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_16 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_16)) )) = 0;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":348
+      /* "sorted_nearest/src/sorted_nearest.pyx":409
  *             # print("  overlapping")
  *             output_ridx[i] = 0
  *             output_dist[i] = 0             # <<<<<<<<<<<<<<
@@ -6010,7 +6560,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_17 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_17)) )) = 0;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":349
+      /* "sorted_nearest/src/sorted_nearest.pyx":410
  *             output_ridx[i] = 0
  *             output_dist[i] = 0
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6022,7 +6572,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_L7:;
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":351
+  /* "sorted_nearest/src/sorted_nearest.pyx":412
  *             i += 1
  * 
  *     while i < length_l and j < length_r_minus_one:             # <<<<<<<<<<<<<<
@@ -6041,7 +6591,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_L10_bool_binop_done:;
     if (!__pyx_t_8) break;
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":353
+    /* "sorted_nearest/src/sorted_nearest.pyx":414
  *     while i < length_l and j < length_r_minus_one:
  * 
  *         if l_e[i] < r_s[j + 1]:             # <<<<<<<<<<<<<<
@@ -6053,7 +6603,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_18)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_19)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":355
+      /* "sorted_nearest/src/sorted_nearest.pyx":416
  *         if l_e[i] < r_s[j + 1]:
  *             # print("l_e[i] < r_s[j + 1]")
  *             output_ridx[i] = j             # <<<<<<<<<<<<<<
@@ -6063,7 +6613,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_20 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_20)) )) = __pyx_v_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":356
+      /* "sorted_nearest/src/sorted_nearest.pyx":417
  *             # print("l_e[i] < r_s[j + 1]")
  *             output_ridx[i] = j
  *             output_dist[i] = old_diff             # <<<<<<<<<<<<<<
@@ -6073,7 +6623,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_21 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_21)) )) = __pyx_v_old_diff;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":357
+      /* "sorted_nearest/src/sorted_nearest.pyx":418
  *             output_ridx[i] = j
  *             output_dist[i] = old_diff
  *             old_diff = cn.INT_MAX             # <<<<<<<<<<<<<<
@@ -6082,7 +6632,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_old_diff = INT_MAX;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":358
+      /* "sorted_nearest/src/sorted_nearest.pyx":419
  *             output_dist[i] = old_diff
  *             old_diff = cn.INT_MAX
  *             j -= 1             # <<<<<<<<<<<<<<
@@ -6091,7 +6641,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_j = (__pyx_v_j - 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":359
+      /* "sorted_nearest/src/sorted_nearest.pyx":420
  *             old_diff = cn.INT_MAX
  *             j -= 1
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6100,7 +6650,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":353
+      /* "sorted_nearest/src/sorted_nearest.pyx":414
  *     while i < length_l and j < length_r_minus_one:
  * 
  *         if l_e[i] < r_s[j + 1]:             # <<<<<<<<<<<<<<
@@ -6110,7 +6660,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       goto __pyx_L12;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":361
+    /* "sorted_nearest/src/sorted_nearest.pyx":422
  *             i += 1
  * 
  *         elif l_s[i] > r_e[j + 1]:             # <<<<<<<<<<<<<<
@@ -6122,7 +6672,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_22)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_23)) )))) != 0);
     if (__pyx_t_8) {
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":363
+      /* "sorted_nearest/src/sorted_nearest.pyx":424
  *         elif l_s[i] > r_e[j + 1]:
  *             # print("l_s[i] > r_e[j + 1]")
  *             new_diff = l_s[i] - r_e[j + 1]             # <<<<<<<<<<<<<<
@@ -6133,7 +6683,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_25 = (__pyx_v_j + 1);
       __pyx_v_new_diff = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_24)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_25)) ))));
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":364
+      /* "sorted_nearest/src/sorted_nearest.pyx":425
  *             # print("l_s[i] > r_e[j + 1]")
  *             new_diff = l_s[i] - r_e[j + 1]
  *             if new_diff > old_diff:             # <<<<<<<<<<<<<<
@@ -6143,7 +6693,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = ((__pyx_v_new_diff > __pyx_v_old_diff) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":366
+        /* "sorted_nearest/src/sorted_nearest.pyx":427
  *             if new_diff > old_diff:
  *                 # print("  Pushing", i, j, old_diff)
  *                 output_ridx[i] = j             # <<<<<<<<<<<<<<
@@ -6153,7 +6703,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_26 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_26)) )) = __pyx_v_j;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":367
+        /* "sorted_nearest/src/sorted_nearest.pyx":428
  *                 # print("  Pushing", i, j, old_diff)
  *                 output_ridx[i] = j
  *                 output_dist[i] = old_diff             # <<<<<<<<<<<<<<
@@ -6163,7 +6713,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_27 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_27)) )) = __pyx_v_old_diff;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":368
+        /* "sorted_nearest/src/sorted_nearest.pyx":429
  *                 output_ridx[i] = j
  *                 output_dist[i] = old_diff
  *                 old_diff = cn.INT_MAX             # <<<<<<<<<<<<<<
@@ -6172,7 +6722,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
         __pyx_v_old_diff = INT_MAX;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":369
+        /* "sorted_nearest/src/sorted_nearest.pyx":430
  *                 output_dist[i] = old_diff
  *                 old_diff = cn.INT_MAX
  *                 j -= 1             # <<<<<<<<<<<<<<
@@ -6181,7 +6731,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
         __pyx_v_j = (__pyx_v_j - 1);
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":370
+        /* "sorted_nearest/src/sorted_nearest.pyx":431
  *                 old_diff = cn.INT_MAX
  *                 j -= 1
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -6190,7 +6740,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":364
+        /* "sorted_nearest/src/sorted_nearest.pyx":425
  *             # print("l_s[i] > r_e[j + 1]")
  *             new_diff = l_s[i] - r_e[j + 1]
  *             if new_diff > old_diff:             # <<<<<<<<<<<<<<
@@ -6200,7 +6750,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L13;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":372
+      /* "sorted_nearest/src/sorted_nearest.pyx":433
  *                 i += 1
  *             else:
  *                 j += 1             # <<<<<<<<<<<<<<
@@ -6210,7 +6760,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       /*else*/ {
         __pyx_v_j = (__pyx_v_j + 1);
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":373
+        /* "sorted_nearest/src/sorted_nearest.pyx":434
  *             else:
  *                 j += 1
  *                 old_diff = new_diff             # <<<<<<<<<<<<<<
@@ -6221,7 +6771,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       }
       __pyx_L13:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":361
+      /* "sorted_nearest/src/sorted_nearest.pyx":422
  *             i += 1
  * 
  *         elif l_s[i] > r_e[j + 1]:             # <<<<<<<<<<<<<<
@@ -6231,7 +6781,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       goto __pyx_L12;
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":377
+    /* "sorted_nearest/src/sorted_nearest.pyx":438
  *             # print("else")
  *             # print("  Pushing", i, j, 0)
  *             j += 1             # <<<<<<<<<<<<<<
@@ -6241,7 +6791,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     /*else*/ {
       __pyx_v_j = (__pyx_v_j + 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":378
+      /* "sorted_nearest/src/sorted_nearest.pyx":439
  *             # print("  Pushing", i, j, 0)
  *             j += 1
  *             output_ridx[i] = j             # <<<<<<<<<<<<<<
@@ -6251,7 +6801,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_28 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_28)) )) = __pyx_v_j;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":379
+      /* "sorted_nearest/src/sorted_nearest.pyx":440
  *             j += 1
  *             output_ridx[i] = j
  *             output_dist[i] = 0             # <<<<<<<<<<<<<<
@@ -6261,7 +6811,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_29 = __pyx_v_i;
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_29)) )) = 0;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":380
+      /* "sorted_nearest/src/sorted_nearest.pyx":441
  *             output_ridx[i] = j
  *             output_dist[i] = 0
  *             old_diff = cn.INT_MAX             # <<<<<<<<<<<<<<
@@ -6270,7 +6820,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_old_diff = INT_MAX;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":381
+      /* "sorted_nearest/src/sorted_nearest.pyx":442
  *             output_dist[i] = 0
  *             old_diff = cn.INT_MAX
  *             j -= 1             # <<<<<<<<<<<<<<
@@ -6279,7 +6829,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
  */
       __pyx_v_j = (__pyx_v_j - 1);
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":382
+      /* "sorted_nearest/src/sorted_nearest.pyx":443
  *             old_diff = cn.INT_MAX
  *             j -= 1
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6291,7 +6841,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     __pyx_L12:;
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":387
+  /* "sorted_nearest/src/sorted_nearest.pyx":448
  *     # might be a tie against last and second last since we could not check j == len(r)
  *     # in prev loop
  *     cdef int second_last = len(r_s) - 2             # <<<<<<<<<<<<<<
@@ -6301,7 +6851,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_s); 
   __pyx_v_second_last = (__pyx_t_1 - 2);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":388
+  /* "sorted_nearest/src/sorted_nearest.pyx":449
  *     # in prev loop
  *     cdef int second_last = len(r_s) - 2
  *     cdef int last = len(r_s) - 1             # <<<<<<<<<<<<<<
@@ -6311,7 +6861,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_1 = __Pyx_MemoryView_Len(__pyx_v_r_s); 
   __pyx_v_last = (__pyx_t_1 - 1);
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":390
+  /* "sorted_nearest/src/sorted_nearest.pyx":451
  *     cdef int last = len(r_s) - 1
  *     cdef int sl_dist, l_dist
  *     if len(r_s) >= 2:             # <<<<<<<<<<<<<<
@@ -6322,7 +6872,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_8 = ((__pyx_t_1 >= 2) != 0);
   if (__pyx_t_8) {
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":391
+    /* "sorted_nearest/src/sorted_nearest.pyx":452
  *     cdef int sl_dist, l_dist
  *     if len(r_s) >= 2:
  *         while i < length_l:             # <<<<<<<<<<<<<<
@@ -6333,7 +6883,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = ((__pyx_v_i < __pyx_v_length_l) != 0);
       if (!__pyx_t_8) break;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":393
+      /* "sorted_nearest/src/sorted_nearest.pyx":454
  *         while i < length_l:
  *             # print("we are here")
  *             if l_e[i] < r_s[second_last]:             # <<<<<<<<<<<<<<
@@ -6345,7 +6895,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_30)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_31)) )))) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":396
+        /* "sorted_nearest/src/sorted_nearest.pyx":457
  *                 # print("l_e[i] < r_s[second_last]")
  *                 # print(l_e[i], r_s[second_last])
  *                 sl_dist = r_s[second_last] - l_e[i]             # <<<<<<<<<<<<<<
@@ -6356,7 +6906,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_33 = __pyx_v_i;
         __pyx_v_sl_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_32)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_33)) ))));
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":393
+        /* "sorted_nearest/src/sorted_nearest.pyx":454
  *         while i < length_l:
  *             # print("we are here")
  *             if l_e[i] < r_s[second_last]:             # <<<<<<<<<<<<<<
@@ -6366,7 +6916,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L17;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":397
+      /* "sorted_nearest/src/sorted_nearest.pyx":458
  *                 # print(l_e[i], r_s[second_last])
  *                 sl_dist = r_s[second_last] - l_e[i]
  *             elif l_s[i] > r_e[second_last]:             # <<<<<<<<<<<<<<
@@ -6378,7 +6928,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_34)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_35)) )))) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":400
+        /* "sorted_nearest/src/sorted_nearest.pyx":461
  *                 # print("l_s[i] > r_e[second_last]")
  *                 # print(l_s[i], r_e[second_last])
  *                 sl_dist = l_s[i] - r_e[second_last]             # <<<<<<<<<<<<<<
@@ -6389,7 +6939,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_37 = __pyx_v_second_last;
         __pyx_v_sl_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_36)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_37)) ))));
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":397
+        /* "sorted_nearest/src/sorted_nearest.pyx":458
  *                 # print(l_e[i], r_s[second_last])
  *                 sl_dist = r_s[second_last] - l_e[i]
  *             elif l_s[i] > r_e[second_last]:             # <<<<<<<<<<<<<<
@@ -6399,7 +6949,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L17;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":402
+      /* "sorted_nearest/src/sorted_nearest.pyx":463
  *                 sl_dist = l_s[i] - r_e[second_last]
  *             else:
  *                 sl_dist = 0             # <<<<<<<<<<<<<<
@@ -6411,7 +6961,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       }
       __pyx_L17:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":404
+      /* "sorted_nearest/src/sorted_nearest.pyx":465
  *                 sl_dist = 0
  * 
  *             if l_e[i] < r_s[last]:             # <<<<<<<<<<<<<<
@@ -6423,7 +6973,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_38)) ))) < (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_39)) )))) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":407
+        /* "sorted_nearest/src/sorted_nearest.pyx":468
  *                 # print("l_e[i] < r_s[last]")
  *                 # print(l_e[i], r_s[last])
  *                 l_dist = r_s[last] - l_e[i]             # <<<<<<<<<<<<<<
@@ -6434,7 +6984,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_41 = __pyx_v_i;
         __pyx_v_l_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_s.data) + __pyx_t_40)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_e.data) + __pyx_t_41)) ))));
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":404
+        /* "sorted_nearest/src/sorted_nearest.pyx":465
  *                 sl_dist = 0
  * 
  *             if l_e[i] < r_s[last]:             # <<<<<<<<<<<<<<
@@ -6444,7 +6994,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L18;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":408
+      /* "sorted_nearest/src/sorted_nearest.pyx":469
  *                 # print(l_e[i], r_s[last])
  *                 l_dist = r_s[last] - l_e[i]
  *             elif l_s[i] > r_e[last]:             # <<<<<<<<<<<<<<
@@ -6456,7 +7006,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_42)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_43)) )))) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":411
+        /* "sorted_nearest/src/sorted_nearest.pyx":472
  *                 # print("l_s[i] > r_e[last]")
  *                 # print(l_s[i], r_e[last])
  *                 l_dist = l_s[i] - r_e[last]             # <<<<<<<<<<<<<<
@@ -6467,7 +7017,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_45 = __pyx_v_last;
         __pyx_v_l_dist = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_44)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_45)) ))));
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":408
+        /* "sorted_nearest/src/sorted_nearest.pyx":469
  *                 # print(l_e[i], r_s[last])
  *                 l_dist = r_s[last] - l_e[i]
  *             elif l_s[i] > r_e[last]:             # <<<<<<<<<<<<<<
@@ -6477,7 +7027,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L18;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":414
+      /* "sorted_nearest/src/sorted_nearest.pyx":475
  *             else:
  *                 # print("else ldist=0")
  *                 l_dist = 0             # <<<<<<<<<<<<<<
@@ -6489,7 +7039,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       }
       __pyx_L18:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":417
+      /* "sorted_nearest/src/sorted_nearest.pyx":478
  * 
  *             # print("sl_dist", sl_dist, "l_dist", l_dist)
  *             if sl_dist < l_dist:             # <<<<<<<<<<<<<<
@@ -6499,7 +7049,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = ((__pyx_v_sl_dist < __pyx_v_l_dist) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":419
+        /* "sorted_nearest/src/sorted_nearest.pyx":480
  *             if sl_dist < l_dist:
  *                 # print(" Pushing", second_last, sl_dist)
  *                 output_ridx[i] = second_last             # <<<<<<<<<<<<<<
@@ -6509,7 +7059,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_46 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_46)) )) = __pyx_v_second_last;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":420
+        /* "sorted_nearest/src/sorted_nearest.pyx":481
  *                 # print(" Pushing", second_last, sl_dist)
  *                 output_ridx[i] = second_last
  *                 output_dist[i] = sl_dist             # <<<<<<<<<<<<<<
@@ -6519,7 +7069,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_47 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_47)) )) = __pyx_v_sl_dist;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":417
+        /* "sorted_nearest/src/sorted_nearest.pyx":478
  * 
  *             # print("sl_dist", sl_dist, "l_dist", l_dist)
  *             if sl_dist < l_dist:             # <<<<<<<<<<<<<<
@@ -6529,7 +7079,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L19;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":423
+      /* "sorted_nearest/src/sorted_nearest.pyx":484
  *             else:
  *                 # print(" Pushing", last, l_dist)
  *                 output_ridx[i] = last             # <<<<<<<<<<<<<<
@@ -6540,7 +7090,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_48 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_48)) )) = __pyx_v_last;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":424
+        /* "sorted_nearest/src/sorted_nearest.pyx":485
  *                 # print(" Pushing", last, l_dist)
  *                 output_ridx[i] = last
  *                 output_dist[i] = l_dist             # <<<<<<<<<<<<<<
@@ -6552,7 +7102,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       }
       __pyx_L19:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":426
+      /* "sorted_nearest/src/sorted_nearest.pyx":487
  *                 output_dist[i] = l_dist
  * 
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6562,7 +7112,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_v_i = (__pyx_v_i + 1);
     }
 
-    /* "sorted_nearest/src/sorted_nearest.pyx":390
+    /* "sorted_nearest/src/sorted_nearest.pyx":451
  *     cdef int last = len(r_s) - 1
  *     cdef int sl_dist, l_dist
  *     if len(r_s) >= 2:             # <<<<<<<<<<<<<<
@@ -6572,7 +7122,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
     goto __pyx_L14;
   }
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":429
+  /* "sorted_nearest/src/sorted_nearest.pyx":490
  * 
  *     else:
  *         while i < length_l:             # <<<<<<<<<<<<<<
@@ -6584,7 +7134,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = ((__pyx_v_i < __pyx_v_length_l) != 0);
       if (!__pyx_t_8) break;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":430
+      /* "sorted_nearest/src/sorted_nearest.pyx":491
  *     else:
  *         while i < length_l:
  *             if l_s[i] > r_e[0]:             # <<<<<<<<<<<<<<
@@ -6596,7 +7146,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       __pyx_t_8 = (((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_50)) ))) > (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_51)) )))) != 0);
       if (__pyx_t_8) {
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":431
+        /* "sorted_nearest/src/sorted_nearest.pyx":492
  *         while i < length_l:
  *             if l_s[i] > r_e[0]:
  *                 output_ridx[i] = 0             # <<<<<<<<<<<<<<
@@ -6606,7 +7156,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_52 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_52)) )) = 0;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":432
+        /* "sorted_nearest/src/sorted_nearest.pyx":493
  *             if l_s[i] > r_e[0]:
  *                 output_ridx[i] = 0
  *                 output_dist[i] = l_s[i] - r_e[0]             # <<<<<<<<<<<<<<
@@ -6618,7 +7168,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_55 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_dist.data) + __pyx_t_55)) )) = ((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_l_s.data) + __pyx_t_53)) ))) - (*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_r_e.data) + __pyx_t_54)) ))));
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":430
+        /* "sorted_nearest/src/sorted_nearest.pyx":491
  *     else:
  *         while i < length_l:
  *             if l_s[i] > r_e[0]:             # <<<<<<<<<<<<<<
@@ -6628,7 +7178,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L22;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":433
+      /* "sorted_nearest/src/sorted_nearest.pyx":494
  *                 output_ridx[i] = 0
  *                 output_dist[i] = l_s[i] - r_e[0]
  *             elif r_e[0] < l_s[i]:             # <<<<<<<<<<<<<<
@@ -6642,7 +7192,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         goto __pyx_L22;
       }
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":436
+      /* "sorted_nearest/src/sorted_nearest.pyx":497
  *                 pass
  *             else:
  *                 output_ridx[i] = 0             # <<<<<<<<<<<<<<
@@ -6653,7 +7203,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
         __pyx_t_58 = __pyx_v_i;
         *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_ridx.data) + __pyx_t_58)) )) = 0;
 
-        /* "sorted_nearest/src/sorted_nearest.pyx":437
+        /* "sorted_nearest/src/sorted_nearest.pyx":498
  *             else:
  *                 output_ridx[i] = 0
  *                 output_dist[i] = 0             # <<<<<<<<<<<<<<
@@ -6665,7 +7215,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
       }
       __pyx_L22:;
 
-      /* "sorted_nearest/src/sorted_nearest.pyx":439
+      /* "sorted_nearest/src/sorted_nearest.pyx":500
  *                 output_dist[i] = 0
  * 
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6677,13 +7227,13 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   }
   __pyx_L14:;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":441
+  /* "sorted_nearest/src/sorted_nearest.pyx":502
  *             i += 1
  * 
  *     return output_arr_ridx, output_arr_dist             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 502, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_output_arr_ridx);
   __Pyx_GIVEREF(__pyx_v_output_arr_ridx);
@@ -6695,7 +7245,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "sorted_nearest/src/sorted_nearest.pyx":316
+  /* "sorted_nearest/src/sorted_nearest.pyx":377
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef nearest_previous(long [::1] l_s, long [::1] l_e, long [::1] r_s, long [::1] r_e):             # <<<<<<<<<<<<<<
@@ -6760,23 +7310,23 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_11nearest_previ
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_l_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 1); __PYX_ERR(0, 316, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 1); __PYX_ERR(0, 377, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 2); __PYX_ERR(0, 316, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 2); __PYX_ERR(0, 377, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r_e)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 3); __PYX_ERR(0, 316, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, 3); __PYX_ERR(0, 377, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_previous") < 0)) __PYX_ERR(0, 316, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "nearest_previous") < 0)) __PYX_ERR(0, 377, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -6786,14 +7336,14 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_11nearest_previ
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_l_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_s.memview)) __PYX_ERR(0, 316, __pyx_L3_error)
-    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 316, __pyx_L3_error)
-    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 316, __pyx_L3_error)
-    __pyx_v_r_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_e.memview)) __PYX_ERR(0, 316, __pyx_L3_error)
+    __pyx_v_l_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_s.memview)) __PYX_ERR(0, 377, __pyx_L3_error)
+    __pyx_v_l_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_l_e.memview)) __PYX_ERR(0, 377, __pyx_L3_error)
+    __pyx_v_r_s = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_s.memview)) __PYX_ERR(0, 377, __pyx_L3_error)
+    __pyx_v_r_e = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_r_e.memview)) __PYX_ERR(0, 377, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 316, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("nearest_previous", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 377, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.nearest_previous", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6812,11 +7362,11 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_10nearest_previ
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("nearest_previous", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_l_s.memview)) { __Pyx_RaiseUnboundLocalError("l_s"); __PYX_ERR(0, 316, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 316, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 316, __pyx_L1_error) }
-  if (unlikely(!__pyx_v_r_e.memview)) { __Pyx_RaiseUnboundLocalError("r_e"); __PYX_ERR(0, 316, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous(__pyx_v_l_s, __pyx_v_l_e, __pyx_v_r_s, __pyx_v_r_e, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
+  if (unlikely(!__pyx_v_l_s.memview)) { __Pyx_RaiseUnboundLocalError("l_s"); __PYX_ERR(0, 377, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_l_e.memview)) { __Pyx_RaiseUnboundLocalError("l_e"); __PYX_ERR(0, 377, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_r_s.memview)) { __Pyx_RaiseUnboundLocalError("r_s"); __PYX_ERR(0, 377, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_r_e.memview)) { __Pyx_RaiseUnboundLocalError("r_e"); __PYX_ERR(0, 377, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous(__pyx_v_l_s, __pyx_v_l_e, __pyx_v_r_s, __pyx_v_r_e, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 377, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -20492,6 +21042,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_View_MemoryView, __pyx_k_View_MemoryView, sizeof(__pyx_k_View_MemoryView), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
+  #if PY_MAJOR_VERSION >= 3
+  {&__pyx_kp_s_b_after_after_after_after_after, __pyx_k_after_after_after_after_after_af, sizeof(__pyx_k_after_after_after_after_after_af), 0, 1, 0, 0},
+  #else
+  {&__pyx_kp_s_b_after_after_after_after_after, __pyx_k_b_after_after_after_after_after, sizeof(__pyx_k_b_after_after_after_after_after), 0, 0, 1, 0},
+  #endif
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
@@ -20518,6 +21073,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
   {&__pyx_n_s_l_e, __pyx_k_l_e, sizeof(__pyx_k_l_e), 0, 0, 1, 1},
+  {&__pyx_kp_s_l_e_i_r_s_j, __pyx_k_l_e_i_r_s_j, sizeof(__pyx_k_l_e_i_r_s_j), 0, 0, 1, 0},
+  {&__pyx_kp_s_l_e_i_r_s_j_2, __pyx_k_l_e_i_r_s_j_2, sizeof(__pyx_k_l_e_i_r_s_j_2), 0, 0, 1, 0},
   {&__pyx_n_s_l_s, __pyx_k_l_s, sizeof(__pyx_k_l_s), 0, 0, 1, 1},
   {&__pyx_n_s_long, __pyx_k_long, sizeof(__pyx_k_long), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -20526,13 +21083,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
-  {&__pyx_kp_s_nearest_previous_nonoverlapping, __pyx_k_nearest_previous_nonoverlapping, sizeof(__pyx_k_nearest_previous_nonoverlapping), 0, 0, 1, 0},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_ones, __pyx_k_ones, sizeof(__pyx_k_ones), 0, 0, 1, 1},
+  {&__pyx_n_s_output_dist, __pyx_k_output_dist, sizeof(__pyx_k_output_dist), 0, 0, 1, 1},
+  {&__pyx_n_s_output_ridx, __pyx_k_output_ridx, sizeof(__pyx_k_output_ridx), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
@@ -20887,7 +21445,6 @@ static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_10 = PyInt_FromLong(10); if (unlikely(!__pyx_int_10)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_184977713 = PyInt_FromLong(184977713L); if (unlikely(!__pyx_int_184977713)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
