@@ -165,17 +165,23 @@ cpdef nearest_nonoverlapping(long [::1] l_s, long [::1] l_e, long [::1] r_s, lon
 @cython.wraparound(False)
 cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1] r_e):
 
-    # print("nearest previous nonoverlapping " * 10)
+    print("nearest previous nonoverlapping " * 10)
 
     cdef int j = 0
     cdef int i = 0
+    cdef int k = 0
     cdef int min_dist = cn.INT_MAX
     cdef int new_diff = cn.INT_MAX
-    cdef int min_j = -1
-    cdef int ZERO = 0
+    cdef int next_start = 0
+    cdef int found = 0
+    cdef int passed = 0
+    cdef int min_j = 0
+    cdef int rewind = 0
+    cdef int _continue = 0
     cdef int length_l = len(l_s)
     cdef int length_r = len(r_e)
     cdef int length_l_minus_one = len(l_s) - 1
+    cdef int length_r_minus_one = len(r_s) - 1
 
     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
@@ -187,70 +193,77 @@ cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1]
 
     while i < length_l and j < length_r:
 
-        # print("----")
-        # print("i", i, "j", j)
-        # print("output_ridx", output_arr_ridx)
-        # print("output_dist", output_arr_dist)
+        print("----")
+        print("i", i, "j", j)
+        print("output_ridx", output_arr_ridx)
+        print("output_dist", output_arr_dist)
         if l_s[i] > r_e[j]:
-            # print("l_s[i] > r_e[j]", l_s[i], r_e[j])
+            print("l_s[i] > r_e[j]", l_s[i], r_e[j])
             new_diff = l_s[i] - r_e[j]
-            # print("new_diff", l_s[i] - r_e[j])
+            print("new_diff", l_s[i] - r_e[j])
             if new_diff < min_dist:
-                min_j = j
                 # output_ridx[i] = j
                 # output_dist[i] = new_diff
                 min_dist = new_diff
-            # print("min_dist", min_dist)
-            # print("min_j", min_j)
+                min_j = j
+                found = 1
+            print("min_dist", min_dist)
         elif r_s[j] >= l_s[i]:
-            # print("elif r_s[j] >= l_s[i]", r_s[j], l_s[i])
-            # print("min_dist", min_dist)
-            # print("min_j", min_j)
-            if min_j >= 0:
-                output_ridx[i] = min_j
-                output_dist[i] = min_dist
-                min_dist = cn.INT_MAX
-            if min_j > 0:
-                j = min_j - 1
+            print("elif r_s[j] >= l_s[i]", r_s[j], l_s[i])
+            print("min_dist", min_dist)
+            passed = 1
+
+        if found and passed:
+            print("found and passed")
+            output_ridx[i] = min_j
+            output_dist[i] = min_dist
+            min_dist = cn.INT_MAX
+            found = 0
+            passed = 0
+            rewind = 1
+        elif not found and passed:
+            print("not found and passed")
+            rewind = 1
+            passed = 0
+        elif found and i == length_l_minus_one and j == length_r_minus_one:
+            print("found and i == length_l_minus_one and j == length_r_minus_one")
+            output_ridx[i] = min_j
+            output_dist[i] = min_dist
+            min_dist = cn.INT_MAX
+            j += 1
+        elif found and j == length_r_minus_one and not i == length_l_minus_one:
+            print("found and j == length_r_minus_one and not i == length_l_minus_one")
+            output_ridx[i] = min_j
+            output_dist[i] = min_dist
+            min_dist = cn.INT_MAX
+            rewind = 1
+        elif j == length_r_minus_one and not i == length_l_minus_one:
+            print("j == length_r_minus_one and not i == length_l_minus_one")
+            rewind = 1
+        elif not passed:
+            print("not passed")
+            j += 1
+
+        if rewind:
+            if i == length_l_minus_one:
+                next_start = l_s[i]
+                i+= 1
             else:
-                j = -1
-            i += 1
+                i += 1
+                next_start = l_s[i]
 
-        j += 1
-        if j == length_r:
-            # print("j == length_r")
-            # print("i == length_l_minus_one", i == length_l_minus_one)
-            # print("l_s[i] > r_e[j - 1]", l_s[i], r_e[j - 1])
-            if min_j >= 0:
-                new_diff = l_s[i] - r_e[j - 1]
-                if min_dist > new_diff and new_diff > 0:
-                    min_dist = l_s[i] - r_e[j - 1]
+            k = j
+            print("k", k)
+            print("next_start", next_start)
+            _continue = 1
+            while k >= 0 and _continue:
+                print("r_e[k] < next_start", r_e[k], next_start)
+                if r_e[k] < next_start:
+                    _continue = 0
+                j = k
+                k -= 1
+            rewind = 0
 
-                # print("i == length_l")
-                output_ridx[i] = min_j
-                output_dist[i] = min_dist
-                j = min_j
-            elif l_s[i] > r_e[j - 1]:
-                # print("l_s[i] > r_e[j - 1]")
-                min_dist = l_s[i] - r_e[j - 1]
-                output_ridx[i] = j - 1
-                output_dist[i] = min_dist
-
-            # elif i < length_l_minus_one:
-            #     print("i < length_l_minus_one")
-            #     if min_j > 0:
-            #         j = min_j
-            #     else:
-            #         j = 0
-            #     print("j back at", j)
-            # Eli i == length_l_minus_one and l_s[i] > r_e[j - 1]:
-            #     print("we are here " * 100)
-            #     min_dist = l_s[i] - r_e[j - 1]
-            #     min_j = j - 1
-            #     output_ridx[i] = min_j
-            #     output_dist[i] = min_dist
-
-            i += 1
 
 
 
@@ -264,7 +277,7 @@ cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1]
 
 
 
-    # loop out of the leftones that have no entries in right previous
+    # dist out of the leftones that have no entries in right previous
     # print("l_s[i] <= r_e[0]", l_s[i], r_e[0])
     # while i < length_l and l_s[i] <= r_e[0]:
     #     print("in here!")
@@ -296,16 +309,22 @@ cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] r_s, long [::1]
 
 
 
-@cython.boundscheck(False)
+@cython.boundscheck(True)
 @cython.wraparound(False)
 cpdef nearest_next_nonoverlapping(long [::1] l_e, long [::1] r_s):
 
     cdef int diff
     cdef int j = 0
+    cdef int found = 0
+    cdef int next_end = 0
+    # cdef int min_dist = 0
     cdef int i = 0
-    cdef int ZERO = 0
+    cdef int k = 0
+    cdef int rewind = 0
     cdef int length_l = len(l_e)
+    cdef int length_l_m1 = len(l_e) - 1
     cdef int length_r = len(r_s)
+    cdef int length_r_m1 = len(r_s) - 1
 
     output_arr_ridx = np.ones(length_l, dtype=np.long) * -1
     output_arr_dist = np.ones(length_l, dtype=np.long) * -1
@@ -315,24 +334,45 @@ cpdef nearest_next_nonoverlapping(long [::1] l_e, long [::1] r_s):
     output_ridx = output_arr_ridx
     output_dist = output_arr_dist
 
-    # # loop out of the rightmost that are not next to any in left
-    # while j < length_r and r_s[j] <= l_e[0]:
-    #     j += 1
-
+    print("nearest next" *  5)
     while i < length_l and j < length_r:
 
+        print("---" * 3)
+        print("i", i, "j", j)
         if l_e[i] < r_s[j]:
-            print("l_e[i] < r_s[j]", l_e[i], r_s[j])
             output_dist[i] = r_s[j] - l_e[i]
             output_ridx[i] = j
-            i += 1
-        elif l_e[i] > r_s[j]:
-            print("l_e[i] > r_s[j]", l_e[i], r_s[j])
-            j += 1
+            found = 1
         else:
-            print("else", l_e[i], r_s[j])
-            i += 1
+            print("l_e[i] >= r_s[j]", l_e[i], r_s[j])
 
+        if found:
+            print("found and i < length_l_m1")
+            if i < length_l_m1:
+                rewind = 1
+            i+=1
+            found = 0
+        elif i < length_l and j == length_r_m1:
+            print("elif i < length_l and j == length_r")
+            rewind = 1
+            i += 1
+        else:
+            print("else")
+            j += 1
+
+        if rewind and not i == length_l:
+            next_end = l_e[i]
+            k = j
+            print("k", k)
+            print("next_end", next_end)
+            while k >= 0 and r_s[k] > next_end:
+                print("r_s[k] > next_end", r_s[k], next_end)
+                j = k
+                k -= 1
+            rewind = 0
+
+    output_ridx = output_arr_ridx
+    output_dist = output_arr_dist
 
     return output_arr_ridx, output_arr_dist
 
