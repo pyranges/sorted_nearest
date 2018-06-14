@@ -29,6 +29,8 @@ def test_simple_some_missing_next():
 
     r_s = np.array([5, 8, 11])
 
+    l_idx = np.array([0, 1, 2])
+
     idx_r, dist = nearest_next_nonoverlapping(l_e, r_s)
 
     idx_r, dist = list(idx_r), list(dist)
