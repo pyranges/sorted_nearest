@@ -158,3 +158,45 @@ cpdef merge_sort_overlapping_and_nearest(long [::1] o_lidx, long [::1] o_ridx,
         i += 1
 
     return output_arr_ridx, output_arr_dist
+
+
+
+
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef find_clusters(long [::1] starts, long [::1] ends):
+
+    cpdef int min_start = starts[0]
+    cpdef int max_end = ends[0]
+    cpdef int i = 0
+    cpdef int n_clusters = 0
+    cpdef int length = len(starts)
+
+    output_arr_start = np.ones(length, dtype=np.long) * -1
+    output_arr_end = np.zeros(length, dtype=np.long) * -1
+
+    cdef long [::1] output_start
+    cdef long [::1] output_end
+
+    output_start = output_arr_start
+    output_end = output_arr_end
+
+    for i in range(length):
+        if not starts[i] <= max_end:
+            output_start[n_clusters] = min_start
+            output_end[n_clusters] = max_end
+            min_start = starts[i]
+            max_end = ends[i]
+            n_clusters += 1
+        else:
+            if ends[i] > max_end:
+                max_end = ends[i]
+
+    if output_arr_start[n_clusters] != min_start:
+        output_arr_start[n_clusters] = min_start
+        output_arr_end[n_clusters] = max_end
+        n_clusters += 1
+
+    return output_arr_start[:n_clusters], output_arr_end[:n_clusters]
