@@ -5,7 +5,6 @@ from Cython.Build import cythonize
 import os
 import sys
 
-from sorted_nearest import __version__
 
 
 CLASSIFIERS = """Development Status :: 5 - Production/Stable
@@ -39,7 +38,7 @@ extensions = [Extension("sorted_nearest.src.sorted_nearest", ["sorted_nearest/sr
 
 setup(
     name = "sorted_nearest",
-    version=__version__,
+    version="0.0.7",
     packages=find_packages(),
     ext_modules = cythonize(extensions),
     description = \
