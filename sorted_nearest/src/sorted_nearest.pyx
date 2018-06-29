@@ -34,6 +34,7 @@ cpdef nearest_next_nonoverlapping(long [::1] l_e, long [::1] l_idx, long [::1] r
         if l_e[i] >= r_s[j]:
             # print("in if")
             j += 1
+            lidx[i] = l_idx[i]
         else:
             # print("in else")
             dist[i] = r_s[j] - l_e[i]
@@ -73,6 +74,7 @@ cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] l_idx, long [::
     while -1 < i and -1 < j:
         if l_s[i] <= r_e[j]:
             j -= 1
+            lidx[i] = l_idx[i]
         else:
             dist[i] = l_s[i] - r_e[j]
             ridx[i] = r_idx[j]
@@ -88,6 +90,10 @@ cpdef nearest_previous_nonoverlapping(long [::1] l_s, long [::1] l_idx, long [::
 cpdef nearest_nonoverlapping(long [::1] prev_lidx, long [::1] prev_ridx, long [::1] prev_dist,
                              long [::1] next_lidx, long [::1] next_ridx, long [::1] next_dist):
 
+    # gr = pr.PyRanges(df)
+    # gr = pr.PyRanges(df)
+    # gr2 = pr.PyRanges(df2)
+    # gr2 = pr.PyRanges(df2)
     cdef int i = 0
 
     cdef int length = len(prev_ridx)
