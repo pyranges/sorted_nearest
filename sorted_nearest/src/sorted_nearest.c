@@ -1757,7 +1757,6 @@ static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_fortran[] = "fortran";
-static const char __pyx_k_int32_t[] = "int32_t";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -1869,7 +1868,6 @@ static PyObject *__pyx_kp_s_got_differing_extents_in_dimensi;
 static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_int32;
-static PyObject *__pyx_n_s_int32_t;
 static PyObject *__pyx_n_s_int64;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
@@ -6341,7 +6339,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
  *     cpdef int n_clusters = 0
  *     cpdef int length = len(starts)             # <<<<<<<<<<<<<<
  * 
- *     output_arr_start = np.ones(length, dtype=np.int32_t) * -1
+ *     output_arr_start = np.ones(length, dtype=np.int32) * -1
  */
   __pyx_t_3 = __Pyx_MemoryView_Len(__pyx_v_starts); 
   __pyx_v_length = __pyx_t_3;
@@ -6349,8 +6347,8 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
   /* "sorted_nearest/src/sorted_nearest.pyx":322
  *     cpdef int length = len(starts)
  * 
- *     output_arr_start = np.ones(length, dtype=np.int32_t) * -1             # <<<<<<<<<<<<<<
- *     output_arr_end = np.zeros(length, dtype=np.int32_t) * -1
+ *     output_arr_start = np.ones(length, dtype=np.int32) * -1             # <<<<<<<<<<<<<<
+ *     output_arr_end = np.zeros(length, dtype=np.int32) * -1
  * 
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
@@ -6369,7 +6367,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_int32_t); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_int32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_8) < 0) __PYX_ERR(0, 322, __pyx_L1_error)
@@ -6387,8 +6385,8 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
 
   /* "sorted_nearest/src/sorted_nearest.pyx":323
  * 
- *     output_arr_start = np.ones(length, dtype=np.int32_t) * -1
- *     output_arr_end = np.zeros(length, dtype=np.int32_t) * -1             # <<<<<<<<<<<<<<
+ *     output_arr_start = np.ones(length, dtype=np.int32) * -1
+ *     output_arr_end = np.zeros(length, dtype=np.int32) * -1             # <<<<<<<<<<<<<<
  * 
  *     cdef int32_t [::1] output_start
  */
@@ -6408,7 +6406,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int32_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 323, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int32); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 323, __pyx_L1_error)
@@ -20441,7 +20439,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_int32, __pyx_k_int32, sizeof(__pyx_k_int32), 0, 0, 1, 1},
-  {&__pyx_n_s_int32_t, __pyx_k_int32_t, sizeof(__pyx_k_int32_t), 0, 0, 1, 1},
   {&__pyx_n_s_int64, __pyx_k_int64, sizeof(__pyx_k_int64), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},

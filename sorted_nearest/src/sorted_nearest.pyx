@@ -319,8 +319,8 @@ cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):
     cpdef int n_clusters = 0
     cpdef int length = len(starts)
 
-    output_arr_start = np.ones(length, dtype=np.int32_t) * -1
-    output_arr_end = np.zeros(length, dtype=np.int32_t) * -1
+    output_arr_start = np.ones(length, dtype=np.int32) * -1
+    output_arr_end = np.zeros(length, dtype=np.int32) * -1
 
     cdef int32_t [::1] output_start
     cdef int32_t [::1] output_end
