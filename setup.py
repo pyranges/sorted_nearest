@@ -19,7 +19,6 @@ Topic :: Scientific/Engineering :: Bio-Informatics"""
 # split into lines and filter empty ones
 CLASSIFIERS = CLASSIFIERS.splitlines()
 
-
 # macros = [("CYTHON_TRACE", "1")]
 
 # if macros:
