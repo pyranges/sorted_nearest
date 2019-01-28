@@ -52,6 +52,7 @@ def nearest_next_nonoverlapping(le, rs, ridx):
     else:
         raise Exception("Starts/Ends not int64 or int32: " + str(le.dtype))
 
+
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)

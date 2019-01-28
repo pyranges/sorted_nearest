@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.6"
+install:
+  - pip install cython
+  - python setup.py install
+
+# functionality is tested in the pyranges package
+script: cd ~/; python -c 'import sorted_nearest; print(sorted_nearest.__version__)'

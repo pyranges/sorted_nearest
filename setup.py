@@ -35,12 +35,13 @@ macros = []
 extensions = [Extension("sorted_nearest.src.sorted_nearest", ["sorted_nearest/src/sorted_nearest.pyx"],
                         define_macros=macros)]
 
+__version__ = open("sorted_nearest/version.py").readline().split(" = ")[1].replace('"', '').strip()
 
 setup(
     name = "sorted_nearest",
-    version="0.0.12",
+    version=__version__,
     packages=find_packages(),
-    ext_modules = cythonize(extensions),
+    ext_modules = cythonize(extensions, language_level="3"),
     description = \
     'Find nearest interval.',
     long_description = __doc__,
