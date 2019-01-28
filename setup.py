@@ -38,7 +38,7 @@ extensions = [Extension("sorted_nearest.src.sorted_nearest", ["sorted_nearest/sr
 
 setup(
     name = "sorted_nearest",
-    version="0.0.11",
+    version="0.0.12",
     packages=find_packages(),
     ext_modules = cythonize(extensions),
     description = \
