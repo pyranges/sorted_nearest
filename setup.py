@@ -40,7 +40,7 @@ setup(
     name = "sorted_nearest",
     version=__version__,
     packages=find_packages(),
-    ext_modules = cythonize(extensions, language_level="3"),
+    ext_modules = cythonize(extensions, language_level=3),
     description = \
     'Find nearest interval.',
     long_description = __doc__,

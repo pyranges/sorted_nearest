@@ -2,7 +2,7 @@ language: python
 python:
   - "3.6"
 install:
-  - pip install cython
+  - pip install cython hypothesis pytest sorted_nearest
   - python setup.py install
 
 # functionality is tested in the pyranges package

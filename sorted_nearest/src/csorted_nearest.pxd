@@ -14,5 +14,5 @@
 #     void utarray_push_back(UT_array *a, void *p)
 #     void utarray_free(UT_array *a)
 
-cdef extern from "limits.h":
-    int INT_MAX
+# cdef extern from "limits.h":
+#     int INT_MAX
