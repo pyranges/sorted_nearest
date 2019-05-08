@@ -36,11 +36,14 @@ extensions = [Extension("sorted_nearest.src.sorted_nearest", ["sorted_nearest/sr
 
 __version__ = open("sorted_nearest/version.py").readline().split(" = ")[1].replace('"', '').strip()
 
+install_requires = ["cython", "numpy"]
+
 setup(
     name = "sorted_nearest",
     version=__version__,
     packages=find_packages(),
     ext_modules = cythonize(extensions, language_level=3),
+    install_requires = install_requires,
     description = \
     'Find nearest interval.',
     long_description = __doc__,
