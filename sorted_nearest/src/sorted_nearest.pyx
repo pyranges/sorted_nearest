@@ -7,12 +7,12 @@ import numpy as np
 
 
 
-def find_clusters(starts, ends):
+def find_clusters(starts, ends, slack):
 
     if starts.dtype == np.long:
-        return find_clusters64(starts, ends)
+        return find_clusters64(starts, ends, slack)
     elif starts.dtype == np.int32:
-        return find_clusters32(starts, ends)
+        return find_clusters32(starts, ends, slack)
     else:
         raise Exception("Starts/Ends not int64 or int32: " + str(starts.dtype))
 
@@ -271,7 +271,7 @@ cpdef nearest_nonoverlapping32(const long [::1] prev_ridx, const int32_t [::1] p
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_clusters64(long [::1] starts, long [::1] ends):
+cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):
 
     cpdef int min_start = starts[0]
     cpdef int max_end = ends[0]
@@ -289,7 +289,7 @@ cpdef find_clusters64(long [::1] starts, long [::1] ends):
     output_end = output_arr_end
 
     for i in range(length):
-        if not starts[i] <= max_end:
+        if not (starts[i] - slack) <= max_end:
             output_start[n_clusters] = min_start
             output_end[n_clusters] = max_end
             min_start = starts[i]
@@ -310,7 +310,7 @@ cpdef find_clusters64(long [::1] starts, long [::1] ends):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):
+cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends, int slack):
 
     cpdef int min_start = starts[0]
     cpdef int max_end = ends[0]
@@ -328,7 +328,7 @@ cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):
     output_end = output_arr_end
 
     for i in range(length):
-        if not starts[i] <= max_end:
+        if not (starts[i] - slack) <= max_end:
             output_start[n_clusters] = min_start
             output_end[n_clusters] = max_end
             min_start = starts[i]
@@ -355,7 +355,7 @@ def makewindows(indexes, starts, ends, window_size, tile=False):
 
     if tile:
         starts, ends = _starts, _ends
-        
+
     max_n_windows = int((np.sum(_ends - _starts + window_size) / window_size))
 
     if starts.dtype == np.long:

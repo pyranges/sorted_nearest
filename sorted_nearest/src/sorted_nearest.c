@@ -1748,8 +1748,8 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous
 static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_previous_nonoverlapping32(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_nonoverlapping64(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_nearest_nonoverlapping32(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__Pyx_memviewslice, __Pyx_memviewslice, int, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__Pyx_memviewslice, __Pyx_memviewslice, int, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_makewindows32(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, PyObject *, int, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_makewindows64(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, PyObject *, int, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
@@ -1844,6 +1844,7 @@ static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_r_idx[] = "r_idx";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
+static const char __pyx_k_slack[] = "slack";
 static const char __pyx_k_start[] = "start";
 static const char __pyx_k_zeros[] = "zeros";
 static const char __pyx_k_encode[] = "encode";
@@ -2029,6 +2030,7 @@ static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
 static PyObject *__pyx_n_s_size;
+static PyObject *__pyx_n_s_slack;
 static PyObject *__pyx_kp_s_sorted_nearest_src_sorted_neares;
 static PyObject *__pyx_n_s_sorted_nearest_src_sorted_neares_2;
 static PyObject *__pyx_n_s_start;
@@ -2050,7 +2052,7 @@ static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
 static PyObject *__pyx_n_s_window_size;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_starts, PyObject *__pyx_v_ends); /* proto */
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_starts, PyObject *__pyx_v_ends, PyObject *__pyx_v_slack); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_2nearest_nonoverlapping(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_prev_ridx, PyObject *__pyx_v_prev_dist, PyObject *__pyx_v_next_ridx, PyObject *__pyx_v_next_dist); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_4nearest_previous_nonoverlapping(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_ls, PyObject *__pyx_v_re, PyObject *__pyx_v_ridx); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_6nearest_next_nonoverlapping(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_le, PyObject *__pyx_v_rs, PyObject *__pyx_v_ridx); /* proto */
@@ -2060,8 +2062,8 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_12nearest_previ
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_14nearest_previous_nonoverlapping32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_l_s, __Pyx_memviewslice __pyx_v_r_e, __Pyx_memviewslice __pyx_v_r_idx); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_16nearest_nonoverlapping64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_prev_ridx, __Pyx_memviewslice __pyx_v_prev_dist, __Pyx_memviewslice __pyx_v_next_ridx, __Pyx_memviewslice __pyx_v_next_dist); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_18nearest_nonoverlapping32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_prev_ridx, __Pyx_memviewslice __pyx_v_prev_dist, __Pyx_memviewslice __pyx_v_next_ridx, __Pyx_memviewslice __pyx_v_next_dist); /* proto */
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends); /* proto */
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends); /* proto */
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack); /* proto */
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_24makewindows(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_indexes, PyObject *__pyx_v_starts, PyObject *__pyx_v_ends, PyObject *__pyx_v_window_size, PyObject *__pyx_v_tile); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_26makewindows32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_indexes, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, PyObject *__pyx_v_max_n_windows, int __pyx_v_window_size); /* proto */
 static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_28makewindows64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_indexes, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, PyObject *__pyx_v_max_n_windows, int __pyx_v_window_size); /* proto */
@@ -2155,7 +2157,7 @@ static PyObject *__pyx_codeobj__35;
 /* "sorted_nearest/src/sorted_nearest.pyx":10
  * 
  * 
- * def find_clusters(starts, ends):             # <<<<<<<<<<<<<<
+ * def find_clusters(starts, ends, slack):             # <<<<<<<<<<<<<<
  * 
  *     if starts.dtype == np.long:
  */
@@ -2166,16 +2168,19 @@ static PyMethodDef __pyx_mdef_14sorted_nearest_3src_14sorted_nearest_1find_clust
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_1find_clusters(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_starts = 0;
   PyObject *__pyx_v_ends = 0;
+  PyObject *__pyx_v_slack = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("find_clusters (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,0};
-    PyObject* values[2] = {0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,&__pyx_n_s_slack,0};
+    PyObject* values[3] = {0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -2192,37 +2197,45 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_1find_clusters(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ends)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_clusters", 1, 2, 2, 1); __PYX_ERR(0, 10, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find_clusters", 1, 3, 3, 1); __PYX_ERR(0, 10, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_slack)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("find_clusters", 1, 3, 3, 2); __PYX_ERR(0, 10, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_clusters") < 0)) __PYX_ERR(0, 10, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_starts = values[0];
     __pyx_v_ends = values[1];
+    __pyx_v_slack = values[2];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_clusters", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 10, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_clusters", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 10, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.find_clusters", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(__pyx_self, __pyx_v_starts, __pyx_v_ends);
+  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(__pyx_self, __pyx_v_starts, __pyx_v_ends, __pyx_v_slack);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_starts, PyObject *__pyx_v_ends) {
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_starts, PyObject *__pyx_v_ends, PyObject *__pyx_v_slack) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2231,15 +2244,16 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
   int __pyx_t_4;
   __Pyx_memviewslice __pyx_t_5 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_7;
   __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_t_9 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_RefNannySetupContext("find_clusters", 0);
 
   /* "sorted_nearest/src/sorted_nearest.pyx":12
- * def find_clusters(starts, ends):
+ * def find_clusters(starts, ends, slack):
  * 
  *     if starts.dtype == np.long:             # <<<<<<<<<<<<<<
- *         return find_clusters64(starts, ends)
+ *         return find_clusters64(starts, ends, slack)
  *     elif starts.dtype == np.int32:
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_starts, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
@@ -2259,14 +2273,15 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
     /* "sorted_nearest/src/sorted_nearest.pyx":13
  * 
  *     if starts.dtype == np.long:
- *         return find_clusters64(starts, ends)             # <<<<<<<<<<<<<<
+ *         return find_clusters64(starts, ends, slack)             # <<<<<<<<<<<<<<
  *     elif starts.dtype == np.int32:
- *         return find_clusters32(starts, ends)
+ *         return find_clusters32(starts, ends, slack)
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_starts, PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 13, __pyx_L1_error)
     __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_long(__pyx_v_ends, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 13, __pyx_L1_error)
-    __pyx_t_2 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__pyx_t_5, __pyx_t_6, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_slack); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 13, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__pyx_t_5, __pyx_t_6, __pyx_t_7, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
     __pyx_t_5.memview = NULL;
@@ -2279,19 +2294,19 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
     goto __pyx_L0;
 
     /* "sorted_nearest/src/sorted_nearest.pyx":12
- * def find_clusters(starts, ends):
+ * def find_clusters(starts, ends, slack):
  * 
  *     if starts.dtype == np.long:             # <<<<<<<<<<<<<<
- *         return find_clusters64(starts, ends)
+ *         return find_clusters64(starts, ends, slack)
  *     elif starts.dtype == np.int32:
  */
   }
 
   /* "sorted_nearest/src/sorted_nearest.pyx":14
  *     if starts.dtype == np.long:
- *         return find_clusters64(starts, ends)
+ *         return find_clusters64(starts, ends, slack)
  *     elif starts.dtype == np.int32:             # <<<<<<<<<<<<<<
- *         return find_clusters32(starts, ends)
+ *         return find_clusters32(starts, ends, slack)
  *     else:
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_starts, __pyx_n_s_dtype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
@@ -2309,38 +2324,39 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
   if (likely(__pyx_t_4)) {
 
     /* "sorted_nearest/src/sorted_nearest.pyx":15
- *         return find_clusters64(starts, ends)
+ *         return find_clusters64(starts, ends, slack)
  *     elif starts.dtype == np.int32:
- *         return find_clusters32(starts, ends)             # <<<<<<<<<<<<<<
+ *         return find_clusters32(starts, ends, slack)             # <<<<<<<<<<<<<<
  *     else:
  *         raise Exception("Starts/Ends not int64 or int32: " + str(starts.dtype))
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_starts, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 15, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_ends, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 15, __pyx_L1_error)
-    __pyx_t_3 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__pyx_t_7, __pyx_t_8, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_starts, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 15, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_ends, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 15, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_slack); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
+    __pyx_t_3 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__pyx_t_8, __pyx_t_9, __pyx_t_7, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-    __pyx_t_7.memview = NULL;
-    __pyx_t_7.data = NULL;
     __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
+    __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
+    __pyx_t_9.memview = NULL;
+    __pyx_t_9.data = NULL;
     __pyx_r = __pyx_t_3;
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
     /* "sorted_nearest/src/sorted_nearest.pyx":14
  *     if starts.dtype == np.long:
- *         return find_clusters64(starts, ends)
+ *         return find_clusters64(starts, ends, slack)
  *     elif starts.dtype == np.int32:             # <<<<<<<<<<<<<<
- *         return find_clusters32(starts, ends)
+ *         return find_clusters32(starts, ends, slack)
  *     else:
  */
   }
 
   /* "sorted_nearest/src/sorted_nearest.pyx":17
- *         return find_clusters32(starts, ends)
+ *         return find_clusters32(starts, ends, slack)
  *     else:
  *         raise Exception("Starts/Ends not int64 or int32: " + str(starts.dtype))             # <<<<<<<<<<<<<<
  * 
@@ -2366,7 +2382,7 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
   /* "sorted_nearest/src/sorted_nearest.pyx":10
  * 
  * 
- * def find_clusters(starts, ends):             # <<<<<<<<<<<<<<
+ * def find_clusters(starts, ends, slack):             # <<<<<<<<<<<<<<
  * 
  *     if starts.dtype == np.long:
  */
@@ -2378,8 +2394,8 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_find_clusters(C
   __Pyx_XDECREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_9, 1);
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.find_clusters", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5865,13 +5881,13 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_18nearest_nonov
 /* "sorted_nearest/src/sorted_nearest.pyx":274
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
- * cpdef find_clusters64(long [::1] starts, long [::1] ends):             # <<<<<<<<<<<<<<
+ * cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):             # <<<<<<<<<<<<<<
  * 
  *     cpdef int min_start = starts[0]
  */
 
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_21find_clusters64(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack, CYTHON_UNUSED int __pyx_skip_dispatch) {
   int __pyx_v_min_start;
   int __pyx_v_max_end;
   int __pyx_v_i;
@@ -5906,7 +5922,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
   __Pyx_RefNannySetupContext("find_clusters64", 0);
 
   /* "sorted_nearest/src/sorted_nearest.pyx":276
- * cpdef find_clusters64(long [::1] starts, long [::1] ends):
+ * cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):
  * 
  *     cpdef int min_start = starts[0]             # <<<<<<<<<<<<<<
  *     cpdef int max_end = ends[0]
@@ -6059,7 +6075,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
  *     output_end = output_arr_end
  * 
  *     for i in range(length):             # <<<<<<<<<<<<<<
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start
  */
   __pyx_t_10 = __pyx_v_length;
@@ -6070,17 +6086,17 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
     /* "sorted_nearest/src/sorted_nearest.pyx":292
  * 
  *     for i in range(length):
- *         if not starts[i] <= max_end:             # <<<<<<<<<<<<<<
+ *         if not (starts[i] - slack) <= max_end:             # <<<<<<<<<<<<<<
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end
  */
     __pyx_t_13 = __pyx_v_i;
-    __pyx_t_14 = ((!(((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_starts.data) + __pyx_t_13)) ))) <= __pyx_v_max_end) != 0)) != 0);
+    __pyx_t_14 = ((!((((*((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_starts.data) + __pyx_t_13)) ))) - __pyx_v_slack) <= __pyx_v_max_end) != 0)) != 0);
     if (__pyx_t_14) {
 
       /* "sorted_nearest/src/sorted_nearest.pyx":293
  *     for i in range(length):
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start             # <<<<<<<<<<<<<<
  *             output_end[n_clusters] = max_end
  *             min_start = starts[i]
@@ -6089,7 +6105,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
       *((long *) ( /* dim=0 */ ((char *) (((long *) __pyx_v_output_start.data) + __pyx_t_15)) )) = __pyx_v_min_start;
 
       /* "sorted_nearest/src/sorted_nearest.pyx":294
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end             # <<<<<<<<<<<<<<
  *             min_start = starts[i]
@@ -6130,7 +6146,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
       /* "sorted_nearest/src/sorted_nearest.pyx":292
  * 
  *     for i in range(length):
- *         if not starts[i] <= max_end:             # <<<<<<<<<<<<<<
+ *         if not (starts[i] - slack) <= max_end:             # <<<<<<<<<<<<<<
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end
  */
@@ -6258,7 +6274,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(
   /* "sorted_nearest/src/sorted_nearest.pyx":274
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
- * cpdef find_clusters64(long [::1] starts, long [::1] ends):             # <<<<<<<<<<<<<<
+ * cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):             # <<<<<<<<<<<<<<
  * 
  *     cpdef int min_start = starts[0]
  */
@@ -6288,16 +6304,19 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_21find_clusters
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_21find_clusters64(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_starts = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_ends = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_slack;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("find_clusters64 (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,0};
-    PyObject* values[2] = {0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,&__pyx_n_s_slack,0};
+    PyObject* values[3] = {0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -6314,43 +6333,51 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_21find_clusters
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ends)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_clusters64", 1, 2, 2, 1); __PYX_ERR(0, 274, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find_clusters64", 1, 3, 3, 1); __PYX_ERR(0, 274, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_slack)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("find_clusters64", 1, 3, 3, 2); __PYX_ERR(0, 274, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_clusters64") < 0)) __PYX_ERR(0, 274, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_starts = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_starts.memview)) __PYX_ERR(0, 274, __pyx_L3_error)
     __pyx_v_ends = __Pyx_PyObject_to_MemoryviewSlice_dc_long(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ends.memview)) __PYX_ERR(0, 274, __pyx_L3_error)
+    __pyx_v_slack = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_slack == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 274, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_clusters64", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 274, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_clusters64", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 274, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.find_clusters64", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(__pyx_self, __pyx_v_starts, __pyx_v_ends);
+  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(__pyx_self, __pyx_v_starts, __pyx_v_ends, __pyx_v_slack);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends) {
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters64(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("find_clusters64", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__pyx_v_starts, __pyx_v_ends, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters64(__pyx_v_starts, __pyx_v_ends, __pyx_v_slack, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6372,13 +6399,13 @@ static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_20find_clusters
 /* "sorted_nearest/src/sorted_nearest.pyx":313
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
- * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):             # <<<<<<<<<<<<<<
+ * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends, int slack):             # <<<<<<<<<<<<<<
  * 
  *     cpdef int min_start = starts[0]
  */
 
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_23find_clusters32(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack, CYTHON_UNUSED int __pyx_skip_dispatch) {
   int __pyx_v_min_start;
   int __pyx_v_max_end;
   int __pyx_v_i;
@@ -6413,7 +6440,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
   __Pyx_RefNannySetupContext("find_clusters32", 0);
 
   /* "sorted_nearest/src/sorted_nearest.pyx":315
- * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):
+ * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends, int slack):
  * 
  *     cpdef int min_start = starts[0]             # <<<<<<<<<<<<<<
  *     cpdef int max_end = ends[0]
@@ -6566,7 +6593,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
  *     output_end = output_arr_end
  * 
  *     for i in range(length):             # <<<<<<<<<<<<<<
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start
  */
   __pyx_t_10 = __pyx_v_length;
@@ -6577,17 +6604,17 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
     /* "sorted_nearest/src/sorted_nearest.pyx":331
  * 
  *     for i in range(length):
- *         if not starts[i] <= max_end:             # <<<<<<<<<<<<<<
+ *         if not (starts[i] - slack) <= max_end:             # <<<<<<<<<<<<<<
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end
  */
     __pyx_t_13 = __pyx_v_i;
-    __pyx_t_14 = ((!(((*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_starts.data) + __pyx_t_13)) ))) <= __pyx_v_max_end) != 0)) != 0);
+    __pyx_t_14 = ((!((((*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_starts.data) + __pyx_t_13)) ))) - __pyx_v_slack) <= __pyx_v_max_end) != 0)) != 0);
     if (__pyx_t_14) {
 
       /* "sorted_nearest/src/sorted_nearest.pyx":332
  *     for i in range(length):
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start             # <<<<<<<<<<<<<<
  *             output_end[n_clusters] = max_end
  *             min_start = starts[i]
@@ -6596,7 +6623,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
       *((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_output_start.data) + __pyx_t_15)) )) = __pyx_v_min_start;
 
       /* "sorted_nearest/src/sorted_nearest.pyx":333
- *         if not starts[i] <= max_end:
+ *         if not (starts[i] - slack) <= max_end:
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end             # <<<<<<<<<<<<<<
  *             min_start = starts[i]
@@ -6637,7 +6664,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
       /* "sorted_nearest/src/sorted_nearest.pyx":331
  * 
  *     for i in range(length):
- *         if not starts[i] <= max_end:             # <<<<<<<<<<<<<<
+ *         if not (starts[i] - slack) <= max_end:             # <<<<<<<<<<<<<<
  *             output_start[n_clusters] = min_start
  *             output_end[n_clusters] = max_end
  */
@@ -6765,7 +6792,7 @@ static PyObject *__pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(
   /* "sorted_nearest/src/sorted_nearest.pyx":313
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
- * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends):             # <<<<<<<<<<<<<<
+ * cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends, int slack):             # <<<<<<<<<<<<<<
  * 
  *     cpdef int min_start = starts[0]
  */
@@ -6795,16 +6822,19 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_23find_clusters
 static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_23find_clusters32(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_starts = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_ends = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_slack;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("find_clusters32 (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,0};
-    PyObject* values[2] = {0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_starts,&__pyx_n_s_ends,&__pyx_n_s_slack,0};
+    PyObject* values[3] = {0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         CYTHON_FALLTHROUGH;
         case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -6821,43 +6851,51 @@ static PyObject *__pyx_pw_14sorted_nearest_3src_14sorted_nearest_23find_clusters
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_ends)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_clusters32", 1, 2, 2, 1); __PYX_ERR(0, 313, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find_clusters32", 1, 3, 3, 1); __PYX_ERR(0, 313, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_slack)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("find_clusters32", 1, 3, 3, 2); __PYX_ERR(0, 313, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_clusters32") < 0)) __PYX_ERR(0, 313, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_starts = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_starts.memview)) __PYX_ERR(0, 313, __pyx_L3_error)
     __pyx_v_ends = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ends.memview)) __PYX_ERR(0, 313, __pyx_L3_error)
+    __pyx_v_slack = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_slack == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 313, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_clusters32", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 313, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_clusters32", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 313, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("sorted_nearest.src.sorted_nearest.find_clusters32", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(__pyx_self, __pyx_v_starts, __pyx_v_ends);
+  __pyx_r = __pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(__pyx_self, __pyx_v_starts, __pyx_v_ends, __pyx_v_slack);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends) {
+static PyObject *__pyx_pf_14sorted_nearest_3src_14sorted_nearest_22find_clusters32(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_starts, __Pyx_memviewslice __pyx_v_ends, int __pyx_v_slack) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("find_clusters32", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__pyx_v_starts, __pyx_v_ends, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_14sorted_nearest_3src_14sorted_nearest_find_clusters32(__pyx_v_starts, __pyx_v_ends, __pyx_v_slack, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -22375,6 +22413,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
+  {&__pyx_n_s_slack, __pyx_k_slack, sizeof(__pyx_k_slack), 0, 0, 1, 1},
   {&__pyx_kp_s_sorted_nearest_src_sorted_neares, __pyx_k_sorted_nearest_src_sorted_neares, sizeof(__pyx_k_sorted_nearest_src_sorted_neares), 0, 0, 1, 0},
   {&__pyx_n_s_sorted_nearest_src_sorted_neares_2, __pyx_k_sorted_nearest_src_sorted_neares_2, sizeof(__pyx_k_sorted_nearest_src_sorted_neares_2), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
@@ -22611,14 +22650,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "sorted_nearest/src/sorted_nearest.pyx":10
  * 
  * 
- * def find_clusters(starts, ends):             # <<<<<<<<<<<<<<
+ * def find_clusters(starts, ends, slack):             # <<<<<<<<<<<<<<
  * 
  *     if starts.dtype == np.long:
  */
-  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_starts, __pyx_n_s_ends); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(3, __pyx_n_s_starts, __pyx_n_s_ends, __pyx_n_s_slack); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_sorted_nearest_src_sorted_neares, __pyx_n_s_find_clusters, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_sorted_nearest_src_sorted_neares, __pyx_n_s_find_clusters, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 10, __pyx_L1_error)
 
   /* "sorted_nearest/src/sorted_nearest.pyx":22
  * 
@@ -23079,7 +23118,7 @@ if (!__Pyx_RefNanny) {
   /* "sorted_nearest/src/sorted_nearest.pyx":10
  * 
  * 
- * def find_clusters(starts, ends):             # <<<<<<<<<<<<<<
+ * def find_clusters(starts, ends, slack):             # <<<<<<<<<<<<<<
  * 
  *     if starts.dtype == np.long:
  */
@@ -26493,6 +26532,28 @@ __pyx_fail:
     return result;
 }
 
+/* CIntFromPyVerify */
+  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
+#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
+#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
+    {\
+        func_type value = func_value;\
+        if (sizeof(target_type) < sizeof(func_type)) {\
+            if (unlikely(value != (func_type) (target_type) value)) {\
+                func_type zero = 0;\
+                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
+                    return (target_type) -1;\
+                if (is_unsigned && unlikely(value < zero))\
+                    goto raise_neg_overflow;\
+                else\
+                    goto raise_overflow;\
+            }\
+        }\
+        return (target_type) value;\
+    }
+
 /* ObjectToMemviewSlice */
   static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -26515,28 +26576,6 @@ __pyx_fail:
     result.data = NULL;
     return result;
 }
-
-/* CIntFromPyVerify */
-  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
-#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
-#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
-    {\
-        func_type value = func_value;\
-        if (sizeof(target_type) < sizeof(func_type)) {\
-            if (unlikely(value != (func_type) (target_type) value)) {\
-                func_type zero = 0;\
-                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
-                    return (target_type) -1;\
-                if (is_unsigned && unlikely(value < zero))\
-                    goto raise_neg_overflow;\
-                else\
-                    goto raise_overflow;\
-            }\
-        }\
-        return (target_type) value;\
-    }
 
 /* CIntToPy */
   static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
