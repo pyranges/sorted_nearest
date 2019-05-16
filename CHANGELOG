@@ -1,2 +1,13 @@
+# 0.0.21 (16.05.19)
+- refactor to modules.
+- fix tile
+
+
+# 0.0.20 (15.05.19)
+- fix another off by 1 error in makewindows with tile=True
+
+# 0.0.19 (14.05.19)
+- fix off by 1 error in makewindows with tile=True
+
 # 0.0.18 (13.05.19)
 - add slack to find_clusters
