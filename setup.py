@@ -35,6 +35,8 @@ extensions = [Extension("sorted_nearest.src.sorted_nearest", ["sorted_nearest/sr
                         define_macros=macros),
               Extension("sorted_nearest.src.clusters", ["sorted_nearest/src/clusters.pyx"],
                         define_macros=macros),
+              Extension("sorted_nearest.src.annotate_clusters", ["sorted_nearest/src/annotate_clusters.pyx"],
+                        define_macros=macros),
               Extension("sorted_nearest.src.windows", ["sorted_nearest/src/windows.pyx"],
                         define_macros=macros),
               Extension("sorted_nearest.src.tiles", ["sorted_nearest/src/tiles.pyx"],

@@ -1,4 +1,10 @@
-# 0.0.21 (16.05.19)
+# 0.0.24 (14.07.19)
+- implement cluster for pyranges-speedup
+
+# 0.0.23 (28.05.19)
+- add const kw where missing to allow multithreading
+
+# 0.0.21-22 (16.05.19)
 - refactor to modules.
 - fix tile
 

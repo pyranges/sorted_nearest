@@ -1,3 +1,4 @@
+"find clusters is what is called merge in pyranges"
 
 from libc.stdint cimport int32_t
 
@@ -18,7 +19,7 @@ def find_clusters(starts, ends, slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):
+cpdef find_clusters64(const long [::1] starts, const long [::1] ends, int slack):
 
     cpdef int min_start = starts[0]
     cpdef int max_end = ends[0]
@@ -57,7 +58,7 @@ cpdef find_clusters64(long [::1] starts, long [::1] ends, int slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_clusters32(int32_t [::1] starts, int32_t [::1] ends, int slack):
+cpdef find_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int slack):
 
     cpdef int min_start = starts[0]
     cpdef int max_end = ends[0]

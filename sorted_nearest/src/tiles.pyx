@@ -15,8 +15,6 @@ def maketiles(indexes, starts, ends, tile_size, preserve_end=False):
                      (ends - 1) - ((ends - 1) % tile_size) + tile_size,
                      ends - (ends % tile_size) + tile_size)
 
-    _ends[-1] = ends[-1]
-
     max_n_tiles = int((np.sum(_ends - _starts + tile_size) / tile_size))
     if max_n_tiles < 0:
         raise Exception("The sum of your chromosome lengths is below 0. Did you switch the start and end columns or try a negative tile size?")
@@ -35,7 +33,7 @@ def maketiles(indexes, starts, ends, tile_size, preserve_end=False):
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles32(long [::1] indexes, int32_t [::1] starts, int32_t [::1] ends, max_n_tiles, int tile_size):
+cpdef maketiles32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0
@@ -86,7 +84,7 @@ cpdef maketiles32(long [::1] indexes, int32_t [::1] starts, int32_t [::1] ends, 
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles64(long [::1] indexes, long [::1] starts, long [::1] ends, max_n_tiles, int tile_size):
+cpdef maketiles64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0
