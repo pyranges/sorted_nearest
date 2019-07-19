@@ -1,5 +1,8 @@
+# 0.0.26-27 (19.07.19)
+- hotfixes
+
 # 0.0.25 (16.07.19)
-- implement by for merge and cluster
+- implement introns, add by arg for merge and cluster
 
 # 0.0.24 (14.07.19)
 - implement cluster for pyranges-speedup
