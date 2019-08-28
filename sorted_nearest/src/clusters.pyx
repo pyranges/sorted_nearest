@@ -24,35 +24,43 @@ cpdef find_clusters64(const long [::1] starts, const long [::1] ends, int slack)
     cpdef int min_start = starts[0]
     cpdef int max_end = ends[0]
     cpdef int i = 0
+    cpdef int intervals_in_cluster = 0
     cpdef int n_clusters = 0
     cpdef int length = len(starts)
 
     output_arr_start = np.ones(length, dtype=np.long) * -1
     output_arr_end = np.zeros(length, dtype=np.long) * -1
+    output_arr_number = np.zeros(length, dtype=np.long) * -1
 
     cdef long [::1] output_start
     cdef long [::1] output_end
+    cdef long [::1] output_number
 
     output_start = output_arr_start
     output_end = output_arr_end
+    output_number = output_arr_number
 
     for i in range(length):
         if not (starts[i] - slack) <= max_end:
             output_start[n_clusters] = min_start
             output_end[n_clusters] = max_end
+            output_number[n_clusters] = intervals_in_cluster
             min_start = starts[i]
             max_end = ends[i]
+            intervals_in_cluster = 1
             n_clusters += 1
         else:
+            intervals_in_cluster += 1
             if ends[i] > max_end:
                 max_end = ends[i]
 
     if output_arr_start[n_clusters] != min_start:
         output_arr_start[n_clusters] = min_start
         output_arr_end[n_clusters] = max_end
+        output_number[n_clusters] = intervals_in_cluster
         n_clusters += 1
 
-    return output_arr_start[:n_clusters], output_arr_end[:n_clusters]
+    return output_arr_start[:n_clusters], output_arr_end[:n_clusters], output_arr_number[:n_clusters]
 
 
 @cython.boundscheck(False)
@@ -64,31 +72,39 @@ cpdef find_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int 
     cpdef int max_end = ends[0]
     cpdef int i = 0
     cpdef int n_clusters = 0
+    cpdef int intervals_in_cluster = 0
     cpdef int length = len(starts)
 
     output_arr_start = np.ones(length, dtype=np.int32) * -1
     output_arr_end = np.zeros(length, dtype=np.int32) * -1
+    output_arr_number = np.zeros(length, dtype=np.int32) * -1
 
     cdef int32_t [::1] output_start
     cdef int32_t [::1] output_end
+    cdef int32_t [::1] output_number
 
     output_start = output_arr_start
     output_end = output_arr_end
+    output_number = output_arr_number
 
     for i in range(length):
         if not (starts[i] - slack) <= max_end:
             output_start[n_clusters] = min_start
             output_end[n_clusters] = max_end
+            output_number[n_clusters] = intervals_in_cluster
             min_start = starts[i]
             max_end = ends[i]
+            intervals_in_cluster = 1
             n_clusters += 1
         else:
+            intervals_in_cluster += 1
             if ends[i] > max_end:
                 max_end = ends[i]
 
     if output_arr_start[n_clusters] != min_start:
         output_arr_start[n_clusters] = min_start
         output_arr_end[n_clusters] = max_end
+        output_number[n_clusters] = intervals_in_cluster
         n_clusters += 1
 
-    return output_arr_start[:n_clusters], output_arr_end[:n_clusters]
+    return output_arr_start[:n_clusters], output_arr_end[:n_clusters], output_arr_number[:n_clusters]
