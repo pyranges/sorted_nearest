@@ -21,8 +21,8 @@ def find_clusters(starts, ends, slack):
 @cython.initializedcheck(False)
 cpdef find_clusters64(const long [::1] starts, const long [::1] ends, int slack):
 
-    cpdef int min_start = starts[0]
-    cpdef int max_end = ends[0]
+    cpdef long min_start = starts[0]
+    cpdef long max_end = ends[0]
     cpdef int i = 0
     cpdef int intervals_in_cluster = 0
     cpdef int n_clusters = 0

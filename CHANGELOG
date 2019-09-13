@@ -1,4 +1,7 @@
-# 0.0.28 (unreleased)
+# 0.0.29 (13.09.19)
+- fix int64 versions
+
+# 0.0.28 (24.07.19)
 - add count to merge/merge_by
 
 # 0.0.26-27 (19.07.19)

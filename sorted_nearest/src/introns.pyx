@@ -28,7 +28,7 @@ cpdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, c
         int n = 0
         int i = 0
         int j = 0
-        int gene_start, gene_end, gene_id
+        long gene_start, gene_end, gene_id
         long [::1] output_start
         long [::1] output_end
         long [::1] output_id

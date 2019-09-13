@@ -19,8 +19,8 @@ def merge_by(starts, ends, ids, slack=0):
 @cython.initializedcheck(False)
 cpdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1] ids, int slack):
 
-    cpdef int min_start = starts[0]
-    cpdef int max_end = ends[0]
+    cpdef long min_start = starts[0]
+    cpdef long max_end = ends[0]
     cpdef int i = 0
     cpdef int current_id = ids[0]
     cpdef int last_id = ids[0]

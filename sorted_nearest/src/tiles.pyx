@@ -90,7 +90,7 @@ cpdef maketiles64(const long [::1] indexes, const long [::1] starts, const long 
         int nfound = 0
         int i = 0
         int length = len(starts)
-        int start, end
+        long start, end
 
     output_arr_indexes = np.ones(max_n_tiles, dtype=long) * -1
     output_arr_start = np.ones(max_n_tiles, dtype=long) * -1
