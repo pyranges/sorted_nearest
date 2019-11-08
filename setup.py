@@ -37,6 +37,9 @@ extensions = [
         "sorted_nearest.src.k_nearest", ["sorted_nearest/src/k_nearest.pyx"],
         define_macros=macros),
     Extension(
+        "sorted_nearest.src.k_nearest_ties", ["sorted_nearest/src/k_nearest_ties.pyx"],
+        define_macros=macros),
+    Extension(
         "sorted_nearest.src.clusters", ["sorted_nearest/src/clusters.pyx"],
         define_macros=macros),
     Extension(

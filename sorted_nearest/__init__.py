@@ -2,7 +2,9 @@ from sorted_nearest.src.sorted_nearest import (nearest_previous_nonoverlapping,
                                                nearest_next_nonoverlapping,
                                                nearest_nonoverlapping)
 
-from sorted_nearest.src.k_nearest import nearest_previous_nonoverlapping, nearest_next_nonoverlapping
+from sorted_nearest.src.k_nearest import k_nearest_previous_nonoverlapping, k_nearest_next_nonoverlapping
+
+from sorted_nearest.src.k_nearest_ties import get_all_ties, get_different_ties
 
 from sorted_nearest.src.tiles import maketiles
 from sorted_nearest.src.clusters import find_clusters
