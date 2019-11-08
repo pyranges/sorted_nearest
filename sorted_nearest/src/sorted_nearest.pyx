@@ -4,9 +4,6 @@ cimport cython
 
 import numpy as np
 
-
-
-
 def nearest_nonoverlapping(prev_ridx, prev_dist,
                            next_ridx, next_dist):
 
