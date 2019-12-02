@@ -54,7 +54,7 @@ cpdef find_clusters64(const long [::1] starts, const long [::1] ends, int slack)
             if ends[i] > max_end:
                 max_end = ends[i]
 
-    if output_arr_start[n_clusters] != min_start:
+    if n_clusters < length and output_arr_start[n_clusters] != min_start:
         output_arr_start[n_clusters] = min_start
         output_arr_end[n_clusters] = max_end
         output_number[n_clusters] = intervals_in_cluster
@@ -101,7 +101,7 @@ cpdef find_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int 
             if ends[i] > max_end:
                 max_end = ends[i]
 
-    if output_arr_start[n_clusters] != min_start:
+    if n_clusters < length and output_arr_start[n_clusters] != min_start:
         output_arr_start[n_clusters] = min_start
         output_arr_end[n_clusters] = max_end
         output_number[n_clusters] = intervals_in_cluster

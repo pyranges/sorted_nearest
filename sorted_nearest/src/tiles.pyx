@@ -1,4 +1,4 @@
-from libc.stdint cimport int32_t
+from libc.stdint cimport int32_t, int64_t
 
 cimport cython
 
@@ -19,10 +19,7 @@ def maketiles(indexes, starts, ends, tile_size, preserve_end=False):
     if max_n_tiles < 0:
         raise Exception("The sum of your chromosome lengths is below 0. Did you switch the start and end columns or try a negative tile size?")
 
-    # if tile:
-    #     ends -= 1
-
-    if starts.dtype == np.long:
+    if starts.dtype == np.int64:
         return maketiles64(indexes, _starts, _ends, max_n_tiles, tile_size)
     elif starts.dtype == np.int32:
         return maketiles32(indexes, _starts, _ends, max_n_tiles, tile_size)
@@ -33,15 +30,15 @@ def maketiles(indexes, starts, ends, tile_size, preserve_end=False):
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_tiles, int tile_size):
+cpdef maketiles32(const int64_t [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0
         int i = 0
         int length = len(starts)
-        int start, end
+        int32_t start, end
 
-    output_arr_indexes = np.ones(max_n_tiles, dtype=long) * -1
+    output_arr_indexes = np.ones(max_n_tiles, dtype=np.int64) * -1
     output_arr_start = np.ones(max_n_tiles, dtype=np.int32) * -1
     output_arr_end = np.ones(max_n_tiles, dtype=np.int32) * -1
 
@@ -84,7 +81,7 @@ cpdef maketiles32(const long [::1] indexes, const int32_t [::1] starts, const in
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, max_n_tiles, int tile_size):
+cpdef maketiles64(const int64_t [::1] indexes, const int64_t [::1] starts, const int64_t [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0
@@ -92,11 +89,11 @@ cpdef maketiles64(const long [::1] indexes, const long [::1] starts, const long 
         int length = len(starts)
         long start, end
 
-    output_arr_indexes = np.ones(max_n_tiles, dtype=long) * -1
-    output_arr_start = np.ones(max_n_tiles, dtype=long) * -1
-    output_arr_end = np.ones(max_n_tiles, dtype=long) * -1
+    output_arr_indexes = np.ones(max_n_tiles, dtype=np.int64) * -1
+    output_arr_start = np.ones(max_n_tiles, dtype=np.int64) * -1
+    output_arr_end = np.ones(max_n_tiles, dtype=np.int64) * -1
 
-    # return np.array([], dtype=long), np.array([], dtype=long), np.array([], dtype=long)
+    # return np.array([], dtype=np.int64), np.array([], dtype=np.int64), np.array([], dtype=np.int64)
     cdef long [::1] output_indexes
     cdef long [::1] output_start
     cdef long [::1] output_end
