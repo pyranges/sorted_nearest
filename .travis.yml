@@ -2,7 +2,7 @@ language: python
 python:
   - "3.6"
 install:
-  - pip install cython hypothesis pytest
+  - pip install cython hypothesis pytest pandas
   - python setup.py install
 
 # functionality is tested in the pyranges package
