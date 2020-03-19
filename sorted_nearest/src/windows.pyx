@@ -65,7 +65,7 @@ cpdef makewindows32(const long [::1] indexes, const int32_t [::1] starts, const 
             output_end[nfound] = start
             nfound += 1
 
-        if start > end:
+        if start != end and start + window_size > end:
             output_indexes[nfound] = indexes[i]
             output_start[nfound] = start
             output_end[nfound] = end
@@ -119,7 +119,7 @@ cpdef makewindows64(const long [::1] indexes, const long [::1] starts, const lon
             output_end[nfound] = start
             nfound += 1
 
-        if start < end:
+        if start != end and start + window_size > end:
             output_indexes[nfound] = indexes[i]
             output_start[nfound] = start
             output_end[nfound] = end

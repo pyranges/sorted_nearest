@@ -313,8 +313,6 @@ cpdef nearest_previous_nonoverlapping32_k_distances(const int32_t [::1] l_s, con
 cpdef nearest_next_nonoverlapping32_k_distances(const int32_t [::1] l_e, const int32_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
-    print("nearest_next_nonoverlapping32_k_distances " * 5)
-
     cdef int len_l = len(l_e)
     cdef int len_rx = len(r_idx)
     cdef int len_r = len(r_s)
