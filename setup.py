@@ -34,6 +34,10 @@ extensions = [
         ["sorted_nearest/src/sorted_nearest.pyx"],
         define_macros=macros),
     Extension(
+        "sorted_nearest.src.max_disjoint_intervals",
+        ["sorted_nearest/src/max_disjoint_intervals.pyx"],
+        define_macros=macros),
+    Extension(
         "sorted_nearest.src.k_nearest", ["sorted_nearest/src/k_nearest.pyx"],
         define_macros=macros),
     Extension(
