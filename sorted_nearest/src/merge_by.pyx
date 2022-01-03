@@ -17,16 +17,16 @@ def merge_by(starts, ends, ids, slack=0):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1] ids, int slack):
+cdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1] ids, int slack):
 
-    cpdef long min_start = starts[0]
-    cpdef long max_end = ends[0]
-    cpdef int i = 0
-    cpdef int current_id = ids[0]
-    cpdef int last_id = ids[0]
-    cpdef int n_clusters = 0
-    cpdef int intervals_in_cluster = 0
-    cpdef int length = len(starts)
+    cdef long min_start = starts[0]
+    cdef long max_end = ends[0]
+    cdef int i = 0
+    cdef int current_id = ids[0]
+    cdef int last_id = ids[0]
+    cdef int n_clusters = 0
+    cdef int intervals_in_cluster = 0
+    cdef int length = len(starts)
 
     output_arr_ids = np.ones(length, dtype=np.long) * -1
     output_arr_start = np.ones(length, dtype=np.long) * -1
@@ -73,16 +73,16 @@ cpdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef merge_by32(const int32_t [::1] starts, const int32_t [::1] ends, const int32_t [::1] ids, int slack):
+cdef merge_by32(const int32_t [::1] starts, const int32_t [::1] ends, const int32_t [::1] ids, int slack):
 
-    cpdef int min_start = starts[0]
-    cpdef int max_end = ends[0]
-    cpdef int i = 0
-    cpdef int current_id = ids[0]
-    cpdef int last_id = ids[0]
-    cpdef int n_clusters = 0
-    cpdef int intervals_in_cluster = 0
-    cpdef int length = len(starts)
+    cdef int min_start = starts[0]
+    cdef int max_end = ends[0]
+    cdef int i = 0
+    cdef int current_id = ids[0]
+    cdef int last_id = ids[0]
+    cdef int n_clusters = 0
+    cdef int intervals_in_cluster = 0
+    cdef int length = len(starts)
 
     output_arr_ids = np.ones(length, dtype=np.int32) * -1
     output_arr_start = np.ones(length, dtype=np.int32) * -1

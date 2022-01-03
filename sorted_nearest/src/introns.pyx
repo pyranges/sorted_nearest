@@ -19,7 +19,7 @@ def find_introns(gene_starts, gene_ends, gene_ids,
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, const long [::1] gene_ids,
+cdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, const long [::1] gene_ids,
                      const long [::1] exon_starts, const long [::1] exon_ends, const long [::1] x_gene_ids):
 
     cdef:
@@ -76,7 +76,7 @@ cpdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, c
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef find_introns32(const int32_t [::1] gene_starts, const int32_t [::1] gene_ends, const long [::1] gene_ids,
+cdef find_introns32(const int32_t [::1] gene_starts, const int32_t [::1] gene_ends, const long [::1] gene_ids,
                      const int32_t [::1] exon_starts, const int32_t [::1] exon_ends, const long [::1] x_gene_ids):
 
     cdef:

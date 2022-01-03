@@ -18,14 +18,14 @@ def annotate_clusters(starts, ends, slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int slack):
+cdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int slack):
 
-    cpdef int min_start = starts[0]
-    cpdef int max_end = ends[0]
-    cpdef int i = 0
-    cpdef int n_clusters = 1
-    cpdef int length = len(starts)
-   # cpdef int last_write = 0
+    cdef int min_start = starts[0]
+    cdef int max_end = ends[0]
+    cdef int i = 0
+    cdef int n_clusters = 1
+    cdef int length = len(starts)
+   # cdef int last_write = 0
 
     output_arr_ids = np.ones(length, dtype=np.long) * -1
 
@@ -50,13 +50,13 @@ cpdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int sl
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef annotate_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int slack):
+cdef annotate_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int slack):
 
-    cpdef int min_start = starts[0]
-    cpdef int max_end = ends[0]
-    cpdef int i = 0
-    cpdef int n_clusters = 1
-    cpdef int length = len(starts)
+    cdef int min_start = starts[0]
+    cdef int max_end = ends[0]
+    cdef int i = 0
+    cdef int n_clusters = 1
+    cdef int length = len(starts)
 
     output_arr_ids = np.ones(length, dtype=np.int32) * -1
 

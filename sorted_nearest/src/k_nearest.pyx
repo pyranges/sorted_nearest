@@ -65,7 +65,7 @@ def k_nearest_next_nonoverlapping(le, rs, lidx, ridx, k, ties=None):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping32_all(const int32_t [::1] l_s, const int32_t [::1] r_e,
+cdef nearest_previous_nonoverlapping32_all(const int32_t [::1] l_s, const int32_t [::1] r_e,
                                             const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_s)
@@ -151,7 +151,7 @@ cpdef nearest_previous_nonoverlapping32_all(const int32_t [::1] l_s, const int32
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping32_all(const int32_t [::1] l_e, const int32_t [::1] r_s,
+cdef nearest_next_nonoverlapping32_all(const int32_t [::1] l_e, const int32_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_e)
@@ -233,7 +233,7 @@ cpdef nearest_next_nonoverlapping32_all(const int32_t [::1] l_e, const int32_t [
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping32_k_distances(const int32_t [::1] l_s, const int32_t [::1] r_e,
+cdef nearest_previous_nonoverlapping32_k_distances(const int32_t [::1] l_s, const int32_t [::1] r_e,
                                                     const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     # print("nearest_previous_nonoverlapping32_k_distances " * 5)
@@ -310,7 +310,7 @@ cpdef nearest_previous_nonoverlapping32_k_distances(const int32_t [::1] l_s, con
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping32_k_distances(const int32_t [::1] l_e, const int32_t [::1] r_s,
+cdef nearest_next_nonoverlapping32_k_distances(const int32_t [::1] l_e, const int32_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_e)
@@ -389,7 +389,7 @@ cpdef nearest_next_nonoverlapping32_k_distances(const int32_t [::1] l_e, const i
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping32_first(const int32_t [::1] l_e, const int32_t [::1] r_s,
+cdef nearest_next_nonoverlapping32_first(const int32_t [::1] l_e, const int32_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     # print("nearest_next_nonoverlapping first")
@@ -484,7 +484,7 @@ cpdef nearest_next_nonoverlapping32_first(const int32_t [::1] l_e, const int32_t
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping32_first(const int32_t [::1] l_s, const int32_t [::1] r_e,
+cdef nearest_previous_nonoverlapping32_first(const int32_t [::1] l_s, const int32_t [::1] r_e,
                                               const long [::1] l_idx, const long [::1] r_idx,
                                               const long [::1] k):
 
@@ -573,7 +573,7 @@ cpdef nearest_previous_nonoverlapping32_first(const int32_t [::1] l_s, const int
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping32_last(const int32_t [::1] l_e, const int32_t [::1] r_s,
+cdef nearest_next_nonoverlapping32_last(const int32_t [::1] l_e, const int32_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     # print("  nearest_next_nonoverlapping last" * 5)
@@ -698,7 +698,7 @@ cpdef nearest_next_nonoverlapping32_last(const int32_t [::1] l_e, const int32_t 
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping32_last(const int32_t [::1] l_s, const int32_t [::1] r_e,
+cdef nearest_previous_nonoverlapping32_last(const int32_t [::1] l_s, const int32_t [::1] r_e,
                                               const long [::1] l_idx, const long [::1] r_idx,
                                               const long [::1] k):
 
@@ -812,7 +812,7 @@ cpdef nearest_previous_nonoverlapping32_last(const int32_t [::1] l_s, const int3
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
+cdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
 
     # print("lx", list(lx))
     # print("ids", list(ids))
@@ -893,7 +893,7 @@ cpdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping64_all(const int64_t [::1] l_s, const int64_t [::1] r_e,
+cdef nearest_previous_nonoverlapping64_all(const int64_t [::1] l_s, const int64_t [::1] r_e,
                                             const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_s)
@@ -979,7 +979,7 @@ cpdef nearest_previous_nonoverlapping64_all(const int64_t [::1] l_s, const int64
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping64_all(const int64_t [::1] l_e, const int64_t [::1] r_s,
+cdef nearest_next_nonoverlapping64_all(const int64_t [::1] l_e, const int64_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_e)
@@ -1061,7 +1061,7 @@ cpdef nearest_next_nonoverlapping64_all(const int64_t [::1] l_e, const int64_t [
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping64_k_distances(const int64_t [::1] l_s, const int64_t [::1] r_e,
+cdef nearest_previous_nonoverlapping64_k_distances(const int64_t [::1] l_s, const int64_t [::1] r_e,
                                                     const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_s)
@@ -1138,7 +1138,7 @@ cpdef nearest_previous_nonoverlapping64_k_distances(const int64_t [::1] l_s, con
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping64_k_distances(const int64_t [::1] l_e, const int64_t [::1] r_s,
+cdef nearest_next_nonoverlapping64_k_distances(const int64_t [::1] l_e, const int64_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     cdef int len_l = len(l_e)
@@ -1217,7 +1217,7 @@ cpdef nearest_next_nonoverlapping64_k_distances(const int64_t [::1] l_e, const i
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping64_first(const int64_t [::1] l_e, const int64_t [::1] r_s,
+cdef nearest_next_nonoverlapping64_first(const int64_t [::1] l_e, const int64_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     # print("nearest_next_nonoverlapping first")
@@ -1312,7 +1312,7 @@ cpdef nearest_next_nonoverlapping64_first(const int64_t [::1] l_e, const int64_t
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping64_first(const int64_t [::1] l_s, const int64_t [::1] r_e,
+cdef nearest_previous_nonoverlapping64_first(const int64_t [::1] l_s, const int64_t [::1] r_e,
                                               const long [::1] l_idx, const long [::1] r_idx,
                                               const long [::1] k):
 
@@ -1401,7 +1401,7 @@ cpdef nearest_previous_nonoverlapping64_first(const int64_t [::1] l_s, const int
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_next_nonoverlapping64_last(const int64_t [::1] l_e, const int64_t [::1] r_s,
+cdef nearest_next_nonoverlapping64_last(const int64_t [::1] l_e, const int64_t [::1] r_s,
                                         const long [::1] l_idx, const long [::1] r_idx, const long [::1] k):
 
     # print("  nearest_next_nonoverlapping last" * 5)
@@ -1526,7 +1526,7 @@ cpdef nearest_next_nonoverlapping64_last(const int64_t [::1] l_e, const int64_t 
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef nearest_previous_nonoverlapping64_last(const int64_t [::1] l_s, const int64_t [::1] r_e,
+cdef nearest_previous_nonoverlapping64_last(const int64_t [::1] l_s, const int64_t [::1] r_e,
                                               const long [::1] l_idx, const long [::1] r_idx,
                                               const long [::1] k):
 
@@ -1633,7 +1633,3 @@ cpdef nearest_previous_nonoverlapping64_last(const int64_t [::1] l_s, const int6
         # print("i", i, "len_l", len_l)
 
     return arr_lidx[:nfound], arr_ridx[:nfound], arr_dist[:nfound]
-
-
-
-

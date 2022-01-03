@@ -30,7 +30,7 @@ def maketiles(indexes, starts, ends, tile_size, preserve_end=False):
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles32(const int64_t [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_tiles, int tile_size):
+cdef maketiles32(const int64_t [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0
@@ -81,7 +81,7 @@ cpdef maketiles32(const int64_t [::1] indexes, const int32_t [::1] starts, const
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef maketiles64(const int64_t [::1] indexes, const int64_t [::1] starts, const int64_t [::1] ends, max_n_tiles, int tile_size):
+cdef maketiles64(const int64_t [::1] indexes, const int64_t [::1] starts, const int64_t [::1] ends, max_n_tiles, int tile_size):
 
     cdef:
         int nfound = 0

@@ -19,13 +19,13 @@ def max_disjoint(indexes, starts, ends, slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, int slack):
+cdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, int slack):
 
-    cpdef int length = len(starts)
-    cpdef int count = 0
-    cpdef int r1 = 0
-    cpdef int l1 = 0
-    cpdef int r2 = 0
+    cdef int length = len(starts)
+    cdef int count = 0
+    cdef int r1 = 0
+    cdef int l1 = 0
+    cdef int r2 = 0
 
     output_arr_indexes = np.ones(length, dtype=np.long) * -1
     # output_arr_start = np.ones(length, dtype=np.long) * -1
@@ -62,13 +62,13 @@ cpdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const lo
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef max_disjoint32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, int slack):
+cdef max_disjoint32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, int slack):
 
-    cpdef int length = len(starts)
-    cpdef int count = 0
-    cpdef int r1 = 0
-    cpdef int l1 = 0
-    cpdef int r2 = 0
+    cdef int length = len(starts)
+    cdef int count = 0
+    cdef int r1 = 0
+    cdef int l1 = 0
+    cdef int r2 = 0
 
     output_arr_indexes = np.ones(length, dtype=np.long) * -1
     # output_arr_start = np.ones(length, dtype=np.int32) * -1

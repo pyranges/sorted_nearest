@@ -25,7 +25,7 @@ def makewindows(indexes, starts, ends, window_size):
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef makewindows32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_windows, int window_size):
+cdef makewindows32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, max_n_windows, int window_size):
 
     cdef:
         int nfound = 0
@@ -78,7 +78,7 @@ cpdef makewindows32(const long [::1] indexes, const int32_t [::1] starts, const 
 @cython.boundscheck(True)
 @cython.wraparound(True)
 @cython.initializedcheck(True)
-cpdef makewindows64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, max_n_windows, int window_size):
+cdef makewindows64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, max_n_windows, int window_size):
 
     cdef:
         int nfound = 0
