@@ -8,7 +8,7 @@ import numpy as np
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
+cpdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
 
     """all fetches until you have k nearest intervals and then all intervals with same distance."""
 
@@ -84,7 +84,7 @@ cdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[:
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef get_different_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
+cpdef get_different_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[::1] dist, int k):
 
     """fetch all ties until you have all intervals with k distances"""
 
