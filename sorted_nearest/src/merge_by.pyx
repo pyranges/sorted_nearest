@@ -6,8 +6,8 @@ import numpy as np
 
 def merge_by(starts, ends, ids, slack=0):
 
-    if starts.dtype == np.long:
-        return merge_by64(starts, ends, ids.astype(np.long), slack)
+    if starts.dtype == np.int_:
+        return merge_by64(starts, ends, ids.astype(np.int_), slack)
     elif starts.dtype == np.int32:
         return merge_by32(starts, ends, ids.astype(np.int32), slack)
     else:
@@ -28,10 +28,10 @@ cdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1]
     cdef int intervals_in_cluster = 0
     cdef int length = len(starts)
 
-    output_arr_ids = np.ones(length, dtype=np.long) * -1
-    output_arr_start = np.ones(length, dtype=np.long) * -1
-    output_arr_end = np.zeros(length, dtype=np.long) * -1
-    output_arr_number = np.zeros(length, dtype=np.long) * -1
+    output_arr_ids = np.ones(length, dtype=np.int_) * -1
+    output_arr_start = np.ones(length, dtype=np.int_) * -1
+    output_arr_end = np.zeros(length, dtype=np.int_) * -1
+    output_arr_number = np.zeros(length, dtype=np.int_) * -1
 
     cdef long [::1] output_ids
     cdef long [::1] output_start

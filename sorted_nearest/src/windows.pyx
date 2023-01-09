@@ -14,7 +14,7 @@ def makewindows(indexes, starts, ends, window_size):
 
     max_n_windows = int((np.sum(_ends - _starts + window_size) / window_size))
 
-    if starts.dtype == np.long:
+    if starts.dtype == np.int_:
         return makewindows64(indexes, starts, ends, max_n_windows, window_size)
     elif starts.dtype == np.int32:
         return makewindows32(indexes, starts, ends, max_n_windows, window_size)

@@ -7,7 +7,7 @@ import numpy as np
 
 def annotate_clusters(starts, ends, slack):
 
-    if starts.dtype == np.long:
+    if starts.dtype == np.int_:
         return annotate_clusters64(starts, ends, slack)
     elif starts.dtype == np.int32:
         return annotate_clusters32(starts, ends, slack)
@@ -27,7 +27,7 @@ cdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int sla
     cdef int length = len(starts)
    # cdef int last_write = 0
 
-    output_arr_ids = np.ones(length, dtype=np.long) * -1
+    output_arr_ids = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] output_ids
 

@@ -47,8 +47,8 @@ cdef nearest_next_nonoverlapping64(const long [::1] l_e, const long [::1] r_s, c
     cdef int len_l = len(l_e)
     cdef int len_r = len(r_s)
 
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
-    arr_dist = np.ones(len_l, dtype=np.long) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
+    arr_dist = np.ones(len_l, dtype=np.int_) * -1
     cdef long [::1] ridx
     cdef long [::1] dist
 
@@ -84,7 +84,7 @@ cdef nearest_next_nonoverlapping32(const int32_t [::1] l_e, const int32_t [::1] 
     cdef int len_l = len(l_e)
     cdef int len_r = len(r_s)
 
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
     cdef long [::1] ridx
     cdef int32_t [::1] dist
@@ -123,8 +123,8 @@ cdef nearest_previous_nonoverlapping64(const long [::1] l_s, const long [::1] r_
     cdef int j = len_r - 1
     cdef int i = len_l - 1
 
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
-    arr_dist = np.ones(len_l, dtype=np.long) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
+    arr_dist = np.ones(len_l, dtype=np.int_) * -1
     cdef long [::1] ridx
     cdef long [::1] dist
 
@@ -161,7 +161,7 @@ cdef nearest_previous_nonoverlapping32(const int32_t [::1] l_s, const int32_t [:
     cdef int j = len_r - 1
     cdef int i = len_l - 1
 
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
     cdef long [::1] ridx
     cdef int32_t [::1] dist
@@ -198,8 +198,8 @@ cdef nearest_nonoverlapping64(const long [::1] prev_ridx, const long [::1] prev_
 
     cdef int length = len(prev_ridx)
 
-    output_arr_ridx = np.ones(length, dtype=np.long) * -1
-    output_arr_dist = np.ones(length, dtype=np.long) * -1
+    output_arr_ridx = np.ones(length, dtype=np.int_) * -1
+    output_arr_dist = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] output_ridx
     cdef long [::1] output_dist
@@ -231,7 +231,7 @@ cdef nearest_nonoverlapping32(const long [::1] prev_ridx, const int32_t [::1] pr
 
     cdef int length = len(prev_ridx)
 
-    output_arr_ridx = np.ones(length, dtype=np.long) * -1
+    output_arr_ridx = np.ones(length, dtype=np.int_) * -1
     output_arr_dist = np.ones(length, dtype=np.int32) * -1
 
     cdef long [::1] output_ridx
