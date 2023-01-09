@@ -8,7 +8,7 @@ import numpy as np
 def find_introns(gene_starts, gene_ends, gene_ids,
                  exon_starts, exon_ends, exon_gene_ids):
 
-    if gene_starts.dtype == np.long:
+    if gene_starts.dtype == np.int_:
         return find_introns64(gene_starts, gene_ends, gene_ids, exon_starts, exon_ends, exon_gene_ids)
     elif gene_starts.dtype == np.int32:
         return find_introns32(gene_starts, gene_ends, gene_ids, exon_starts, exon_ends, exon_gene_ids)
@@ -33,9 +33,9 @@ cdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, co
         long [::1] output_end
         long [::1] output_id
 
-    output_arr_start = np.ones(length, dtype=np.long) * -1
-    output_arr_end = np.zeros(length, dtype=np.long) * -1
-    output_arr_id = np.zeros(length, dtype=np.long) * -1
+    output_arr_start = np.ones(length, dtype=np.int_) * -1
+    output_arr_end = np.zeros(length, dtype=np.int_) * -1
+    output_arr_id = np.zeros(length, dtype=np.int_) * -1
 
     output_id = output_arr_id
     output_start = output_arr_start

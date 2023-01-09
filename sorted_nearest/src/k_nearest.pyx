@@ -83,8 +83,8 @@ cdef nearest_previous_nonoverlapping32_all(const int32_t [::1] l_s, const int32_
     cdef int last = -1
     cdef int _dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -169,8 +169,8 @@ cdef nearest_next_nonoverlapping32_all(const int32_t [::1] l_e, const int32_t [:
     cdef int last = -1
     cdef int _dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -253,8 +253,8 @@ cdef nearest_previous_nonoverlapping32_k_distances(const int32_t [::1] l_s, cons
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -330,8 +330,8 @@ cdef nearest_next_nonoverlapping32_k_distances(const int32_t [::1] l_e, const in
     cdef int last_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -411,8 +411,8 @@ cdef nearest_next_nonoverlapping32_first(const int32_t [::1] l_e, const int32_t 
     cdef int last_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -506,8 +506,8 @@ cdef nearest_previous_nonoverlapping32_first(const int32_t [::1] l_s, const int3
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int32) * -1
 
     cdef long [::1] lidx
@@ -596,8 +596,8 @@ cdef nearest_next_nonoverlapping32_last(const int32_t [::1] l_e, const int32_t [
     cdef int start_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -719,8 +719,8 @@ cdef nearest_previous_nonoverlapping32_last(const int32_t [::1] l_s, const int32
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -832,7 +832,7 @@ cdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[:
         int current_dist = -1
         int last_dist = -1
 
-    arr_lidx = np.ones(length, dtype=np.long) * -1
+    arr_lidx = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] lidx
 
@@ -911,8 +911,8 @@ cdef nearest_previous_nonoverlapping64_all(const int64_t [::1] l_s, const int64_
     cdef int last = -1
     cdef int _dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -997,8 +997,8 @@ cdef nearest_next_nonoverlapping64_all(const int64_t [::1] l_e, const int64_t [:
     cdef int last = -1
     cdef int _dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1080,8 +1080,8 @@ cdef nearest_previous_nonoverlapping64_k_distances(const int64_t [::1] l_s, cons
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1158,8 +1158,8 @@ cdef nearest_next_nonoverlapping64_k_distances(const int64_t [::1] l_e, const in
     cdef int last_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1239,8 +1239,8 @@ cdef nearest_next_nonoverlapping64_first(const int64_t [::1] l_e, const int64_t 
     cdef int last_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1334,8 +1334,8 @@ cdef nearest_previous_nonoverlapping64_first(const int64_t [::1] l_s, const int6
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1424,8 +1424,8 @@ cdef nearest_next_nonoverlapping64_last(const int64_t [::1] l_e, const int64_t [
     cdef int start_dist = -1
 
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx
@@ -1547,8 +1547,8 @@ cdef nearest_previous_nonoverlapping64_last(const int64_t [::1] l_s, const int64
     cdef int last_dist = -1
     cdef int curr_dist = -1
 
-    arr_lidx = np.ones(len_l, dtype=np.long) * -1
-    arr_ridx = np.ones(len_l, dtype=np.long) * -1
+    arr_lidx = np.ones(len_l, dtype=np.int_) * -1
+    arr_ridx = np.ones(len_l, dtype=np.int_) * -1
     arr_dist = np.ones(len_l, dtype=np.int64) * -1
 
     cdef long [::1] lidx

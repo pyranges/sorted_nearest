@@ -8,7 +8,7 @@ import numpy as np
 
 def max_disjoint(indexes, starts, ends, slack):
 
-    if starts.dtype == np.long:
+    if starts.dtype == np.int_:
         return max_disjoint64(indexes, starts, ends, slack)
     elif starts.dtype == np.int32:
         return max_disjoint32(indexes, starts, ends, slack)
@@ -27,9 +27,9 @@ cdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const lon
     cdef int l1 = 0
     cdef int r2 = 0
 
-    output_arr_indexes = np.ones(length, dtype=np.long) * -1
-    # output_arr_start = np.ones(length, dtype=np.long) * -1
-    # output_arr_end = np.zeros(length, dtype=np.long) * -1
+    output_arr_indexes = np.ones(length, dtype=np.int_) * -1
+    # output_arr_start = np.ones(length, dtype=np.int_) * -1
+    # output_arr_end = np.zeros(length, dtype=np.int_) * -1
 
     cdef long [::1] output_indexes
     # cdef long [::1] output_start
@@ -70,7 +70,7 @@ cdef max_disjoint32(const long [::1] indexes, const int32_t [::1] starts, const 
     cdef int l1 = 0
     cdef int r2 = 0
 
-    output_arr_indexes = np.ones(length, dtype=np.long) * -1
+    output_arr_indexes = np.ones(length, dtype=np.int_) * -1
     # output_arr_start = np.ones(length, dtype=np.int32) * -1
     # output_arr_end = np.zeros(length, dtype=np.int32) * -1
 

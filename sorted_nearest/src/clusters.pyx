@@ -8,7 +8,7 @@ import numpy as np
 
 def find_clusters(starts, ends, slack):
 
-    if starts.dtype == np.long:
+    if starts.dtype == np.int_:
         return find_clusters64(starts, ends, slack)
     elif starts.dtype == np.int32:
         return find_clusters32(starts, ends, slack)
@@ -28,9 +28,9 @@ cdef find_clusters64(const long [::1] starts, const long [::1] ends, int slack):
     cdef int n_clusters = 0
     cdef int length = len(starts)
 
-    output_arr_start = np.ones(length, dtype=np.long) * -1
-    output_arr_end = np.zeros(length, dtype=np.long) * -1
-    output_arr_number = np.zeros(length, dtype=np.long) * -1
+    output_arr_start = np.ones(length, dtype=np.int_) * -1
+    output_arr_end = np.zeros(length, dtype=np.int_) * -1
+    output_arr_number = np.zeros(length, dtype=np.int_) * -1
 
     cdef long [::1] output_start
     cdef long [::1] output_end

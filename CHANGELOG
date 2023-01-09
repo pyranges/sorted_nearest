@@ -1,3 +1,6 @@
+# 0.0.38 (09.01.22)
+- use np.int_ instead of long
+
 # 0.0.36-37 (06.06.22)
 - hotfix test
 

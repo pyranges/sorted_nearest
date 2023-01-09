@@ -26,7 +26,7 @@ cpdef get_all_ties(const int64_t[::1] lx, const int64_t[::1] ids, const int64_t[
         int current_dist = -1
         int last_dist = -1
 
-    arr_lidx = np.ones(length, dtype=np.long) * -1
+    arr_lidx = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] lidx
 
@@ -106,7 +106,7 @@ cpdef get_different_ties(const int64_t[::1] lx, const int64_t[::1] ids, const in
         int current_dist = -1
         int last_dist = -1
 
-    arr_lidx = np.ones(length, dtype=np.long) * -1
+    arr_lidx = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] lidx
 

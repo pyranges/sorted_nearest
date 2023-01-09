@@ -8,8 +8,8 @@ import numpy as np
 
 def cluster_by(starts, ends, ids, slack=0):
 
-    if starts.dtype == np.long:
-        return cluster_by64(starts, ends, ids.astype(np.long), slack)
+    if starts.dtype == np.int_:
+        return cluster_by64(starts, ends, ids.astype(np.int_), slack)
     elif starts.dtype == np.int32:
         return cluster_by32(starts, ends, ids.astype(np.int32), slack)
     else:
@@ -29,7 +29,7 @@ cdef cluster_by64(const long [::1] starts, const long [::1] ends, const long [::
     cdef int n_clusters = 1
     cdef int length = len(starts)
 
-    output_arr_ids = np.ones(length, dtype=np.long) * -1
+    output_arr_ids = np.ones(length, dtype=np.int_) * -1
 
     cdef long [::1] output_ids
 
