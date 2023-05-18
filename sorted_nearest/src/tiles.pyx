@@ -1,6 +1,5 @@
-from libc.stdint cimport int32_t, int64_t
-
 cimport cython
+from libc.stdint cimport int32_t, int64_t
 
 import numpy as np
 

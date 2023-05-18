@@ -1,4 +1,3 @@
-
 from sorted_nearest.src.sorted_nearest import nearest
 
 import pandas as pd

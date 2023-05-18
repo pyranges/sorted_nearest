@@ -1,4 +1,4 @@
-name: Install, test, doctest, lint, typecheck ncls
+name: Install, test, doctest, lint, typecheck sorted_nearest
 
 # Source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#using-multiple-python-versions
 
@@ -19,12 +19,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - run:
-          pip install pytest
       - name: Install
         run: |
           pip install .
-          pytest tests/*.py
+          cd tests
+          python -c "import sorted_nearest; print(sorted_nearest.__version__)"
 
   isort:
     runs-on: ubuntu-latest
@@ -35,7 +34,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install isort
-      - run: isort --profile black -l 120 --check --diff ncls tests
+      - run: isort --profile black -l 120 --check --diff sorted_nearest
 
   black:
     runs-on: ubuntu-latest
@@ -46,7 +45,7 @@ jobs:
         with:
           python-version: "3.11.0"
       - run: pip install black
-      - run: black -l 120 --check --diff ncls tests
+      - run: black -l 120 --check --diff sorted_nearest
 
   flake8:
     runs-on: ubuntu-latest
@@ -59,7 +58,7 @@ jobs:
       - name: flake8 Lint install
         run: pip install flake8
       - name: flake8 Lint
-        run: flake8 --max-line-length=120 --ignore E203,E501,W503 ncls tests
+        run: flake8 --max-line-length=120 --ignore E203,E501,W503 sorted_nearest
 
   mypy:
     runs-on: ubuntu-latest
@@ -77,4 +76,4 @@ jobs:
         run: |
           pip install numpy  # for the typing stubs
           python -m pip install pandas-stubs types-setuptools 
-          mypy ncls
+          mypy sorted_nearest

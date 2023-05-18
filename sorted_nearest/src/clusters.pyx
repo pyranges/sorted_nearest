@@ -1,10 +1,10 @@
 "find clusters is what is called merge in pyranges"
 
+cimport cython
 from libc.stdint cimport int32_t
 
-cimport cython
-
 import numpy as np
+
 
 def find_clusters(starts, ends, slack):
 

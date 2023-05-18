@@ -1,9 +1,9 @@
 
+cimport cython
 from libc.stdint cimport int32_t
 
-cimport cython
-
 import numpy as np
+
 
 def find_introns(gene_starts, gene_ends, gene_ids,
                  exon_starts, exon_ends, exon_gene_ids):

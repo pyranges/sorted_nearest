@@ -1,9 +1,9 @@
 
+cimport cython
 from libc.stdint cimport int32_t
 
-cimport cython
-
 import numpy as np
+
 
 def annotate_clusters(starts, ends, slack):
 
