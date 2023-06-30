@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sorted_nearest"
-version = "0.0.39"
+version = "0.0.40"
 description = "Find nearest intervals."
 readme = "README.md"
 authors = [{ name = "Endre Bakken Stovner", email = "endbak@pm.me" }]
