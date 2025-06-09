@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         # `windows-2019` retires 2025-06-30 – use supported images instead
-        os: [ubuntu-latest, windows-2022, macos-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4          # ← upgrade
