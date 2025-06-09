@@ -1,4 +1,4 @@
-import pkg_resources
+from importlib.metadata import version
 
 from sorted_nearest.src.annotate_clusters import annotate_clusters  # type: ignore  # NOQA: F401
 from sorted_nearest.src.cluster_by import cluster_by  # type: ignore  # NOQA: F401
@@ -19,4 +19,4 @@ from sorted_nearest.src.sorted_nearest import (  # type: ignore  # NOQA: F401
 from sorted_nearest.src.tiles import maketiles  # type: ignore  # NOQA: F401
 from sorted_nearest.src.windows import makewindows  # type: ignore  # NOQA: F401
 
-__version__ = pkg_resources.get_distribution("sorted_nearest").version
+__version__ = version("sorted_nearest")
