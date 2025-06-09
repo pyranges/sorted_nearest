@@ -7,7 +7,6 @@ env:
   # Drop both 3.6 and 3.7 wheels
   CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-* cp313-*"
 
-
 # Build on every push (branches & tags), PR update, and manual dispatch
 on:
   push:
@@ -29,20 +28,22 @@ jobs:
         os: [ubuntu-latest, macos-latest]
 
     steps:
-      - uses: actions/checkout@v4          # ← upgrade
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.18.1     # ← latest stable
+        uses: pypa/cibuildwheel@v2.18.1
 
+      # ---------- CHANGE 1: unique artifact name ----------
       - name: Upload wheels
-        uses: actions/upload-artifact@v4    # ← upgrade
+        uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          # wheel sets are keyed by the matrix OS
+          name: wheels-${{ matrix.os }}
           path: wheelhouse/*.whl
-          retention-days: 7                 # optional, defaults to 90
+          retention-days: 7          # optional (defaults to 90)
 
 # -----------------------------------------------------------------------------
 # 2. Build sdist (Linux only)
@@ -75,10 +76,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # ---------- CHANGE 2: grab *all* wheel artifacts and merge ----------
       - name: Download build artifacts
-        uses: actions/download-artifact@v4  # ← upgrade
+        uses: actions/download-artifact@v4
         with:
-          pattern: '*'
+          pattern: wheels-*           # grab every OS-specific wheel set
+          merge-multiple: true        # put them all into a single folder
+          path: dist                  # same folder as the sdist download below
+
+      - name: Download sdist
+        uses: actions/download-artifact@v4
+        with:
+          name: sdist
           path: dist
 
       - name: Publish to PyPI
