@@ -5,7 +5,7 @@ name: Build and upload to PyPI
 # -----------------------------------------------------------------------------
 env:
   # Drop both 3.6 and 3.7 wheels
-  CIBW_SKIP: "cp36-* cp37-* cp38-* cp39-*"
+  CIBW_SKIP: "cp36-* cp37-* cp38-*"
 
 # Build on every push (branches & tags), PR update, and manual dispatch
 on:
