@@ -24,6 +24,11 @@ jobs:
           pip install .
           cd tests
           python -c "import sorted_nearest; print(sorted_nearest.__version__)"
+      - name: Test
+        run: |
+          pip install pytest
+          cd tests
+          pytest --import-mode=importlib .
 
   isort:
     runs-on: ubuntu-latest

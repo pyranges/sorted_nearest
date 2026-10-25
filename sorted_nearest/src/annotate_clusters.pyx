@@ -18,7 +18,7 @@ def annotate_clusters(starts, ends, slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int slack):
+cdef annotate_clusters64(const long[:] starts, const long[:] ends, int slack):
 
     cdef int min_start = starts[0]
     cdef int max_end = ends[0]
@@ -50,7 +50,7 @@ cdef annotate_clusters64(const long [::1] starts, const long [::1] ends, int sla
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef annotate_clusters32(const int32_t [::1] starts, const int32_t [::1] ends, int slack):
+cdef annotate_clusters32(const int32_t[:] starts, const int32_t[:] ends, int slack):
 
     cdef int min_start = starts[0]
     cdef int max_end = ends[0]
