@@ -19,8 +19,8 @@ def find_introns(gene_starts, gene_ends, gene_ids,
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, const long [::1] gene_ids,
-                     const long [::1] exon_starts, const long [::1] exon_ends, const long [::1] x_gene_ids):
+cdef find_introns64(const long[:] gene_starts, const long[:] gene_ends, const long[:] gene_ids,
+                     const long[:] exon_starts, const long[:] exon_ends, const long[:] x_gene_ids):
 
     cdef:
         exon_length = len(exon_starts)
@@ -76,8 +76,8 @@ cdef find_introns64(const long [::1] gene_starts, const long [::1] gene_ends, co
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef find_introns32(const int32_t [::1] gene_starts, const int32_t [::1] gene_ends, const long [::1] gene_ids,
-                     const int32_t [::1] exon_starts, const int32_t [::1] exon_ends, const long [::1] x_gene_ids):
+cdef find_introns32(const int32_t[:] gene_starts, const int32_t[:] gene_ends, const long[:] gene_ids,
+                     const int32_t[:] exon_starts, const int32_t[:] exon_ends, const long[:] x_gene_ids):
 
     cdef:
         exon_length = len(exon_starts)

@@ -1,3 +1,6 @@
+# 0.0.42 (25.10.26)
+- accept non-contiguous (strided) arrays, as pandas >= 3.1 can return from Series.values
+
 # 0.0.40 (30.06.23)
 - use np.int_ instead of long
 

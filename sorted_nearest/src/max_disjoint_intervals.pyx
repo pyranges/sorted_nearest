@@ -19,7 +19,7 @@ def max_disjoint(indexes, starts, ends, slack):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const long [::1] ends, int slack):
+cdef max_disjoint64(const long[:] indexes, const long[:] starts, const long[:] ends, int slack):
 
     cdef int length = len(starts)
     cdef int count = 0
@@ -62,7 +62,7 @@ cdef max_disjoint64(const long [::1] indexes, const long [::1] starts, const lon
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef max_disjoint32(const long [::1] indexes, const int32_t [::1] starts, const int32_t [::1] ends, int slack):
+cdef max_disjoint32(const long[:] indexes, const int32_t[:] starts, const int32_t[:] ends, int slack):
 
     cdef int length = len(starts)
     cdef int count = 0

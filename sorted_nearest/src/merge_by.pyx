@@ -17,7 +17,7 @@ def merge_by(starts, ends, ids, slack=0):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1] ids, int slack):
+cdef merge_by64(const long[:] starts, const long[:] ends, const long[:] ids, int slack):
 
     cdef long min_start = starts[0]
     cdef long max_end = ends[0]
@@ -73,7 +73,7 @@ cdef merge_by64(const long [::1] starts, const long [::1] ends, const long [::1]
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cdef merge_by32(const int32_t [::1] starts, const int32_t [::1] ends, const int32_t [::1] ids, int slack):
+cdef merge_by32(const int32_t[:] starts, const int32_t[:] ends, const int32_t[:] ids, int slack):
 
     cdef int min_start = starts[0]
     cdef int max_end = ends[0]
